@@ -15,6 +15,8 @@
 		A7175E511721489A0031058F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E501721489A0031058F /* main.m */; };
 		A7175E53172148AA0031058F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A7175E52172148AA0031058F /* Credits.rtf */; };
 		A7415F28172161F30092F4F8 /* libITCReportDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F23172161E20092F4F8 /* libITCReportDownloader.a */; };
+		A7415F2C1721626A0092F4F8 /* Readme.markdown in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2A1721626A0092F4F8 /* Readme.markdown */; };
+		A7415F2D1721626A0092F4F8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2B1721626A0092F4F8 /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		A7175E5717214A6A0031058F /* AutoIngest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AutoIngest-Info.plist"; sourceTree = "<group>"; };
 		A7175E5817214A6A0031058F /* AutoIngest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AutoIngest-Prefix.pch"; sourceTree = "<group>"; };
 		A7415F0E172161DD0092F4F8 /* TheMissingAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TheMissingAPI.xcodeproj; path = DTITCReportDownloader/TheMissingAPI.xcodeproj; sourceTree = "<group>"; };
+		A7415F2A1721626A0092F4F8 /* Readme.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.markdown; sourceTree = "<group>"; };
+		A7415F2B1721626A0092F4F8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 		A7175E1B172146EE0031058F = {
 			isa = PBXGroup;
 			children = (
+				A7415F291721625E0092F4F8 /* Documentation */,
 				A7415EFB172161DD0092F4F8 /* Externals */,
 				A7175E2D172146EE0031058F /* AutoIngest */,
 				A7175E26172146EE0031058F /* Frameworks */,
@@ -160,6 +165,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A7415F291721625E0092F4F8 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				A7415F2A1721626A0092F4F8 /* Readme.markdown */,
+				A7415F2B1721626A0092F4F8 /* LICENSE */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -238,6 +252,8 @@
 				A7175E47172148390031058F /* PreferencesWindowController.xib in Resources */,
 				A7175E4C1721488A0031058F /* MainMenu.xib in Resources */,
 				A7175E53172148AA0031058F /* Credits.rtf in Resources */,
+				A7415F2C1721626A0092F4F8 /* Readme.markdown in Resources */,
+				A7415F2D1721626A0092F4F8 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
