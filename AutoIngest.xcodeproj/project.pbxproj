@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		A7175E28172146EE0031058F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7175E27172146EE0031058F /* Cocoa.framework */; };
-		A7175E32172146EE0031058F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7175E30172146EE0031058F /* InfoPlist.strings */; };
-		A7175E34172146EE0031058F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E33172146EE0031058F /* main.m */; };
-		A7175E38172146EE0031058F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A7175E36172146EE0031058F /* Credits.rtf */; };
-		A7175E3B172146EE0031058F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E3A172146EE0031058F /* AppDelegate.m */; };
-		A7175E3E172146EF0031058F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7175E3C172146EF0031058F /* MainMenu.xib */; };
+		A7175E47172148390031058F /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7175E46172148390031058F /* PreferencesWindowController.xib */; };
+		A7175E4A172148450031058F /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E49172148450031058F /* PreferencesWindowController.m */; };
+		A7175E4C1721488A0031058F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7175E4B1721488A0031058F /* MainMenu.xib */; };
+		A7175E4F172148930031058F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E4E172148930031058F /* AppDelegate.m */; };
+		A7175E511721489A0031058F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E501721489A0031058F /* main.m */; };
+		A7175E53172148AA0031058F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A7175E52172148AA0031058F /* Credits.rtf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +22,16 @@
 		A7175E2A172146EE0031058F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		A7175E2B172146EE0031058F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A7175E2C172146EE0031058F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		A7175E2F172146EE0031058F /* AutoIngest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AutoIngest-Info.plist"; sourceTree = "<group>"; };
-		A7175E31172146EE0031058F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A7175E33172146EE0031058F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A7175E35172146EE0031058F /* AutoIngest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AutoIngest-Prefix.pch"; sourceTree = "<group>"; };
-		A7175E37172146EE0031058F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		A7175E39172146EE0031058F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		A7175E3A172146EE0031058F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A7175E3D172146EF0031058F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		A7175E46172148390031058F /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
+		A7175E48172148450031058F /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindowController.h; sourceTree = "<group>"; };
+		A7175E49172148450031058F /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindowController.m; sourceTree = "<group>"; };
+		A7175E4B1721488A0031058F /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		A7175E4D172148930031058F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A7175E4E172148930031058F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A7175E501721489A0031058F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A7175E52172148AA0031058F /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		A7175E5717214A6A0031058F /* AutoIngest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AutoIngest-Info.plist"; sourceTree = "<group>"; };
+		A7175E5817214A6A0031058F /* AutoIngest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AutoIngest-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,24 +85,34 @@
 		A7175E2D172146EE0031058F /* AutoIngest */ = {
 			isa = PBXGroup;
 			children = (
-				A7175E39172146EE0031058F /* AppDelegate.h */,
-				A7175E3A172146EE0031058F /* AppDelegate.m */,
-				A7175E3C172146EF0031058F /* MainMenu.xib */,
-				A7175E2E172146EE0031058F /* Supporting Files */,
+				A7175E5717214A6A0031058F /* AutoIngest-Info.plist */,
+				A7175E5817214A6A0031058F /* AutoIngest-Prefix.pch */,
+				A7175E44172147800031058F /* Resources */,
+				A7175E45172147800031058F /* Source */,
 			);
 			path = AutoIngest;
 			sourceTree = "<group>";
 		};
-		A7175E2E172146EE0031058F /* Supporting Files */ = {
+		A7175E44172147800031058F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A7175E2F172146EE0031058F /* AutoIngest-Info.plist */,
-				A7175E30172146EE0031058F /* InfoPlist.strings */,
-				A7175E33172146EE0031058F /* main.m */,
-				A7175E35172146EE0031058F /* AutoIngest-Prefix.pch */,
-				A7175E36172146EE0031058F /* Credits.rtf */,
+				A7175E52172148AA0031058F /* Credits.rtf */,
+				A7175E4B1721488A0031058F /* MainMenu.xib */,
+				A7175E46172148390031058F /* PreferencesWindowController.xib */,
 			);
-			name = "Supporting Files";
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A7175E45172147800031058F /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				A7175E501721489A0031058F /* main.m */,
+				A7175E4D172148930031058F /* AppDelegate.h */,
+				A7175E4E172148930031058F /* AppDelegate.m */,
+				A7175E48172148450031058F /* PreferencesWindowController.h */,
+				A7175E49172148450031058F /* PreferencesWindowController.m */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,9 +166,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7175E32172146EE0031058F /* InfoPlist.strings in Resources */,
-				A7175E38172146EE0031058F /* Credits.rtf in Resources */,
-				A7175E3E172146EF0031058F /* MainMenu.xib in Resources */,
+				A7175E47172148390031058F /* PreferencesWindowController.xib in Resources */,
+				A7175E4C1721488A0031058F /* MainMenu.xib in Resources */,
+				A7175E53172148AA0031058F /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,39 +179,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7175E34172146EE0031058F /* main.m in Sources */,
-				A7175E3B172146EE0031058F /* AppDelegate.m in Sources */,
+				A7175E4A172148450031058F /* PreferencesWindowController.m in Sources */,
+				A7175E4F172148930031058F /* AppDelegate.m in Sources */,
+				A7175E511721489A0031058F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		A7175E30172146EE0031058F /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A7175E31172146EE0031058F /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		A7175E36172146EE0031058F /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A7175E37172146EE0031058F /* en */,
-			);
-			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		A7175E3C172146EF0031058F /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A7175E3D172146EF0031058F /* en */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A7175E3F172146EF0031058F /* Debug */ = {
