@@ -23,6 +23,7 @@
 		A7415F3A172173650092F4F8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F39172173650092F4F8 /* Security.framework */; };
 		A7415F40172178890092F4F8 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F3D172178890092F4F8 /* SSKeychain.m */; };
 		A7415F41172178890092F4F8 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F3F172178890092F4F8 /* SSKeychainQuery.m */; };
+		A7415F4417218D2F0092F4F8 /* DTITCReportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,8 @@
 		A7415F3D172178890092F4F8 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		A7415F3E172178890092F4F8 /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
 		A7415F3F172178890092F4F8 /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
+		A7415F4217218D2F0092F4F8 /* DTITCReportManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTITCReportManager.h; sourceTree = "<group>"; };
+		A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTITCReportManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +167,8 @@
 				A7175E4E172148930031058F /* AppDelegate.m */,
 				A7175E48172148450031058F /* PreferencesWindowController.h */,
 				A7175E49172148450031058F /* PreferencesWindowController.m */,
+				A7415F4217218D2F0092F4F8 /* DTITCReportManager.h */,
+				A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -316,6 +321,7 @@
 				A7415F38172170EA0092F4F8 /* GenericAccount.m in Sources */,
 				A7415F40172178890092F4F8 /* SSKeychain.m in Sources */,
 				A7415F41172178890092F4F8 /* SSKeychainQuery.m in Sources */,
+				A7415F4417218D2F0092F4F8 /* DTITCReportManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +403,7 @@
 				GCC_PREFIX_HEADER = "AutoIngest/AutoIngest-Prefix.pch";
 				INFOPLIST_FILE = "AutoIngest/AutoIngest-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "Externals/DTITCReportDownloader/Core/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -409,6 +416,7 @@
 				GCC_PREFIX_HEADER = "AutoIngest/AutoIngest-Prefix.pch";
 				INFOPLIST_FILE = "AutoIngest/AutoIngest-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "Externals/DTITCReportDownloader/Core/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

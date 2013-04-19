@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "PreferencesWindowController.h"
+#import "DTITCReportManager.h"
 
 @implementation AppDelegate
 {
@@ -49,14 +50,17 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	// Insert code here to initialize your application
+    DTITCReportManager *reportManager = [DTITCReportManager sharedManager]; // inits it
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDidStart:) name:DTITCReportManagerSyncDidStartNotification object:reportManager];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDidFinish:) name:DTITCReportManagerSyncDidFinishNotification object:reportManager];
 }
 
 #pragma mark - Actions
 
 - (void)syncNow:(id)sender
 {
-    
+    [[DTITCReportManager sharedManager] startSync];
 }
 
 - (void)quitApplication:(id)sender
@@ -74,5 +78,28 @@
 	[_preferencesController showWindow:sender];
     [_preferencesController.window orderFrontRegardless];
 }
+
+#pragma mark - Notifications
+
+- (void)syncDidStart:(NSNotification *)notification
+{
+    [_statusItem setTitle:@"Synching"];
+}
+
+- (void)syncDidFinish:(NSNotification *)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_statusItem setTitle:@"AutoIngest"];
+
+        NSUserNotification *note = [[NSUserNotification alloc] init];
+        [note setTitle:@"AutoIngest"];
+        NSString *infoText = [NSString stringWithFormat:@"Report download complete"];
+        [note setInformativeText:infoText];
+        
+        NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
+        [center deliverNotification:note];
+    });
+}
+
 
 @end
