@@ -1,0 +1,3 @@
+[submodule "Externals/DTITCReportDownloader"]
+	path = Externals/DTITCReportDownloader
+	url = git@github.com:Cocoanetics/DTITCReportDownloader.git
