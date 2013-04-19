@@ -305,7 +305,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     if ([defaults boolForKey:@"DownloadWeekly"])
     {
         [_queue addOperationWithBlock:^{
-            [self _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeWeekly fromAccount:account];
+            [weakself _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeWeekly fromAccount:account];
         }];
         
         hasWorkToDo = YES;
@@ -314,7 +314,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     if ([defaults boolForKey:@"DownloadMonthly"])
     {
         [_queue addOperationWithBlock:^{
-            [self _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeMonthly fromAccount:account];
+            [weakself _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeMonthly fromAccount:account];
         }];
         
         hasWorkToDo = YES;
@@ -323,7 +323,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     if ([defaults boolForKey:@"DownloadYearly"])
     {
         [_queue addOperationWithBlock:^{
-            [self _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeYearly fromAccount:account];
+            [weakself _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeYearly fromAccount:account];
         }];
         
         hasWorkToDo = YES;

@@ -11,9 +11,6 @@
 #import "AccountManager.h"
 #import "GenericAccount.h"
 
-#import "SSKeychain.h"
-#import "SSKeychainQuery.h"
-
 @interface PreferencesWindowController ()
 
 @property (nonatomic, strong) GenericAccount *account;
