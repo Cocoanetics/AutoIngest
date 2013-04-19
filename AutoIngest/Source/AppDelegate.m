@@ -16,6 +16,18 @@
 	PreferencesWindowController *_preferencesController;
 }
 
+
++ (void)initialize
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Defaults" ofType:@"plist"];
+    NSDictionary *defaults = [NSDictionary dictionaryWithContentsOfFile:path];
+    
+    if (defaults)
+    {
+        [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+    }
+}
+
 - (void)awakeFromNib
 {
 	_statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];

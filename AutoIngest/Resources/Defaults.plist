@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DownloadFolderPath</key>
+	<string>~/Downloads</string>
+	<key>DownloadDaily</key>
+	<true/>
+	<key>DownloadWeekly</key>
+	<true/>
+	<key>DownloadMonthly</key>
+	<true/>
+	<key>DownloadYearly</key>
+	<true/>
+	<key>DownloadVendorID</key>
+	<string>8xxxxxxx</string>
+</dict>
+</plist>

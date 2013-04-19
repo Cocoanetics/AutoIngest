@@ -17,6 +17,7 @@
 		A7415F28172161F30092F4F8 /* libITCReportDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F23172161E20092F4F8 /* libITCReportDownloader.a */; };
 		A7415F2C1721626A0092F4F8 /* Readme.markdown in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2A1721626A0092F4F8 /* Readme.markdown */; };
 		A7415F2D1721626A0092F4F8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2B1721626A0092F4F8 /* LICENSE */; };
+		A7415F3017216AE90092F4F8 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2F17216AE90092F4F8 /* Defaults.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		A7415F0E172161DD0092F4F8 /* TheMissingAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TheMissingAPI.xcodeproj; path = DTITCReportDownloader/TheMissingAPI.xcodeproj; sourceTree = "<group>"; };
 		A7415F2A1721626A0092F4F8 /* Readme.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.markdown; sourceTree = "<group>"; };
 		A7415F2B1721626A0092F4F8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		A7415F2F17216AE90092F4F8 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				A7175E52172148AA0031058F /* Credits.rtf */,
 				A7175E4B1721488A0031058F /* MainMenu.xib */,
 				A7175E46172148390031058F /* PreferencesWindowController.xib */,
+				A7415F2F17216AE90092F4F8 /* Defaults.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				A7175E53172148AA0031058F /* Credits.rtf in Resources */,
 				A7415F2C1721626A0092F4F8 /* Readme.markdown in Resources */,
 				A7415F2D1721626A0092F4F8 /* LICENSE in Resources */,
+				A7415F3017216AE90092F4F8 /* Defaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
