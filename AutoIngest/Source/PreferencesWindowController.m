@@ -8,17 +8,41 @@
 
 #import "PreferencesWindowController.h"
 
+#import "AccountManager.h"
+#import "GenericAccount.h"
+
+#import "SSKeychain.h"
+#import "SSKeychainQuery.h"
+
 @interface PreferencesWindowController ()
+
+@property (nonatomic, strong) GenericAccount *account;
 
 @end
 
 @implementation PreferencesWindowController
+{
+    
+    GenericAccount *_account;
+    
+    NSString *_username;
+    NSString *_password;
+}
 
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
-    if (self) {
-        // Initialization code here.
+    if (self)
+    {
+        NSArray *accounts = [[AccountManager sharedAccountManager] accountsOfType:@"iTunes Connect"];
+        
+        if ([accounts count])
+        {
+            // initially only one account is supported
+            _account = accounts[0];
+            
+            NSLog(@"%@ - %@", _account.account, _account.password);
+        }
     }
 	
     return self;
@@ -28,8 +52,36 @@
 {
     [super windowDidLoad];
     
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+   // check if we have an account
+    
+    
+    
+
+    
+   // SSKeychainQuery *query = [[SSKeychainQuery alloc] init];
+    
+   // NSArray *results = [query fetchAll:NULL];
+    
+  //  NSLog(@"%@", results);
 }
+
+- (void)_createAccountIfNecessary
+{
+   // [SSKeychain setPassword:@"aaa" forService:@"iTunes Connect" account:@"aaa"];
+    
+    
+    if (_account)
+    {
+        return; // not necessary
+    }
+    
+    if (_username)
+    {
+        _account = [[AccountManager sharedAccountManager] addAccountForService:@"iTunes Connect" user:_username];
+    }
+}
+
+#pragma mark - Actions
 
 - (IBAction)chooseDownloadFolder:(id)sender
 {
@@ -58,5 +110,37 @@
 		}
 	}];
 }
+
+#pragma mark - Properties
+
+- (NSString *)username
+{
+    return self.account.account;
+}
+
+- (void)setUsername:(NSString *)username
+{
+    _username = username;
+    
+    [self _createAccountIfNecessary];
+    
+    _account.account = username;
+}
+
+- (NSString *)password
+{
+    return self.account.password;
+}
+
+- (void)setPassword:(NSString *)password
+{
+    _password = password;
+    
+    [self _createAccountIfNecessary];
+    
+    _account.password = password;
+}
+
+@synthesize account = _account;
 
 @end

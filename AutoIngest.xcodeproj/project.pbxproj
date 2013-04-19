@@ -21,6 +21,8 @@
 		A7415F37172170EA0092F4F8 /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F34172170EA0092F4F8 /* AccountManager.m */; };
 		A7415F38172170EA0092F4F8 /* GenericAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F36172170EA0092F4F8 /* GenericAccount.m */; };
 		A7415F3A172173650092F4F8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F39172173650092F4F8 /* Security.framework */; };
+		A7415F40172178890092F4F8 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F3D172178890092F4F8 /* SSKeychain.m */; };
+		A7415F41172178890092F4F8 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F3F172178890092F4F8 /* SSKeychainQuery.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,10 @@
 		A7415F35172170EA0092F4F8 /* GenericAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericAccount.h; sourceTree = "<group>"; };
 		A7415F36172170EA0092F4F8 /* GenericAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericAccount.m; sourceTree = "<group>"; };
 		A7415F39172173650092F4F8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A7415F3C172178890092F4F8 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
+		A7415F3D172178890092F4F8 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
+		A7415F3E172178890092F4F8 /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
+		A7415F3F172178890092F4F8 /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +171,7 @@
 		A7415EFB172161DD0092F4F8 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				A7415F3B172178890092F4F8 /* SSKeychain */,
 				A7415F0E172161DD0092F4F8 /* TheMissingAPI.xcodeproj */,
 			);
 			path = Externals;
@@ -197,6 +204,18 @@
 				A7415F36172170EA0092F4F8 /* GenericAccount.m */,
 			);
 			name = "Cleanup for DTFoundation";
+			sourceTree = "<group>";
+		};
+		A7415F3B172178890092F4F8 /* SSKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				A7415F3C172178890092F4F8 /* SSKeychain.h */,
+				A7415F3D172178890092F4F8 /* SSKeychain.m */,
+				A7415F3E172178890092F4F8 /* SSKeychainQuery.h */,
+				A7415F3F172178890092F4F8 /* SSKeychainQuery.m */,
+			);
+			name = SSKeychain;
+			path = SSKeychain/SSKeychain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,6 +314,8 @@
 				A7175E511721489A0031058F /* main.m in Sources */,
 				A7415F37172170EA0092F4F8 /* AccountManager.m in Sources */,
 				A7415F38172170EA0092F4F8 /* GenericAccount.m in Sources */,
+				A7415F40172178890092F4F8 /* SSKeychain.m in Sources */,
+				A7415F41172178890092F4F8 /* SSKeychainQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

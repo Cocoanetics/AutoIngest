@@ -24,7 +24,7 @@
 
 @synthesize accounts;
 
-static const UInt8 kKeychainIdentifier[]    = "com.drobnik.asist.KeychainUI\0";
+//static const UInt8 kKeychainIdentifier[]    = "com.drobnik.asist.KeychainUI\0";
 
 
 static AccountManager *_sharedInstance = nil;
@@ -80,14 +80,12 @@ static AccountManager *_sharedInstance = nil;
 	NSMutableDictionary *genericPasswordQuery;    // A placeholder for a generic Keychain Item query.
 	genericPasswordQuery = [NSMutableDictionary dictionary];
 	[genericPasswordQuery setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
-	NSData *keychainType = [NSData dataWithBytes:kKeychainIdentifier length:strlen((const char *)kKeychainIdentifier)];
-	[genericPasswordQuery setObject:keychainType forKey:(id)kSecAttrGeneric];
+//	NSData *keychainType = [NSData dataWithBytes:kKeychainIdentifier length:strlen((const char *)kKeychainIdentifier)];
+//	[genericPasswordQuery setObject:keychainType forKey:(id)kSecAttrGeneric];
 	
 	// We want all generic accounts and all attributes
 	[genericPasswordQuery setObject:(id)kSecMatchLimitAll forKey:(id)kSecMatchLimit];
 	[genericPasswordQuery setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnAttributes];
-	[genericPasswordQuery setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnData];  // so password is also returned
-
 	
 	NSDictionary *tempQuery = [NSDictionary dictionaryWithDictionary:genericPasswordQuery];
 	

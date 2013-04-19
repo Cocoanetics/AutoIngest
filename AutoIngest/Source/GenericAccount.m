@@ -24,9 +24,12 @@
 
 
 @implementation GenericAccount
+{
+}
+
 @synthesize account, description, comment, label, service, password, pk_account, pk_service;
 
-static const UInt8 kKeychainIdentifier[]    = "com.drobnik.asist.KeychainUI\0";
+//static const UInt8 kKeychainIdentifier[]    = "com.cocoanetics.AutoIngest.KeychainUI\0";
 
 #pragma mark Init/dealloc	
 
@@ -40,11 +43,11 @@ static const UInt8 kKeychainIdentifier[]    = "com.drobnik.asist.KeychainUI\0";
 		label = [[dict objectForKey:(id)kSecAttrLabel] copy];
 		service = [[dict objectForKey:(id)kSecAttrService] copy];
 		
-		
-		
-		// password is NSData, need to convert to string
-		password = [[NSString alloc] initWithData:[dict objectForKey:(id)kSecValueData] encoding:NSUTF8StringEncoding];
-		
+        NSData *passwordData = [dict objectForKey:(id)kSecValueData];
+        if (passwordData)
+        {
+            password = [[NSString alloc] initWithData:passwordData encoding:NSUTF8StringEncoding];
+        }
 		
 		keychainData = [dict mutableCopy];
 		
@@ -82,8 +85,8 @@ static const UInt8 kKeychainIdentifier[]    = "com.drobnik.asist.KeychainUI\0";
 		
 		[keychainData setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
 		
-		NSData *keychainType = [NSData dataWithBytes:kKeychainIdentifier length:strlen((const char *)kKeychainIdentifier)];
-		[keychainData setObject:keychainType forKey:(id)kSecAttrGeneric];
+//		NSData *keychainType = [NSData dataWithBytes:kKeychainIdentifier length:strlen((const char *)kKeychainIdentifier)];
+//		[keychainData setObject:keychainType forKey:(id)kSecAttrGeneric];
 		
 		[self writeToKeychain];
 		
@@ -99,12 +102,12 @@ static const UInt8 kKeychainIdentifier[]    = "com.drobnik.asist.KeychainUI\0";
 {
 	NSMutableDictionary *genericPasswordQuery = [[NSMutableDictionary alloc] init];
 	[genericPasswordQuery setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
-	NSData *keychainType = [NSData dataWithBytes:kKeychainIdentifier length:strlen((const char *)kKeychainIdentifier)];
-	[genericPasswordQuery setObject:keychainType forKey:(id)kSecAttrGeneric];
+//	NSData *keychainType = [NSData dataWithBytes:kKeychainIdentifier length:strlen((const char *)kKeychainIdentifier)];
+//	[genericPasswordQuery setObject:keychainType forKey:(id)kSecAttrGeneric];
 	
-	// Use the proper search constants, return only the attributes of the first match.
-	[genericPasswordQuery setObject:(id)kSecMatchLimitOne forKey:(id)kSecMatchLimit];
-	[genericPasswordQuery setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnAttributes];
+//	// Use the proper search constants, return only the attributes of the first match.
+//	[genericPasswordQuery setObject:(id)kSecMatchLimitOne forKey:(id)kSecMatchLimit];
+//	[genericPasswordQuery setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnAttributes];
 	
 	// also limit to current pk
 	[genericPasswordQuery setObject:pk_account forKey:(id)kSecAttrAccount];
@@ -116,53 +119,25 @@ static const UInt8 kKeychainIdentifier[]    = "com.drobnik.asist.KeychainUI\0";
 - (void)writeToKeychain
 {
     CFDictionaryRef attributes = NULL;
-    NSMutableDictionary *updateItem = NULL;
-	NSDictionary *uniqueSearchQuery = [self makeUniqueSearchQuery];
+ 	NSDictionary *uniqueSearchQuery = [self makeUniqueSearchQuery];
 	
     if (SecItemCopyMatching((__bridge CFDictionaryRef)uniqueSearchQuery, (CFTypeRef *)&attributes) == noErr)
     {
-        // First we need the attributes from the Keychain.
-        updateItem = [NSMutableDictionary dictionaryWithDictionary:(__bridge NSDictionary *)(attributes)];
+        NSMutableDictionary *updateQuery = [NSMutableDictionary dictionary];
  		
 		// we copy the class, service and account as search values
-        [updateItem setObject:[uniqueSearchQuery objectForKey:(id)kSecClass] forKey:(id)kSecClass];
-		[updateItem setObject:pk_account forKey:(id)kSecAttrAccount];
-		[updateItem setObject:pk_service forKey:(id)kSecAttrService];
-		
+        [updateQuery setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
+		[updateQuery setObject:pk_account forKey:(id)kSecAttrAccount];
+		[updateQuery setObject:pk_service forKey:(id)kSecAttrService];
         
-        // Lastly, we need to set up the updated attribute list being careful to remove the class.
-        NSMutableDictionary *tempCheck = [NSMutableDictionary  dictionaryWithDictionary:keychainData];
-        [tempCheck removeObjectForKey:(id)kSecClass];
-        
-		/*
-		 
-		 update item: {
-		 acct = one;
-		 agrp = "6P2Z3HB85N.com.drobnik.MyAppSales";
-		 class = genp;
-		 gena = <636f6d2e 64726f62 6e696b2e 61736973 742e4b65 79636861 696e5549>;
-		 svce = last3;
-		 }
-		 
-		 keychain item: {
-		 acct = one;
-		 class = genp;
-		 gena = <636f6d2e 64726f62 6e696b2e 61736973 742e4b65 79636861 696e5549>;
-		 svce = last3;
-		 }
-		 
-		 -----> update item has the agrp extra, without it the request fails
-		 */
-		
-#ifdef TARGET_IPHONE_SIMULATOR
-		// this causes the SecItemUpdate to crash because on simulator it's "test"
-		[tempCheck removeObjectForKey:@"agrp"];
-#endif
-		
-		//[tempCheck setObject:@"6P2Z3HB85N.com.drobnik.MyAppSales" forKey:@"agrp"];
+        NSMutableDictionary *updatedValues = [NSMutableDictionary dictionary];
+        [updatedValues setObject:account forKey:(id)kSecAttrAccount];
+        [updatedValues setObject:[password dataUsingEncoding:NSUTF8StringEncoding] forKey:(id)kSecValueData];
 		
         // An implicit assumption is that you can only update a single item at a time.
-       if (SecItemUpdate((__bridge CFDictionaryRef)(updateItem), (__bridge CFDictionaryRef)(tempCheck)) != noErr)
+        OSStatus status = SecItemUpdate((__bridge CFDictionaryRef)(updateQuery), (__bridge CFDictionaryRef)(updatedValues));
+        
+        if (status)
         {
             NSLog(@"Couldn't update the Keychain Item.");
         }
@@ -329,4 +304,32 @@ static const UInt8 kKeychainIdentifier[]    = "com.drobnik.asist.KeychainUI\0";
 		dirty = YES;
 	}
 }
+
+- (NSString *)password
+{
+    if (!password)
+    {
+        NSMutableDictionary *updateQuery = [NSMutableDictionary dictionary];
+ 		
+		// we copy the class, service and account as search values
+        [updateQuery setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
+		[updateQuery setObject:pk_account forKey:(id)kSecAttrAccount];
+		[updateQuery setObject:pk_service forKey:(id)kSecAttrService];
+        [updateQuery setObject:(id)kSecMatchLimitOne forKey:(id)kSecMatchLimit];
+        [updateQuery setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnAttributes];
+        [updateQuery setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnData];
+        
+        CFDictionaryRef attributes = NULL;
+        
+        if (SecItemCopyMatching((__bridge CFDictionaryRef)updateQuery, (CFTypeRef *)&attributes) == noErr)
+        {
+            password = [[NSString alloc] initWithData:[(__bridge NSDictionary *)attributes objectForKey:(id)kSecValueData] encoding:NSUTF8StringEncoding];
+        }
+        
+        CFRelease(attributes);
+    }
+    
+    return password;
+}
+
 @end
