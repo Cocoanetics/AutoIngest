@@ -40,8 +40,6 @@
         {
             // initially only one account is supported
             _account = accounts[0];
-            
-            NSLog(@"%@ - %@", _account.account, _account.password);
         }
     }
 	
