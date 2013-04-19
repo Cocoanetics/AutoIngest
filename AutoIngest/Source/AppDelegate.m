@@ -42,7 +42,7 @@
 {
 	_statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
 	[_statusItem setMenu:_statusMenu];
-	[_statusItem setTitle:@"MyAppSales"];
+	[_statusItem setTitle:@"AutoIngest"];
 	
 	[_statusItem setHighlightMode:YES];
 }
