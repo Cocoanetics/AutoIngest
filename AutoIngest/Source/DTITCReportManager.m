@@ -7,9 +7,7 @@
 //
 
 #import "DTITCReportManager.h"
-#import "DTITCConstants.h"
 #import "AccountManager.h"
-#import "GenericAccount.h"
 
 static DTITCReportManager *_sharedInstance = nil;
 
@@ -20,8 +18,6 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 @implementation DTITCReportManager
 {
     BOOL _synching;
-    
-    id defaultsObserver;
     
     NSString *_reportFolder;
     NSString *_vendorID;
@@ -60,7 +56,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:defaultsObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
