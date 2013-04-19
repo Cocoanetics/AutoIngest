@@ -18,6 +18,9 @@
 		A7415F2C1721626A0092F4F8 /* Readme.markdown in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2A1721626A0092F4F8 /* Readme.markdown */; };
 		A7415F2D1721626A0092F4F8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2B1721626A0092F4F8 /* LICENSE */; };
 		A7415F3017216AE90092F4F8 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2F17216AE90092F4F8 /* Defaults.plist */; };
+		A7415F37172170EA0092F4F8 /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F34172170EA0092F4F8 /* AccountManager.m */; };
+		A7415F38172170EA0092F4F8 /* GenericAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F36172170EA0092F4F8 /* GenericAccount.m */; };
+		A7415F3A172173650092F4F8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F39172173650092F4F8 /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,11 @@
 		A7415F2A1721626A0092F4F8 /* Readme.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.markdown; sourceTree = "<group>"; };
 		A7415F2B1721626A0092F4F8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		A7415F2F17216AE90092F4F8 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
+		A7415F33172170EA0092F4F8 /* AccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
+		A7415F34172170EA0092F4F8 /* AccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
+		A7415F35172170EA0092F4F8 /* GenericAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericAccount.h; sourceTree = "<group>"; };
+		A7415F36172170EA0092F4F8 /* GenericAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericAccount.m; sourceTree = "<group>"; };
+		A7415F39172173650092F4F8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7415F3A172173650092F4F8 /* Security.framework in Frameworks */,
 				A7415F28172161F30092F4F8 /* libITCReportDownloader.a in Frameworks */,
 				A7175E28172146EE0031058F /* Cocoa.framework in Frameworks */,
 			);
@@ -102,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				A7175E27172146EE0031058F /* Cocoa.framework */,
+				A7415F39172173650092F4F8 /* Security.framework */,
 				A7175E29172146EE0031058F /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -142,6 +152,7 @@
 		A7175E45172147800031058F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A7415F32172170CB0092F4F8 /* Cleanup for DTFoundation */,
 				A7175E501721489A0031058F /* main.m */,
 				A7175E4D172148930031058F /* AppDelegate.h */,
 				A7175E4E172148930031058F /* AppDelegate.m */,
@@ -175,6 +186,17 @@
 				A7415F2B1721626A0092F4F8 /* LICENSE */,
 			);
 			name = Documentation;
+			sourceTree = "<group>";
+		};
+		A7415F32172170CB0092F4F8 /* Cleanup for DTFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				A7415F33172170EA0092F4F8 /* AccountManager.h */,
+				A7415F34172170EA0092F4F8 /* AccountManager.m */,
+				A7415F35172170EA0092F4F8 /* GenericAccount.h */,
+				A7415F36172170EA0092F4F8 /* GenericAccount.m */,
+			);
+			name = "Cleanup for DTFoundation";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +293,8 @@
 				A7175E4A172148450031058F /* PreferencesWindowController.m in Sources */,
 				A7175E4F172148930031058F /* AppDelegate.m in Sources */,
 				A7175E511721489A0031058F /* main.m in Sources */,
+				A7415F37172170EA0092F4F8 /* AccountManager.m in Sources */,
+				A7415F38172170EA0092F4F8 /* GenericAccount.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

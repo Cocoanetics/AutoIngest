@@ -10,4 +10,7 @@
 
 @interface PreferencesWindowController : NSWindowController
 
+@property (nonatomic, strong) NSString *username;
+@property (nonatomic, strong) NSString *password;
+
 @end
