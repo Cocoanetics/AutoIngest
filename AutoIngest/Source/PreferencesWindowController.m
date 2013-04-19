@@ -33,8 +33,6 @@
 
 - (IBAction)chooseDownloadFolder:(id)sender
 {
-    NSURL *URL = [NSURL fileURLWithPath: [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadFolderPath"]];
-    
 	NSOpenPanel *openPanel	= [NSOpenPanel openPanel];
 	openPanel.canChooseDirectories = YES;
     openPanel.canCreateDirectories = YES;

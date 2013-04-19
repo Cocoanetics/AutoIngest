@@ -26,6 +26,16 @@
     {
         [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     }
+    
+    // replace tilde if necessary
+    NSString *downloadPath = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadFolderPath"];
+    
+    if ([downloadPath hasPrefix:@"~"])
+    {
+        downloadPath = [downloadPath stringByExpandingTildeInPath];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:downloadPath forKey:@"DownloadFolderPath"];
+    }
 }
 
 - (void)awakeFromNib
