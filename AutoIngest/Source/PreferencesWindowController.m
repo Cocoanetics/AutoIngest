@@ -40,6 +40,9 @@
 	openPanel.title = @"Choose Download Folder";
     openPanel.prompt = @"Choose";
     
+    // set default path
+    NSString *path = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadFolderPath"];
+    NSURL *URL = [NSURL fileURLWithPath:path];
     if (URL)
     {
         [openPanel setDirectoryURL:URL];
