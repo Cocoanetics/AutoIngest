@@ -72,6 +72,7 @@
 	}
 	
 	[_preferencesController showWindow:sender];
+    [_preferencesController.window orderFrontRegardless];
 }
 
 @end
