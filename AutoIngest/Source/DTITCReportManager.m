@@ -76,6 +76,17 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	[_queue addOperation:op];
 }
 
+- (void)_reportCompletionWithError:(NSError *)error
+{
+	NSDictionary *userInfo = nil;
+	
+	if (error)
+	{
+		userInfo = @{@"Error": _error};
+	}
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:DTITCReportManagerSyncDidFinishNotification object:self userInfo:userInfo];
+}
 
 - (void)startSync
 {
@@ -105,9 +116,9 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		return;
 	}
 	
-	if (![_vendorID integerValue] || (![_vendorID hasPrefix:@"8"]))
+	if (![_vendorID integerValue] || (![_vendorID hasPrefix:@"8"] || [_vendorID length]!=8))
 	{
-		NSLog(@"Invalid Vendor ID, must be numeric and begin with an 8");
+		NSLog(@"Invalid Vendor ID, must be numeric and begin with an 8 and be 8 digits");
 		return;
 	}
 	
@@ -167,14 +178,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	[_queue addOperationWithBlock:^{
 		[weakself stopSync];
 		
-		NSDictionary *userInfo = nil;
-		
-		if ([weakself error])
-		{
-			userInfo = @{@"Error": _error};
-		}
-		
-		[[NSNotificationCenter defaultCenter] postNotificationName:DTITCReportManagerSyncDidFinishNotification object:weakself userInfo:userInfo];
+		[weakself _reportCompletionWithError:_error];
 	}];
 }
 
@@ -220,8 +224,6 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		
 		needsToStopSync = YES;
 	}
-	
-	
 	
 	if (![_vendorID isEqualToString:vendorID])
 	{
