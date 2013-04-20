@@ -10,6 +10,7 @@
 
 #import "PreferencesWindowController.h"
 #import "DTITCReportManager.h"
+#import "AccountManager.h"
 
 @implementation AppDelegate
 {
@@ -57,6 +58,49 @@
 }
 
 #pragma mark - Actions
+
+- (BOOL)_canSync
+{
+	NSArray *accounts = [[AccountManager sharedAccountManager] accountsOfType:@"iTunes Connect"];
+	
+	if (![accounts count])
+	{
+		return NO;
+	}
+	
+	NSString *vendorID = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadVendorID"];
+	
+	if (![vendorID integerValue] || (![vendorID hasPrefix:@"8"] || [vendorID length]!=8))
+	{
+		return NO;
+	}
+	
+	NSString *reportFolder = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadFolderPath"];
+	BOOL isDirectory = NO;
+	if ([[NSFileManager defaultManager] fileExistsAtPath:reportFolder isDirectory:&isDirectory])
+	{
+		if (!isDirectory)
+		{
+			return NO;
+		}
+	}
+	else
+	{
+		return NO;
+	}
+	
+	return YES;
+}
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	if (menuItem.action == @selector(syncNow:))
+	{
+		return [self _canSync];
+	}
+	
+	return YES;
+}
 
 - (void)syncNow:(id)sender
 {
