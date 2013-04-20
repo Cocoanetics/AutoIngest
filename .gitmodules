@@ -1,3 +1,6 @@
 [submodule "Externals/DTITCReportDownloader"]
 	path = Externals/DTITCReportDownloader
 	url = https://github.com/Cocoanetics/DTITCReportDownloader.git 
+[submodule "Externals/DTFoundation"]
+	path = Externals/DTFoundation
+	url = https://github.com/Cocoanetics/DTFoundation.git
