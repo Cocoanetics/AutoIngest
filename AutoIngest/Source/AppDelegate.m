@@ -91,11 +91,23 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [_statusItem setTitle:@"AutoIngest"];
 
+		 NSError *error = [notification userInfo][@"Error"];
+		 
         NSUserNotification *note = [[NSUserNotification alloc] init];
-        [note setTitle:@"AutoIngest"];
-        NSString *infoText = [NSString stringWithFormat:@"Report download complete"];
-        [note setInformativeText:infoText];
-        
+		 
+		 if (error)
+		 {
+			 [note setTitle:@"Report Synching Error"];
+			 NSString *infoText = [error localizedDescription];
+			 [note setInformativeText:infoText];
+		 }
+		 else
+		 {
+			 [note setTitle:@"AutoIngest"];
+			 NSString *infoText = [NSString stringWithFormat:@"Report download complete"];
+			 [note setInformativeText:infoText];
+		 }
+       
         NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
         [center deliverNotification:note];
     });
