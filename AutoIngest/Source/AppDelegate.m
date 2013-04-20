@@ -83,7 +83,7 @@
 
 - (void)syncDidStart:(NSNotification *)notification
 {
-    [_statusItem setTitle:@"Synching"];
+    [_statusItem setTitle:@"Syncing"];
 }
 
 - (void)syncDidFinish:(NSNotification *)notification
@@ -97,7 +97,7 @@
 		 
 		 if (error)
 		 {
-			 [note setTitle:@"Report Synching Error"];
+			 [note setTitle:@"Report Syncing Error"];
 			 NSString *infoText = [error localizedDescription];
 			 [note setInformativeText:infoText];
 		 }

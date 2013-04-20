@@ -171,6 +171,10 @@
 													 {
 														 _error = error; // error message mentioning Apple ID probably means incorrect credentials
 													 }
+													 else if ([[error localizedDescription] rangeOfString:@"vendor number"].location != NSNotFound)
+													 {
+														 _error = error; // invalid vendor id
+													 }
 													 
 													 if (_error && [_delegate respondsToSelector:@selector(operation:didFailWithError:)])
 													 {

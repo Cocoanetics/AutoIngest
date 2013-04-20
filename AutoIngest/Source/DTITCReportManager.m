@@ -18,6 +18,9 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 
 
 @interface DTITCReportManager () <DTITCReportDownloadOperationDelegate>
+
+@property (strong) NSError *error;
+
 @end
 
 @implementation DTITCReportManager
@@ -28,8 +31,6 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	NSString *_vendorID;
 	
 	NSOperationQueue *_queue;
-	
-	NSError *_error;
 }
 
 + (DTITCReportManager *)sharedManager
@@ -85,7 +86,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	}
 	
 	// reset error status
-	_error = nil;
+	self.error = nil;
 	
 	NSArray *accounts = [[AccountManager sharedAccountManager] accountsOfType:@"iTunes Connect"];
 	
@@ -158,6 +159,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		return;
 	}
 	
+	_synching = YES;
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:DTITCReportManagerSyncDidStartNotification object:weakself];
 	
 	// completion
@@ -166,7 +169,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		
 		NSDictionary *userInfo = nil;
 		
-		if (_error)
+		if ([weakself error])
 		{
 			userInfo = @{@"Error": _error};
 		}
@@ -182,7 +185,20 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		return;
 	}
 	
-	[_queue cancelAllOperations];
+	[_queue setSuspended:YES];
+	
+	// cancel only download operations
+	for (NSOperation *op in [_queue operations])
+	{
+		if ([op isKindOfClass:[DTITCReportDownloadOperation class]])
+		{
+			[op cancel];
+		}
+	}
+	
+	// now the completion block should follow
+	[_queue setSuspended:NO];
+
 	
 	_synching = NO;
 }
@@ -226,7 +242,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 
 - (void)operation:(DTITCReportDownloadOperation *)operation didFailWithError:(NSError *)error
 {
-	_error = error;
+	self.error = error;
 	
 	[self stopSync];
 }
