@@ -7,6 +7,8 @@
 //
 
 #import "DTITCReportManager.h"
+#import "DTITCReportDownloadOperation.h"
+
 #import "AccountManager.h"
 
 static DTITCReportManager *_sharedInstance = nil;
@@ -23,6 +25,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     NSString *_vendorID;
     
     NSOperationQueue *_queue;
+	
+	NSError *_error;
 }
 
 + (DTITCReportManager *)sharedManager
@@ -62,193 +66,10 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 
 - (void)_downloadAllReportsOfType:(ITCReportType)reportType subType:(ITCReportSubType)reportSubType dateType:(ITCReportDateType)reportDateType fromAccount:(GenericAccount *)account
 {
-    BOOL downloadAll = YES;
-    
-    // determine date to pass to download
-    __block NSDate *reportDate;
-    NSDate *today = [NSDate date];
-    
-    NSDateComponents *comps = [[NSDateComponents alloc] init];
-    [comps setDay:-1];
-    
-    reportDate = [[NSCalendar currentCalendar] dateByAddingComponents:comps toDate:today options:0];
-    
-    // for weekly reports go back to previous Sunday
-    if (reportDateType == ITCReportDateTypeWeekly)
-    {
-        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        
-        NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:reportDate];
-        
-        if (comps.weekday!=1) // not a Sunday
-        {
-            comps.day = -(comps.weekday-1);
-            comps.weekday = 0;
-            
-            reportDate = [gregorian dateByAddingComponents:comps toDate:reportDate options:0];
-        }
-    }
-    
-    // create a downloader
-    DTITCReportDownloader *downloader = [[DTITCReportDownloader alloc] initWithUser:account.account password:account.password vendorIdentifier:_vendorID];
-    
-    __block NSUInteger downloadedFiles = 0;
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    NSString *dateFormat = NSStringWithDateFormatForITCReportDateType(reportDateType);
-    
-    [formatter setDateFormat:dateFormat];
-    
-    do
-    {
-        NSString *predictedName = [downloader predictedFileNameForDate:reportDate
-                                                            reportType:reportType
-                                                        reportDateType:reportDateType
-                                                         reportSubType:reportSubType
-                                                            compressed:YES];
-        
-        NSString *predictedOutputPath = [_reportFolder stringByAppendingPathComponent:predictedName];
-        
-        if ([fileManager fileExistsAtPath:predictedOutputPath])
-        {
-            NSLog(@"Skipped %@ because it already exists at %@", predictedName, _reportFolder);
-            downloadedFiles++;
-            
-            if (!downloadAll)
-            {
-                break;
-            }
-        }
-        else if ([downloader downloadReportWithDate:reportDate
-                                         reportType:reportType
-                                     reportDateType:reportDateType
-                                      reportSubType:reportSubType
-                                  completionHandler:^(NSString *fileName, NSData *data) {
-                                      NSString *baseName = [fileName stringByReplacingOccurrencesOfString:@".txt.gz" withString:@""];
-                                      
-                                      // update actual report date
-                                      NSString *dateFormat = NSStringWithDateFormatForITCReportDateType(reportDateType);
-                                      
-                                      NSString *dateStringInName = [baseName substringWithRange:NSMakeRange([baseName length]-[dateFormat length], [dateFormat length])];
-                                      formatter.dateFormat = dateFormat;
-                                      NSDate *parsedDate = [formatter dateFromString:dateStringInName];
-                                      
-                                      if ([parsedDate compare:reportDate] == NSOrderedDescending)
-                                      {
-                                          // cancel loop, this file does not fit with what we requested
-                                          reportDate = nil;
-                                          
-                                          return;
-                                      }
-                                      else
-                                      {
-                                          reportDate = parsedDate;
-                                      }
-                                      
-                                      // get current working directory
-                                      NSString *outputPath = [_reportFolder stringByAppendingPathComponent:fileName];
-                                      
-                                      // skip this file if output already exists
-                                      if ([[NSFileManager defaultManager] fileExistsAtPath:outputPath])
-                                      {
-                                          NSLog(@"Skipped %@ because it already exists at %@", predictedName, _reportFolder);
-                                          downloadedFiles++;
-                                          
-                                          return;
-                                      }
-                                      
-                                      // write data to file
-                                      NSError *writeError = nil;
-                                      if ([data writeToFile:outputPath options:NSDataWritingAtomic error:&writeError])
-                                      {
-                                          printf("%s\n", [fileName UTF8String]);
-                                          downloadedFiles++;
-                                      }
-                                      else
-                                      {
-                                          printf("%s\n", [[writeError localizedDescription] UTF8String]);
-                                      }
-                                  }
-                  
-                                       errorHandler:^(NSError *error) {
-                                           if (!downloadAll)
-                                           {
-                                               // don't output single file errors for ALL mode
-                                               printf("%s\n", [[error localizedDescription] UTF8String]);
-                                           }
-                                       }])
-        {
-            // download succeeded for this date
-            if (!downloadAll)
-            {
-                break;
-            }
-        }
-        else
-        {
-            // download failed for this date
-            if (!downloadAll)
-            {
-                // abort for single file
-                break;
-            }
-            else
-            {
-                if (downloadedFiles>0)
-                {
-                    // if we are downloading all the first failure means we end
-                    break;
-                }
-            }
-        }
-        
-        if (downloadAll)
-        {
-            // move to one day/week/month/year earlier
-            NSDateComponents *comps = [[NSDateComponents alloc] init];
-            
-            switch (reportDateType)
-            {
-                case ITCReportDateTypeDaily:
-                {
-                    [comps setDay:-1];
-                    break;
-                }
-                    
-                case ITCReportDateTypeWeekly:
-                {
-                    [comps setDay:-7];
-                    break;
-                }
-                    
-                case ITCReportDateTypeMonthly:
-                {
-                    [comps setMonth:-1];
-                    break;
-                }
-                    
-                case ITCReportDateTypeYearly:
-                {
-                    [comps setYear:-1];
-                    break;
-                }
-                    
-                default:
-                {
-                    break;
-                }
-            }
-            
-            if (!reportDate)
-            {
-                break;
-            }
-            
-            reportDate = [[NSCalendar currentCalendar] dateByAddingComponents:comps toDate:reportDate options:0];
-        }
-        
-    } while (1);
+	DTITCReportDownloadOperation *op = [[DTITCReportDownloadOperation alloc] initForReportsOfType:reportType subType:reportSubType dateType:reportDateType fromAccount:account vendorID:_vendorID intoFolder:_reportFolder];
+	op.delegate = self;
+	
+	[_queue addOperation:op];
 }
 
 
@@ -259,6 +80,9 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
         NSLog(@"Already Synching");
         return;
     }
+	
+	// reset error status
+	_error = nil;
 
     NSArray *accounts = [[AccountManager sharedAccountManager] accountsOfType:@"iTunes Connect"];
     
@@ -336,8 +160,15 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     // completion
     [_queue addOperationWithBlock:^{
         [weakself stopSync];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:DTITCReportManagerSyncDidFinishNotification object:weakself];
+       
+		 NSDictionary *userInfo = nil;
+		 
+		 if (_error)
+		 {
+			 userInfo = @{@"Error": _error};
+		 }
+		 
+        [[NSNotificationCenter defaultCenter] postNotificationName:DTITCReportManagerSyncDidFinishNotification object:weakself userInfo:userInfo];
     }];
 }
 
@@ -375,5 +206,15 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     
     _vendorID = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadVendorID"];
 }
+
+#pragma mark - DTITCReportDownloadOperation Delegate
+
+- (void)operation:(DTITCReportDownloadOperation *)operation didFailWithError:(NSError *)error
+{
+	_error = error;
+	
+	[self stopSync];
+}
+
 
 @end
