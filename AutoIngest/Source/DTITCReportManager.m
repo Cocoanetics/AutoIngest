@@ -7,9 +7,7 @@
 //
 
 #import "DTITCReportManager.h"
-#import "DTITCConstants.h"
 #import "AccountManager.h"
-#import "GenericAccount.h"
 
 static DTITCReportManager *_sharedInstance = nil;
 
@@ -20,8 +18,6 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 @implementation DTITCReportManager
 {
     BOOL _synching;
-    
-    id defaultsObserver;
     
     NSString *_reportFolder;
     NSString *_vendorID;
@@ -60,7 +56,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:defaultsObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -305,7 +301,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     if ([defaults boolForKey:@"DownloadWeekly"])
     {
         [_queue addOperationWithBlock:^{
-            [self _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeWeekly fromAccount:account];
+            [weakself _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeWeekly fromAccount:account];
         }];
         
         hasWorkToDo = YES;
@@ -314,7 +310,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     if ([defaults boolForKey:@"DownloadMonthly"])
     {
         [_queue addOperationWithBlock:^{
-            [self _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeMonthly fromAccount:account];
+            [weakself _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeMonthly fromAccount:account];
         }];
         
         hasWorkToDo = YES;
@@ -323,7 +319,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     if ([defaults boolForKey:@"DownloadYearly"])
     {
         [_queue addOperationWithBlock:^{
-            [self _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeYearly fromAccount:account];
+            [weakself _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeYearly fromAccount:account];
         }];
         
         hasWorkToDo = YES;
