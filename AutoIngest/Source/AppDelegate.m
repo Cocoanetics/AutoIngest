@@ -12,6 +12,8 @@
 #import "DTITCReportManager.h"
 #import "AccountManager.h"
 
+#import "StatusItemView.h"
+
 @implementation AppDelegate
 {
 	NSStatusItem *_statusItem;
@@ -42,11 +44,12 @@
 
 - (void)awakeFromNib
 {
-	_statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-	[_statusItem setMenu:_statusMenu];
-	[_statusItem setTitle:@"AutoIngest"];
-	
-	[_statusItem setHighlightMode:YES];
+    NSStatusBar *systemStatusBar = [NSStatusBar systemStatusBar];
+	_statusItem = [systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
+    StatusItemView *statusItemView = [[StatusItemView alloc] initWithFrame:CGRectMake(0, 0, systemStatusBar.thickness, systemStatusBar.thickness)];
+	statusItemView.statusItem = _statusItem;
+    statusItemView.menu = _statusMenu;
+    [_statusItem setView:statusItemView];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -127,15 +130,17 @@
 
 - (void)syncDidStart:(NSNotification *)notification
 {
-    [_statusItem setTitle:@"Syncing"];
+    StatusItemView *statusItemView = (StatusItemView *)_statusItem.view;
+    statusItemView.isSyncing = YES;
 }
 
 - (void)syncDidFinish:(NSNotification *)notification
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [_statusItem setTitle:@"AutoIngest"];
-
-		 NSError *error = [notification userInfo][@"Error"];
+        StatusItemView *statusItemView = (StatusItemView *)_statusItem.view;
+        statusItemView.isSyncing = NO;
+        
+        NSError *error = [notification userInfo][@"Error"];
 		 
         NSUserNotification *note = [[NSUserNotification alloc] init];
 		 
