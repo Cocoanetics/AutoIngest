@@ -74,22 +74,25 @@
 
 - (void)setIsSyncing:(BOOL)isSyncing
 {
-    if (_isSyncing)
-    {
-        [self.layer removeAnimationForKey:@"syncAnimation"];
-    }
-    _isSyncing = isSyncing;
-    
-    if (_isSyncing)
-    {
-        CABasicAnimation *syncAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-        syncAnimation.duration = .5f;
-        syncAnimation.repeatCount = INFINITY;
-        syncAnimation.autoreverses = YES;
-        syncAnimation.fromValue = @1;
-        syncAnimation.toValue = @.33;
-        [self.layer addAnimation:syncAnimation forKey:@"syncAnimation"];
-    }
+	if (_isSyncing != isSyncing)
+	{
+		_isSyncing = isSyncing;
+		
+		if (!_isSyncing)
+		{
+			[self.layer removeAnimationForKey:@"syncAnimation"];
+		}
+		else
+		{
+			CABasicAnimation *syncAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+			syncAnimation.duration = .5f;
+			syncAnimation.repeatCount = INFINITY;
+			syncAnimation.autoreverses = YES;
+			syncAnimation.fromValue = @1;
+			syncAnimation.toValue = @.33;
+			[self.layer addAnimation:syncAnimation forKey:@"syncAnimation"];
+		}
+	}
 }
 
 @end

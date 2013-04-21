@@ -137,41 +137,42 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	
 	BOOL hasWorkToDo = NO;
 	
+	[_queue setSuspended:YES];
+	
 	if ([defaults boolForKey:@"DownloadDaily"])
 	{
-		[_queue addOperationWithBlock:^{
-			[weakself _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeDaily fromAccount:account];
-		}];
+		[self _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeDaily fromAccount:account];
 		
 		hasWorkToDo = YES;
 	}
 	
 	if ([defaults boolForKey:@"DownloadWeekly"])
 	{
-		[_queue addOperationWithBlock:^{
-			[weakself _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeWeekly fromAccount:account];
-		}];
+		[self _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeWeekly fromAccount:account];
 		
 		hasWorkToDo = YES;
 	}
 	
 	if ([defaults boolForKey:@"DownloadMonthly"])
 	{
-		[_queue addOperationWithBlock:^{
-			[weakself _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeMonthly fromAccount:account];
-		}];
+		[self _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeMonthly fromAccount:account];
 		
 		hasWorkToDo = YES;
 	}
 	
 	if ([defaults boolForKey:@"DownloadYearly"])
 	{
-		[_queue addOperationWithBlock:^{
-			[weakself _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeYearly fromAccount:account];
-		}];
+		[self _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeYearly fromAccount:account];
 		
 		hasWorkToDo = YES;
 	}
+	
+	// completion
+	[_queue addOperationWithBlock:^{
+		[weakself _reportCompletionWithError:_error];
+		
+		_synching = NO;
+	}];
 	
 	if (!hasWorkToDo)
 	{
@@ -181,16 +182,11 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	
 	NSLog(@"Starting Sync");
 	
-	_synching = YES;
-	
 	[[NSNotificationCenter defaultCenter] postNotificationName:DTITCReportManagerSyncDidStartNotification object:weakself];
 	
-	// completion
-	[_queue addOperationWithBlock:^{
-		[weakself _reportCompletionWithError:_error];
-		
-		_synching = NO;
-	}];
+	[_queue setSuspended:NO];
+	
+	_synching = YES;
 }
 
 - (void)stopSync
