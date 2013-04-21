@@ -13,6 +13,8 @@ extern NSString * const DTITCReportManagerSyncDidFinishNotification;
 
 @interface DTITCReportManager : NSObject
 
+@property (nonatomic) BOOL isSynching;
+
 + (DTITCReportManager *)sharedManager;
 
 - (void)startSync;

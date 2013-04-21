@@ -14,6 +14,15 @@
 
 #import "StatusItemView.h"
 
+
+@interface AppDelegate ()
+
+@property (weak) IBOutlet NSMenuItem *syncMenuItem;
+
+
+@end
+
+
 @implementation AppDelegate
 {
 	NSStatusItem *_statusItem;
@@ -50,6 +59,8 @@
 	statusItemView.statusItem = _statusItem;
     statusItemView.menu = _statusMenu;
     [_statusItem setView:statusItemView];
+    
+    _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -77,10 +88,21 @@
 	return YES;
 }
 
-- (void)syncNow:(id)sender
+- (IBAction)syncMenuItemAction:(id)sender
 {
-    [[DTITCReportManager sharedManager] startSync];
+    DTITCReportManager *reportManager = [DTITCReportManager sharedManager];
+    if (reportManager.isSynching)
+    {
+        [reportManager stopSync];
+        _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
+    }
+    else
+    {
+        [reportManager startSync];
+        _syncMenuItem.title = NSLocalizedString(@"Stop sync", nil);
+    }    
 }
+
 
 - (void)quitApplication:(id)sender
 {
