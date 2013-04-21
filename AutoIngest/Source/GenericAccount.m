@@ -12,10 +12,18 @@
 
 
 @interface GenericAccount ()
-
-- (NSMutableDictionary *)makeUniqueSearchQuery;  // mutable, if primary keys are updated
-- (void)writeToKeychain;
-
+{
+	NSString *_account;
+	NSString *_description;
+	NSString *_comment;
+	NSString *_label;
+	NSString *_service;
+	NSString *_password;
+	
+	// the primary key
+	NSString *_pk_account;
+	NSString *_pk_service;
+}
 
 @property(nonatomic, retain) NSString *pk_account;
 @property(nonatomic, retain) NSString *pk_service;
@@ -27,309 +35,252 @@
 {
 }
 
-@synthesize account, description, comment, label, service, password, pk_account, pk_service;
+#pragma mark Init/dealloc
 
-//static const UInt8 kKeychainIdentifier[]    = "com.cocoanetics.AutoIngest.KeychainUI\0";
-
-#pragma mark Init/dealloc	
-
-- (id) initFromKeychainDictionary:(NSDictionary *)dict
+- (id)initFromKeychainDictionary:(NSDictionary *)dict
 {
 	if (self = [super init])
 	{
-		account = [[dict objectForKey:(id)kSecAttrAccount] copy];
-		description = [[dict objectForKey:(id)kSecAttrDescription] copy];
-		comment = [[dict objectForKey:(id)kSecAttrComment] copy];
-		label = [[dict objectForKey:(id)kSecAttrLabel] copy];
-		service = [[dict objectForKey:(id)kSecAttrService] copy];
+		_account = [[dict objectForKey:(id)kSecAttrAccount] copy];
+		_description = [[dict objectForKey:(id)kSecAttrDescription] copy];
+		_comment = [[dict objectForKey:(id)kSecAttrComment] copy];
+		_label = [[dict objectForKey:(id)kSecAttrLabel] copy];
+		_service = [[dict objectForKey:(id)kSecAttrService] copy];
 		
-        NSData *passwordData = [dict objectForKey:(id)kSecValueData];
-        if (passwordData)
-        {
-            password = [[NSString alloc] initWithData:passwordData encoding:NSUTF8StringEncoding];
-        }
+		// set password only if we have it
+		NSData *passwordData = [dict objectForKey:(id)kSecValueData];
+		if (passwordData)
+		{
+			_password = [[NSString alloc] initWithData:passwordData encoding:NSUTF8StringEncoding];
+		}
 		
-		keychainData = [dict mutableCopy];
-		
-		// remember primary key 
-		self.pk_account = account;
-		self.pk_service = service;
-		
-		//uniqueSearchQuery = [[self makeUniqueSearchQuery] retain];
-		
-		[keychainData setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass]; 
-		
-		
-		dirty = NO;
+		// remember primary key
+		self.pk_account = _account;
+		self.pk_service = _service;
 	}
 	
 	return self;
 }
 
 
-- (id) initService:(NSString *)aService forUser:(NSString *)aUser
+- (id)initService:(NSString *)aService forUser:(NSString *)aUser
 {
 	if (self = [super init])
 	{
-		account = [aUser copy];
-		service = [aService copy];
+		_account = [aUser copy];
+		_service = [aService copy];
 		
-		// remember primary key 
-		self.pk_account = account;
-		self.pk_service = service;
-		
-		keychainData = [NSMutableDictionary dictionary];
-		
-		[keychainData setObject:account forKey:(id)kSecAttrAccount];
-		[keychainData setObject:service forKey:(id)kSecAttrService];
-		
-		[keychainData setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
-		
-//		NSData *keychainType = [NSData dataWithBytes:kKeychainIdentifier length:strlen((const char *)kKeychainIdentifier)];
-//		[keychainData setObject:keychainType forKey:(id)kSecAttrGeneric];
+		// remember primary key
+		self.pk_account = _account;
+		self.pk_service = _service;
 		
 		[self writeToKeychain];
-		
 	}
 	
 	return self;
 }
 
 
-#pragma mark Keychain Access 
+#pragma mark Keychain Access
 // search query to find only this account on the keychain
-- (NSMutableDictionary *)makeUniqueSearchQuery
+- (NSDictionary *)_uniqueSearchQuery
 {
-	NSMutableDictionary *genericPasswordQuery = [[NSMutableDictionary alloc] init];
-	[genericPasswordQuery setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
-//	NSData *keychainType = [NSData dataWithBytes:kKeychainIdentifier length:strlen((const char *)kKeychainIdentifier)];
-//	[genericPasswordQuery setObject:keychainType forKey:(id)kSecAttrGeneric];
+	NSMutableDictionary *query = [NSMutableDictionary dictionary];
+	[query setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
+	[query setObject:_pk_account forKey:(id)kSecAttrAccount];
+	[query setObject:_pk_service forKey:(id)kSecAttrService];
 	
-//	// Use the proper search constants, return only the attributes of the first match.
-//	[genericPasswordQuery setObject:(id)kSecMatchLimitOne forKey:(id)kSecMatchLimit];
-//	[genericPasswordQuery setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnAttributes];
+	// unique means we only want one match
+	[query setObject:(id)kSecMatchLimitOne forKey:(id)kSecMatchLimit];
 	
-	// also limit to current pk
-	[genericPasswordQuery setObject:pk_account forKey:(id)kSecAttrAccount];
-	[genericPasswordQuery setObject:pk_service forKey:(id)kSecAttrService];
 	
-	return genericPasswordQuery;
+	return [query copy];
+}
+
+- (NSDictionary *)_dictionaryOfCurrentValues
+{
+	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	
+	dictionary[(id)kSecAttrAccount] = _account;
+	dictionary[(id)kSecAttrService] = _service;
+	
+	if (_description)
+	{
+		dictionary[(id)kSecAttrDescription] = _description;
+	}
+	
+	if (_comment)
+	{
+		dictionary[(id)kSecAttrComment] = _comment;
+	}
+	
+	if (_label)
+	{
+		dictionary[(id)kSecAttrLabel] = _label;
+	}
+	
+	NSString *password = _password?:@"";
+	NSData *passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
+	dictionary[(id)kSecValueData] = passwordData;
+	
+	dictionary[(id)kSecClass] = (id)kSecClassGenericPassword;
+	
+	return [dictionary copy];
 }
 
 - (void)writeToKeychain
 {
-    CFDictionaryRef attributes = NULL;
- 	NSDictionary *uniqueSearchQuery = [self makeUniqueSearchQuery];
+ 	NSDictionary *uniqueSearchQuery = [self _uniqueSearchQuery];
 	
-    if (SecItemCopyMatching((__bridge CFDictionaryRef)uniqueSearchQuery, (CFTypeRef *)&attributes) == noErr)
-    {
-        NSMutableDictionary *updateQuery = [NSMutableDictionary dictionary];
+	CFDictionaryRef attributes = NULL;
+	if (SecItemCopyMatching((__bridge CFDictionaryRef)uniqueSearchQuery, (CFTypeRef *)&attributes) == noErr)
+	{
+		NSDictionary *updatedValues = [self _dictionaryOfCurrentValues];
  		
-		// we copy the class, service and account as search values
-        [updateQuery setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
-		[updateQuery setObject:pk_account forKey:(id)kSecAttrAccount];
-		[updateQuery setObject:pk_service forKey:(id)kSecAttrService];
-        
-        NSMutableDictionary *updatedValues = [NSMutableDictionary dictionary];
-        [updatedValues setObject:account forKey:(id)kSecAttrAccount];
-        [updatedValues setObject:[password dataUsingEncoding:NSUTF8StringEncoding] forKey:(id)kSecValueData];
+		// An implicit assumption is that you can only update a single item at a time.
+		OSStatus status = SecItemUpdate((__bridge CFDictionaryRef)(uniqueSearchQuery), (__bridge CFDictionaryRef)(updatedValues));
 		
-        // An implicit assumption is that you can only update a single item at a time.
-        OSStatus status = SecItemUpdate((__bridge CFDictionaryRef)(updateQuery), (__bridge CFDictionaryRef)(updatedValues));
-        
-        if (status)
-        {
-            NSLog(@"Couldn't update the Keychain Item.");
-        }
+		if (status)
+		{
+			NSLog(@"Couldn't update the Keychain Item.");
+		}
 		
-		pk_account = account;
-		pk_service = service;
+		// update primary key
+		_pk_account = _account;
+		_pk_service = _service;
 		
 		CFRelease(attributes);
-    }
-    else
-    {
-        // No previous item found, add the new one.
+	}
+	else
+	{
+		NSDictionary *dictionary = [self _dictionaryOfCurrentValues];
 		
-		/*
-		 2009-09-08 09:30:51.197 MyAppSales[4461:207] keychain item: {
-		 acct = one;
-		 class = genp;
-		 gena = <636f6d2e 64726f62 6e696b2e 61736973 742e4b65 79636861 696e5549>;
-		 svce = last4;
-		 }
-		 
-		 --> secitem is identical
-		 
-		 */
-		
-        if (SecItemAdd((__bridge CFDictionaryRef)(keychainData), NULL) != noErr)
-        {
-            NSLog(@"Couldn't add the Keychain Item.");
-
-        }
-    }
-	
-	dirty = NO;
+		CFDictionaryRef result;
+		OSStatus status = SecItemAdd((__bridge CFDictionaryRef)(dictionary), (CFTypeRef *)&result);
+		if (status != noErr)
+		{
+			NSLog(@"Couldn't add the Keychain Item.");
+			
+			/** -- on Mac
+			 CFStringRef message = SecCopyErrorMessageString(status, NULL);
+			 NSLog(@"%@", message);
+			 CFRelease(message);
+			 */
+		}
+	}
 }
 
 
 - (void)removeFromKeychain
 {
-	OSStatus junk = noErr;
-    if (!keychainData) 
-    {
-        keychainData = [[NSMutableDictionary alloc] init];
-    }
-    else if (keychainData)
-    {
-		/*
-		 
-		 secitem: {
-		 acct = "oliver@drobnik.com";
-		 agrp = "6P2Z3HB85N.com.drobnik.MyAppSales";
-		 class = genp;
-		 gena = <636f6d2e ... >;
-		 svce = "iTunes Connect";
-		 }
-		 
-		 
-		 keychain: {
-		 acct = "oliver@drobnik.com";
-		 agrp = "6P2Z3HB85N.com.drobnik.MyAppSales";
-		 gena = <636f6d2e ...>;
-		 svce = "iTunes Connect";
-		 
-		 ---> class missing causes delete to fail
-		 
-		 */
-		
-		[keychainData setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];  // without class this fails
-		
-		junk = SecItemDelete((__bridge CFDictionaryRef)keychainData);
-        
-        if ( junk != noErr && junk != errSecItemNotFound)
-        {
-            NSLog(@"Problem deleting current dictionary.");
-        }
-    }
-}
-
-
-- (void)setObject:(id)inObject forKey:(id)key 
-{
-    if (inObject == nil) return;
-    id currentObject = [keychainData objectForKey:key];
-    if (![currentObject isEqual:inObject])
-    {
-        [keychainData setObject:inObject forKey:key];
-        [self writeToKeychain];
-    }
-}
-
-#pragma mark Setters
-
-- (void) setAccount:(NSString *)newAccount
-{
-	if (account != newAccount) 
+	NSDictionary *query = [self _uniqueSearchQuery];
+	
+	OSStatus status = SecItemDelete((__bridge CFDictionaryRef)query);
+	
+	if ( status != noErr && status != errSecItemNotFound)
 	{
-		account = [newAccount copy];
-		
-		[self setObject:account forKey:(id)kSecAttrAccount];
-		
-		// update unique search query as well because this is part of primary key
-		//[uniqueSearchQuery setObject:newAccount forKey:(id)kSecAttrAccount];
-		
-		dirty = YES;
+		NSLog(@"Problem deleting current dictionary.");
 	}
 }
 
-- (void) setPassword:(NSString *)newPassword
+
+#pragma mark - Properties
+
+- (void)setAccount:(NSString *)account
 {
-	if (password != newPassword) 
+	if (_account != account)
 	{
-		password = [newPassword copy];
+		_account = [account copy];
 		
-		// password is NSData in keychain, need to convert
-		
-		[self setObject:[password dataUsingEncoding:NSUTF8StringEncoding] forKey:(id)kSecValueData];
-		dirty = YES;
+		[self writeToKeychain];
 	}
 }
 
-- (void) setService:(NSString *)newService
+- (void)setPassword:(NSString *)password
 {
-	if (service != newService) 
+	// we cannot remove entry from password, only blank it
+	if (!password)
 	{
-		service = [newService copy];
+		password = @"";
+	}
+	
+	if (_password != password)
+	{
+		_password = [password copy];
 		
-		[self setObject:service forKey:(id)kSecAttrService];
-		
-		// update unique search query as well because this is part of primary key
-		//[uniqueSearchQuery setObject:newService forKey:(id)kSecAttrService];
-		
-		dirty = YES;
+		[self writeToKeychain];
 	}
 }
 
-- (void) setDescription:(NSString *)newDescription
+- (void)setService:(NSString *)service
 {
-	if (description != newDescription) 
+	if (_service != service)
 	{
-		description = [newDescription copy];
+		_service = [service copy];
 		
-		[self setObject:description forKey:(id)kSecAttrDescription];
-		dirty = YES;
+		[self writeToKeychain];
 	}
 }
 
-- (void) setLabel:(NSString *)newLabel
+- (void)setDescription:(NSString *)description
 {
-	if (label != newLabel) 
+	if (_description != description)
 	{
-		label = [newLabel copy];
+		_description = [description copy];
 		
-		[self setObject:label forKey:(id)kSecAttrLabel];
-		dirty = YES;
+		[self writeToKeychain];
 	}
 }
 
-- (void) setComment:(NSString *)newComment
+- (void)setLabel:(NSString *)newLabel
 {
-	if (comment != newComment) 
+	if (_label != newLabel)
 	{
-		comment = [newComment copy];
+		_label = [newLabel copy];
 		
-		[self setObject:comment forKey:(id)kSecAttrComment];
-		dirty = YES;
+		[self writeToKeychain];
+	}
+}
+
+- (void)setComment:(NSString *)comment
+{
+	if (_comment != comment)
+	{
+		_comment = [comment copy];
+		
+		[self writeToKeychain];
 	}
 }
 
 - (NSString *)password
 {
-    if (!password)
-    {
-        NSMutableDictionary *updateQuery = [NSMutableDictionary dictionary];
+	// try to load password if necessary
+	if (!_password)
+	{
+		NSMutableDictionary *query = [[self _uniqueSearchQuery] mutableCopy];
  		
 		// we copy the class, service and account as search values
-        [updateQuery setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
-		[updateQuery setObject:pk_account forKey:(id)kSecAttrAccount];
-		[updateQuery setObject:pk_service forKey:(id)kSecAttrService];
-        [updateQuery setObject:(id)kSecMatchLimitOne forKey:(id)kSecMatchLimit];
-        [updateQuery setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnAttributes];
-        [updateQuery setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnData];
-        
-        CFDictionaryRef attributes = NULL;
-        
-        if (SecItemCopyMatching((__bridge CFDictionaryRef)updateQuery, (CFTypeRef *)&attributes) == noErr)
-        {
-            password = [[NSString alloc] initWithData:[(__bridge NSDictionary *)attributes objectForKey:(id)kSecValueData] encoding:NSUTF8StringEncoding];
-        }
-        
-        CFRelease(attributes);
-    }
-    
-    return password;
+		[query setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnAttributes];
+		[query setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnData];
+		
+		CFDictionaryRef attributes = NULL;
+		
+		if (SecItemCopyMatching((__bridge CFDictionaryRef)query, (CFTypeRef *)&attributes) == noErr)
+		{
+			_password = [[NSString alloc] initWithData:[(__bridge NSDictionary *)attributes objectForKey:(id)kSecValueData] encoding:NSUTF8StringEncoding];
+		}
+		
+		CFRelease(attributes);
+	}
+	
+	return _password;
 }
+
+@synthesize account = _account;
+@synthesize description = _description;
+@synthesize comment = _comment;
+@synthesize label = _label;
+@synthesize password = _password;
+@synthesize service = _service;
 
 @end

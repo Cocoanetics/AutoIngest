@@ -43,34 +43,14 @@
     return self;
 }
 
-- (void)windowDidLoad
-{
-    [super windowDidLoad];
-    
-   // check if we have an account
-    
-    
-    
-
-    
-   // SSKeychainQuery *query = [[SSKeychainQuery alloc] init];
-    
-   // NSArray *results = [query fetchAll:NULL];
-    
-  //  NSLog(@"%@", results);
-}
-
 - (void)_createAccountIfNecessary
 {
-   // [SSKeychain setPassword:@"aaa" forService:@"iTunes Connect" account:@"aaa"];
-    
-    
     if (_account)
     {
         return; // not necessary
     }
     
-    if (_username)
+    if ([_username length] && [_password length])
     {
         _account = [[AccountManager sharedAccountManager] addAccountForService:@"iTunes Connect" user:_username];
     }
