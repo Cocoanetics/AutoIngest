@@ -55,8 +55,8 @@
 		}
 		
 		// remember primary key
-		self.pk_account = _account;
-		self.pk_service = _service;
+		self.pk_account = _account?:@"";
+		self.pk_service = _service?:@"";
 	}
 	
 	return self;
@@ -71,8 +71,8 @@
 		_service = [aService copy];
 		
 		// remember primary key
-		self.pk_account = _account;
-		self.pk_service = _service;
+		self.pk_account = _account?:@"";
+		self.pk_service = _service?:@"";
 		
 		[self writeToKeychain];
 	}
@@ -101,8 +101,8 @@
 {
 	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
 	
-	dictionary[(id)kSecAttrAccount] = _account;
-	dictionary[(id)kSecAttrService] = _service;
+	dictionary[(id)kSecAttrAccount] = _account?:@"";
+	dictionary[(id)kSecAttrService] = _service?:@"";
 	
 	if (_description)
 	{
@@ -146,8 +146,8 @@
 		}
 		
 		// update primary key
-		_pk_account = _account;
-		_pk_service = _service;
+		_pk_account = _account?:@"";
+		_pk_service = _service?:@"";
 		
 		CFRelease(attributes);
 	}
