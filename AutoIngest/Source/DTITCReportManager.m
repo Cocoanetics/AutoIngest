@@ -200,7 +200,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		return;
 	}
 	
-	NSLog(@"Starting Sync");
+	NSLog(@"Stopped Sync");
 	
 	[_queue setSuspended:YES];
 	
