@@ -31,6 +31,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	NSString *_vendorID;
 	
 	NSOperationQueue *_queue;
+	
+	NSTimer *_autoSyncTimer;
 }
 
 + (DTITCReportManager *)sharedManager
@@ -94,6 +96,12 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	if (_synching)
 	{
 		NSLog(@"Already Synching");
+		return;
+	}
+	
+	if (![self canSync])
+	{
+		NSLog(@"Cannot start sync because some setup is missing");
 		return;
 	}
 	
@@ -171,6 +179,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		return;
 	}
 	
+	NSLog(@"Starting Sync");
+	
 	_synching = YES;
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:DTITCReportManagerSyncDidStartNotification object:weakself];
@@ -190,6 +200,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		return;
 	}
 	
+	NSLog(@"Starting Sync");
+	
 	[_queue setSuspended:YES];
 	
 	// cancel only download operations
@@ -206,6 +218,68 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 
 	
 	_synching = NO;
+}
+
+- (BOOL)canSync
+{
+	NSArray *accounts = [[AccountManager sharedAccountManager] accountsOfType:@"iTunes Connect"];
+	
+	if (![accounts count])
+	{
+		return NO;
+	}
+	
+	NSString *vendorID = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadVendorID"];
+	
+	// vendor ID must be only digits
+	if ([[vendorID stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"0123456789"]] length])
+	{
+		return NO;
+	}
+	
+	if (![vendorID integerValue] || (![vendorID hasPrefix:@"8"] || [vendorID length]!=8))
+	{
+		return NO;
+	}
+	
+	NSString *reportFolder = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadFolderPath"];
+	BOOL isDirectory = NO;
+	if ([[NSFileManager defaultManager] fileExistsAtPath:reportFolder isDirectory:&isDirectory])
+	{
+		if (!isDirectory)
+		{
+			return NO;
+		}
+	}
+	else
+	{
+		return NO;
+	}
+	
+	return YES;
+}
+
+#pragma mark - Auto Sync
+- (void)startAutoSyncTimer
+{
+	[_autoSyncTimer invalidate];
+	
+	_autoSyncTimer = [NSTimer scheduledTimerWithTimeInterval:24*60*60 target:self selector:@selector(_autoSyncTimer:) userInfo:nil repeats:YES];
+	
+	NSLog(@"AutoSync Timer enabled");
+}
+
+- (void)stopAutoSyncTimer
+{
+	[_autoSyncTimer invalidate];
+	_autoSyncTimer = nil;
+	
+	NSLog(@"AutoSync Timer disabled");
+}
+
+- (void)_autoSyncTimer:(NSTimer *)timer
+{
+	[self startSync];
 }
 
 #pragma mark - Notifications
@@ -238,6 +312,21 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	if (_synching && needsToStopSync)
 	{
 		[self stopSync];
+	}
+	
+	BOOL needsAutoSync = [[NSUserDefaults standardUserDefaults] boolForKey:@"DownloadAutoSync"];
+	BOOL hasActiveTimer = (_autoSyncTimer!=nil);
+	
+	if (needsAutoSync != hasActiveTimer)
+	{
+		if (needsAutoSync)
+		{
+			[self startAutoSyncTimer];
+		}
+		else
+		{
+			[self stopAutoSyncTimer];
+		}
 	}
 }
 

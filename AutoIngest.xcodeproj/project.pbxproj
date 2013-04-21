@@ -24,7 +24,8 @@
 		A7415F4417218D2F0092F4F8 /* DTITCReportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */; };
 		A7D8C7891722D6BA00025675 /* DTITCReportDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8C7881722D6BA00025675 /* DTITCReportDownloadOperation.m */; };
 		A7D8C7AE172316D900025675 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */; };
-		A7D8C7CE1723199300025675 /* libDTZipArchive copy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7C5172317AD00025675 /* libDTZipArchive copy.a */; };
+		A7D8C7CE1723199300025675 /* libDTZipArchive_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7C5172317AD00025675 /* libDTZipArchive_Mac.a */; };
+		A7D8C7DF1723FD5D00025675 /* LastSyncDateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +160,8 @@
 		A7D8C7881722D6BA00025675 /* DTITCReportDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTITCReportDownloadOperation.m; sourceTree = "<group>"; };
 		A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTFoundation.xcodeproj; path = DTFoundation/DTFoundation.xcodeproj; sourceTree = "<group>"; };
 		A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		A7D8C7DD1723FD5C00025675 /* LastSyncDateValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastSyncDateValueTransformer.h; sourceTree = "<group>"; };
+		A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastSyncDateValueTransformer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7D8C7CE1723199300025675 /* libDTZipArchive copy.a in Frameworks */,
+				A7D8C7CE1723199300025675 /* libDTZipArchive_Mac.a in Frameworks */,
 				A7D8C7AE172316D900025675 /* libz.1.2.5.dylib in Frameworks */,
 				A7415F3A172173650092F4F8 /* Security.framework in Frameworks */,
 				A7415F28172161F30092F4F8 /* libITCReportDownloader.a in Frameworks */,
@@ -242,16 +245,15 @@
 		A7175E45172147800031058F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A7D8C7D11723F79500025675 /* Report Manager */,
 				A7415F32172170CB0092F4F8 /* Cleanup for DTFoundation */,
 				A7175E501721489A0031058F /* main.m */,
 				A7175E4D172148930031058F /* AppDelegate.h */,
 				A7175E4E172148930031058F /* AppDelegate.m */,
 				A7175E48172148450031058F /* PreferencesWindowController.h */,
 				A7175E49172148450031058F /* PreferencesWindowController.m */,
-				A7415F4217218D2F0092F4F8 /* DTITCReportManager.h */,
-				A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */,
-				A7D8C7871722D6BA00025675 /* DTITCReportDownloadOperation.h */,
-				A7D8C7881722D6BA00025675 /* DTITCReportDownloadOperation.m */,
+				A7D8C7DD1723FD5C00025675 /* LastSyncDateValueTransformer.h */,
+				A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -304,11 +306,22 @@
 				A7D8C7A1172316BE00025675 /* libDTHTMLParser.a */,
 				A7D8C7A3172316BE00025675 /* libDTHTMLParser.a */,
 				A7D8C7A5172316BE00025675 /* libDTZipArchive.a */,
-				A7D8C7C5172317AD00025675 /* libDTZipArchive copy.a */,
+				A7D8C7C5172317AD00025675 /* libDTZipArchive_Mac.a */,
 				A7D8C7A7172316BE00025675 /* libDTUTI.a */,
 				A7D8C7A9172316BE00025675 /* libDTUTI.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A7D8C7D11723F79500025675 /* Report Manager */ = {
+			isa = PBXGroup;
+			children = (
+				A7415F4217218D2F0092F4F8 /* DTITCReportManager.h */,
+				A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */,
+				A7D8C7871722D6BA00025675 /* DTITCReportDownloadOperation.h */,
+				A7D8C7881722D6BA00025675 /* DTITCReportDownloadOperation.m */,
+			);
+			name = "Report Manager";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -447,10 +460,10 @@
 			remoteRef = A7D8C7A8172316BE00025675 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A7D8C7C5172317AD00025675 /* libDTZipArchive copy.a */ = {
+		A7D8C7C5172317AD00025675 /* libDTZipArchive_Mac.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libDTZipArchive copy.a";
+			path = libDTZipArchive_Mac.a;
 			remoteRef = A7D8C7C4172317AD00025675 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -484,6 +497,7 @@
 				A7415F38172170EA0092F4F8 /* GenericAccount.m in Sources */,
 				A7415F4417218D2F0092F4F8 /* DTITCReportManager.m in Sources */,
 				A7D8C7891722D6BA00025675 /* DTITCReportDownloadOperation.m in Sources */,
+				A7D8C7DF1723FD5D00025675 /* LastSyncDateValueTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -55,48 +55,20 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDidStart:) name:DTITCReportManagerSyncDidStartNotification object:reportManager];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDidFinish:) name:DTITCReportManagerSyncDidFinishNotification object:reportManager];
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"DownloadAutoSync"])
+	{
+		[reportManager startAutoSyncTimer];
+	}
 }
 
 #pragma mark - Actions
-
-- (BOOL)_canSync
-{
-	NSArray *accounts = [[AccountManager sharedAccountManager] accountsOfType:@"iTunes Connect"];
-	
-	if (![accounts count])
-	{
-		return NO;
-	}
-	
-	NSString *vendorID = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadVendorID"];
-	
-	if (![vendorID integerValue] || (![vendorID hasPrefix:@"8"] || [vendorID length]!=8))
-	{
-		return NO;
-	}
-	
-	NSString *reportFolder = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadFolderPath"];
-	BOOL isDirectory = NO;
-	if ([[NSFileManager defaultManager] fileExistsAtPath:reportFolder isDirectory:&isDirectory])
-	{
-		if (!isDirectory)
-		{
-			return NO;
-		}
-	}
-	else
-	{
-		return NO;
-	}
-	
-	return YES;
-}
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
 	if (menuItem.action == @selector(syncNow:))
 	{
-		return [self _canSync];
+		return [[DTITCReportManager sharedManager] canSync];
 	}
 	
 	return YES;
@@ -150,6 +122,8 @@
 			 [note setTitle:@"AutoIngest"];
 			 NSString *infoText = [NSString stringWithFormat:@"Report download complete"];
 			 [note setInformativeText:infoText];
+			 
+			 [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"DownloadLastSuccessfulSync"];
 		 }
        
         NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];

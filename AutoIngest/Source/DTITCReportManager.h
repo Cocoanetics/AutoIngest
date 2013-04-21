@@ -19,4 +19,9 @@ extern NSString * const DTITCReportManagerSyncDidFinishNotification;
 
 - (void)stopSync;
 
+- (BOOL)canSync;
+
+- (void)startAutoSyncTimer;
+- (void)stopAutoSyncTimer;
+
 @end
