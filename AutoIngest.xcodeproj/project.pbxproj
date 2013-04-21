@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DA477A91723F36D0048EACA /* MenuItem.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA477A81723F36D0048EACA /* MenuItem.png */; };
+		1DA477B81723FB4C0048EACA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA477B71723FB4C0048EACA /* QuartzCore.framework */; };
+		1DA477BB1723FDFB0048EACA /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA477BA1723FDFB0048EACA /* StatusItemView.m */; };
+		1DA477BD1723FF820048EACA /* MenuItemAlt.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA477BC1723FF820048EACA /* MenuItemAlt.png */; };
 		A7175E28172146EE0031058F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7175E27172146EE0031058F /* Cocoa.framework */; };
 		A7175E47172148390031058F /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7175E46172148390031058F /* PreferencesWindowController.xib */; };
 		A7175E4A172148450031058F /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E49172148450031058F /* PreferencesWindowController.m */; };
@@ -24,7 +28,7 @@
 		A7415F4417218D2F0092F4F8 /* DTITCReportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */; };
 		A7D8C7891722D6BA00025675 /* DTITCReportDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8C7881722D6BA00025675 /* DTITCReportDownloadOperation.m */; };
 		A7D8C7AE172316D900025675 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */; };
-		A7D8C7CE1723199300025675 /* libDTZipArchive copy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7C5172317AD00025675 /* libDTZipArchive copy.a */; };
+		A7D8C7CE1723199300025675 /* libDTZipArchive_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7C5172317AD00025675 /* libDTZipArchive_Mac.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +133,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1DA477A81723F36D0048EACA /* MenuItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuItem.png; sourceTree = "<group>"; };
+		1DA477B71723FB4C0048EACA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1DA477B91723FDFA0048EACA /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
+		1DA477BA1723FDFB0048EACA /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemView.m; sourceTree = "<group>"; };
+		1DA477BC1723FF820048EACA /* MenuItemAlt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuItemAlt.png; sourceTree = "<group>"; };
 		A7175E24172146EE0031058F /* AutoIngest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoIngest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7175E27172146EE0031058F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A7175E2A172146EE0031058F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -166,7 +175,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7D8C7CE1723199300025675 /* libDTZipArchive copy.a in Frameworks */,
+				1DA477B81723FB4C0048EACA /* QuartzCore.framework in Frameworks */,
+				A7D8C7CE1723199300025675 /* libDTZipArchive_Mac.a in Frameworks */,
 				A7D8C7AE172316D900025675 /* libz.1.2.5.dylib in Frameworks */,
 				A7415F3A172173650092F4F8 /* Security.framework in Frameworks */,
 				A7415F28172161F30092F4F8 /* libITCReportDownloader.a in Frameworks */,
@@ -210,6 +220,7 @@
 		A7175E29172146EE0031058F /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1DA477B71723FB4C0048EACA /* QuartzCore.framework */,
 				A7175E2A172146EE0031058F /* AppKit.framework */,
 				A7175E2B172146EE0031058F /* CoreData.framework */,
 				A7175E2C172146EE0031058F /* Foundation.framework */,
@@ -234,6 +245,8 @@
 				A7175E52172148AA0031058F /* Credits.rtf */,
 				A7175E4B1721488A0031058F /* MainMenu.xib */,
 				A7175E46172148390031058F /* PreferencesWindowController.xib */,
+				1DA477A81723F36D0048EACA /* MenuItem.png */,
+				1DA477BC1723FF820048EACA /* MenuItemAlt.png */,
 				A7415F2F17216AE90092F4F8 /* Defaults.plist */,
 			);
 			path = Resources;
@@ -252,6 +265,8 @@
 				A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */,
 				A7D8C7871722D6BA00025675 /* DTITCReportDownloadOperation.h */,
 				A7D8C7881722D6BA00025675 /* DTITCReportDownloadOperation.m */,
+				1DA477B91723FDFA0048EACA /* StatusItemView.h */,
+				1DA477BA1723FDFB0048EACA /* StatusItemView.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -304,7 +319,7 @@
 				A7D8C7A1172316BE00025675 /* libDTHTMLParser.a */,
 				A7D8C7A3172316BE00025675 /* libDTHTMLParser.a */,
 				A7D8C7A5172316BE00025675 /* libDTZipArchive.a */,
-				A7D8C7C5172317AD00025675 /* libDTZipArchive copy.a */,
+				A7D8C7C5172317AD00025675 /* libDTZipArchive_Mac.a */,
 				A7D8C7A7172316BE00025675 /* libDTUTI.a */,
 				A7D8C7A9172316BE00025675 /* libDTUTI.a */,
 			);
@@ -447,10 +462,10 @@
 			remoteRef = A7D8C7A8172316BE00025675 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A7D8C7C5172317AD00025675 /* libDTZipArchive copy.a */ = {
+		A7D8C7C5172317AD00025675 /* libDTZipArchive_Mac.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libDTZipArchive copy.a";
+			path = libDTZipArchive_Mac.a;
 			remoteRef = A7D8C7C4172317AD00025675 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -467,6 +482,8 @@
 				A7415F2C1721626A0092F4F8 /* Readme.markdown in Resources */,
 				A7415F2D1721626A0092F4F8 /* LICENSE in Resources */,
 				A7415F3017216AE90092F4F8 /* Defaults.plist in Resources */,
+				1DA477A91723F36D0048EACA /* MenuItem.png in Resources */,
+				1DA477BD1723FF820048EACA /* MenuItemAlt.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +501,7 @@
 				A7415F38172170EA0092F4F8 /* GenericAccount.m in Sources */,
 				A7415F4417218D2F0092F4F8 /* DTITCReportManager.m in Sources */,
 				A7D8C7891722D6BA00025675 /* DTITCReportDownloadOperation.m in Sources */,
+				1DA477BB1723FDFB0048EACA /* StatusItemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
