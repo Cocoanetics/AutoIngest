@@ -188,6 +188,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	// completion
 	[_queue addOperationWithBlock:^{
 		[weakself _reportCompletionWithError:_error];
+		
+		_synching = NO;
 	}];
 }
 
