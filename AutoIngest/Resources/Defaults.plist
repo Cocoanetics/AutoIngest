@@ -14,5 +14,7 @@
 	<true/>
 	<key>DownloadVendorID</key>
 	<string>8xxxxxxx</string>
+	<key>UncompressReports</key>
+	<false/>
 </dict>
 </plist>

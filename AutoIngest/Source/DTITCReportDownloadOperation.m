@@ -8,6 +8,7 @@
 
 #import "DTITCReportDownloadOperation.h"
 #import "GenericAccount.h"
+#import "DTZipArchive.h"
 
 @implementation DTITCReportDownloadOperation
 {
@@ -19,6 +20,8 @@
 	NSString *_reportFolder;
 	
 	NSError *_error;
+	
+	DTITCReportDownloader *_downloader;
 }
 
 
@@ -42,9 +45,47 @@
 }
 
 
+// determines if a report already exists in the download folder
+- (BOOL)_alreadyDownloadedReportForDate:(NSDate *)reportDate reportType:(ITCReportType)reportType reportDateType:(ITCReportDateType)reportDateType reportSubType:(ITCReportSubType)reportSubType
+{
+	NSAssert(_downloader, @"Need a downloader set");
+	
+	NSString *predictedZippedName = [_downloader predictedFileNameForDate:reportDate
+																		 reportType:_reportType
+																	reportDateType:_reportDateType
+																	 reportSubType:_reportSubType
+																		 compressed:YES];
+	
+	NSString *predictedUnzippedName = [_downloader predictedFileNameForDate:reportDate
+																				 reportType:_reportType
+																			reportDateType:_reportDateType
+																			 reportSubType:_reportSubType
+																				 compressed:NO];
+	
+	NSString *predictedZippedOutputPath = [_reportFolder stringByAppendingPathComponent:predictedZippedName];
+	NSString *predictedUnzippedOutputPath = [_reportFolder stringByAppendingPathComponent:predictedUnzippedName];
+	
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	
+	if ([fileManager fileExistsAtPath:predictedZippedOutputPath])
+	{
+		return YES;
+	}
+	
+	if ([fileManager fileExistsAtPath:predictedUnzippedOutputPath])
+	{
+		return YES;
+	}
+	
+	return NO;
+}
+
 - (void)main
 {
 	BOOL downloadAll = YES;
+	
+	// create a downloader
+	_downloader = [[DTITCReportDownloader alloc] initWithUser:_account.account password:_account.password vendorIdentifier:_vendorID];
 	
 	// determine date to pass to download
 	__block NSDate *reportDate;
@@ -71,15 +112,10 @@
 		}
 	}
 	
-	// create a downloader
-	DTITCReportDownloader *downloader = [[DTITCReportDownloader alloc] initWithUser:_account.account password:_account.password vendorIdentifier:_vendorID];
-	
 	__block NSUInteger downloadedFiles = 0;
 	
-	NSFileManager *fileManager = [NSFileManager defaultManager];
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	NSString *dateFormat = NSStringWithDateFormatForITCReportDateType(_reportDateType);
-	
 	[formatter setDateFormat:dateFormat];
 	
 	do
@@ -89,17 +125,9 @@
 			break;
 		}
 		
-		NSString *predictedName = [downloader predictedFileNameForDate:reportDate
-																			 reportType:_reportType
-																		reportDateType:_reportDateType
-																		 reportSubType:_reportSubType
-																			 compressed:YES];
-		
-		NSString *predictedOutputPath = [_reportFolder stringByAppendingPathComponent:predictedName];
-		
-		if ([fileManager fileExistsAtPath:predictedOutputPath])
+		if ([self _alreadyDownloadedReportForDate:reportDate reportType:_reportType reportDateType:_reportDateType reportSubType:_reportSubType])
 		{
-			NSLog(@"Skipped %@ because it already exists at %@", predictedName, _reportFolder);
+			NSLog(@"Skipping report %@, already downloaded", [_downloader predictedFileNameForDate:reportDate reportType:_reportType reportDateType:_reportDateType reportSubType:_reportSubType compressed:NO]);
 			downloadedFiles++;
 			
 			if (!downloadAll)
@@ -107,7 +135,7 @@
 				break;
 			}
 		}
-		else if ([downloader downloadReportWithDate:reportDate
+		else if ([_downloader downloadReportWithDate:reportDate
 													reportType:_reportType
 											  reportDateType:_reportDateType
 												reportSubType:_reportSubType
@@ -133,17 +161,18 @@
 												  reportDate = parsedDate;
 											  }
 											  
-											  // get current working directory
-											  NSString *outputPath = [_reportFolder stringByAppendingPathComponent:fileName];
-											  
-											  // skip this file if output already exists
-											  if ([[NSFileManager defaultManager] fileExistsAtPath:outputPath])
+											  // check if we already had this one
+											  if ([self _alreadyDownloadedReportForDate:reportDate reportType:_reportType reportDateType:_reportDateType reportSubType:_reportSubType])
 											  {
-												  NSLog(@"Skipped %@ because it already exists at %@", predictedName, _reportFolder);
+													NSLog(@"Skipping report %@, already downloaded", [_downloader predictedFileNameForDate:reportDate reportType:_reportType reportDateType:_reportDateType reportSubType:_reportSubType compressed:NO]);
+												  
 												  downloadedFiles++;
 												  
 												  return;
 											  }
+											  
+											  // get current working directory
+											  NSString *outputPath = [_reportFolder stringByAppendingPathComponent:fileName];
 											  
 											  // write data to file
 											  NSError *writeError = nil;
@@ -151,11 +180,35 @@
 											  {
 												  NSLog(@"Downloaded Report %@", fileName);
 												  downloadedFiles++;
+												  
+												  // optional uncompressing
+												  if (self.uncompressFiles)
+												  {
+													  NSString *uncompressedFilePath = [outputPath stringByDeletingLastPathComponent];
+													  
+													  DTZipArchive *zipArchive = [DTZipArchive archiveAtPath:outputPath];
+													  
+													  [zipArchive uncompressToPath:uncompressedFilePath completion:^(NSError *error) {
+														  if (error)
+														  {
+															  NSLog(@"Unzipping Error: %@", [error localizedDescription]);
+														  }
+														  else
+														  {
+															  NSFileManager *fileManager = [[NSFileManager alloc] init];
+															  
+															  NSError *removeError = nil;
+															  if (![fileManager removeItemAtPath:outputPath error:&removeError])
+															  {
+																  NSLog(@"Error removing file: %@", [removeError localizedDescription]);
+															  }
+														  }
+													  }];
+												  }
 											  }
 											  else
 											  {
 												  NSLog(@"%@", [writeError localizedDescription]);
-												  
 											  }
 										  }
 					 

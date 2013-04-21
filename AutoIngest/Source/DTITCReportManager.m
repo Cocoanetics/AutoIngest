@@ -71,6 +71,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 - (void)_downloadAllReportsOfType:(ITCReportType)reportType subType:(ITCReportSubType)reportSubType dateType:(ITCReportDateType)reportDateType fromAccount:(GenericAccount *)account
 {
 	DTITCReportDownloadOperation *op = [[DTITCReportDownloadOperation alloc] initForReportsOfType:reportType subType:reportSubType dateType:reportDateType fromAccount:account vendorID:_vendorID intoFolder:_reportFolder];
+	op.uncompressFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"UncompressReports"];
 	op.delegate = self;
 	
 	[_queue addOperation:op];

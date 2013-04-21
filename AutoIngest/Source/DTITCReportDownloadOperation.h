@@ -27,6 +27,8 @@
 
 - (id)initForReportsOfType:(ITCReportType)reportType subType:(ITCReportSubType)reportSubType dateType:(ITCReportDateType)reportDateType fromAccount:(GenericAccount *)account vendorID:(NSString *)vendorID intoFolder:(NSString *)folder;
 
+@property (nonatomic, assign) BOOL uncompressFiles;
+
 @property (nonatomic, weak) id <DTITCReportDownloadOperationDelegate> delegate;
 
 @end

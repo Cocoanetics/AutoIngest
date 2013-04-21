@@ -570,7 +570,7 @@
 				GCC_PREFIX_HEADER = "AutoIngest/AutoIngest-Prefix.pch";
 				INFOPLIST_FILE = "AutoIngest/AutoIngest-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "Externals/DTITCReportDownloader/Core/**";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader/Core\"/** \"${PROJECT_DIR}/Externals/DTFoundation/Core\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -583,7 +583,7 @@
 				GCC_PREFIX_HEADER = "AutoIngest/AutoIngest-Prefix.pch";
 				INFOPLIST_FILE = "AutoIngest/AutoIngest-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "Externals/DTITCReportDownloader/Core/**";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader/Core\"/** \"${PROJECT_DIR}/Externals/DTFoundation/Core\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
