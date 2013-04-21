@@ -256,6 +256,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	
 	BOOL hasWorkToDo = NO;
 	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if ([defaults boolForKey:@"DownloadDaily"])
 	{
 		hasWorkToDo = YES;
