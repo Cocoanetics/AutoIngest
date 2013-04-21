@@ -18,6 +18,8 @@
 @interface AppDelegate ()
 
 @property (weak) IBOutlet NSMenuItem *syncMenuItem;
+@property (weak) IBOutlet NSMenuItem *preferencesMenuItem;
+@property (weak) IBOutlet NSMenuItem *quitMenuItem;
 
 
 @end
@@ -59,8 +61,12 @@
 	statusItemView.statusItem = _statusItem;
     statusItemView.menu = _statusMenu;
     [_statusItem setView:statusItemView];
-    
+
     _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
+    _preferencesMenuItem.title = NSLocalizedString(@"Preferences...", nil);
+    
+    NSString *applicationName = [[NSBundle mainBundle] localizedInfoDictionary][@"CFBundleDisplayName"];
+    _quitMenuItem.title = [NSString stringWithFormat:NSLocalizedString(@"Quit %@", @"Quit App"), applicationName];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification

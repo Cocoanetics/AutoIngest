@@ -52,7 +52,8 @@
 					<object class="NSMenuItem" id="280738034">
 						<reference key="NSMenu" ref="800806550"/>
 						<string key="NSTitle">Preferences ...</string>
-						<string key="NSKeyEquiv"/>
+						<string key="NSKeyEquiv">,</string>
+						<int key="NSKeyEquivModMask">1048576</int>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="354885721"/>
 						<reference key="NSMixedImage" ref="30465630"/>
@@ -70,7 +71,8 @@
 					<object class="NSMenuItem" id="333196037">
 						<reference key="NSMenu" ref="800806550"/>
 						<string key="NSTitle">Quit AutoIngest</string>
-						<string key="NSKeyEquiv"/>
+						<string key="NSKeyEquiv">q</string>
+						<int key="NSKeyEquivModMask">1048576</int>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="354885721"/>
 						<reference key="NSMixedImage" ref="30465630"/>
@@ -130,6 +132,22 @@
 						<reference key="destination" ref="1050566657"/>
 					</object>
 					<int key="connectionID">547</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">preferencesMenuItem</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="280738034"/>
+					</object>
+					<int key="connectionID">548</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">quitMenuItem</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="333196037"/>
+					</object>
+					<int key="connectionID">549</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -212,7 +230,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">547</int>
+			<int key="maxID">549</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -220,10 +238,20 @@
 					<string key="className">AppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="preferencesMenuItem">NSMenuItem</string>
+						<string key="quitMenuItem">NSMenuItem</string>
 						<string key="statusMenu">NSMenu</string>
 						<string key="syncMenuItem">NSMenuItem</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="preferencesMenuItem">
+							<string key="name">preferencesMenuItem</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="quitMenuItem">
+							<string key="name">quitMenuItem</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="statusMenu">
 							<string key="name">statusMenu</string>
 							<string key="candidateClassName">NSMenu</string>
