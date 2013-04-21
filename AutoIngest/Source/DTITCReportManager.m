@@ -187,8 +187,6 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	
 	// completion
 	[_queue addOperationWithBlock:^{
-		[weakself stopSync];
-		
 		[weakself _reportCompletionWithError:_error];
 	}];
 }
@@ -252,6 +250,33 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		}
 	}
 	else
+	{
+		return NO;
+	}
+	
+	BOOL hasWorkToDo = NO;
+	
+	if ([defaults boolForKey:@"DownloadDaily"])
+	{
+		hasWorkToDo = YES;
+	}
+	
+	if ([defaults boolForKey:@"DownloadWeekly"])
+	{
+		hasWorkToDo = YES;
+	}
+	
+	if ([defaults boolForKey:@"DownloadMonthly"])
+	{
+		hasWorkToDo = YES;
+	}
+	
+	if ([defaults boolForKey:@"DownloadYearly"])
+	{
+		hasWorkToDo = YES;
+	}
+	
+	if (!hasWorkToDo)
 	{
 		return NO;
 	}
