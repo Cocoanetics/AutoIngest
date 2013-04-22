@@ -84,7 +84,6 @@
 
 - (void)main
 {
-	NSLog(@"main");
 	BOOL downloadAll = YES;
 	
 	// create a downloader
@@ -143,6 +142,15 @@
 											  reportDateType:_reportDateType
 												reportSubType:_reportSubType
 										  completionHandler:^(NSString *fileName, NSData *data) {
+											  
+											  // cancel loop, synching has probably been cancelled
+											  if ([self isCancelled])
+											  {
+												  reportDate = nil;
+												  
+												  return;
+											  }
+											  
 											  NSString *baseName = [fileName stringByReplacingOccurrencesOfString:@".txt.gz" withString:@""];
 											  
 											  // update actual report date

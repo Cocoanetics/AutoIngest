@@ -14,6 +14,17 @@
 
 #import "StatusItemView.h"
 
+
+@interface AppDelegate ()
+
+@property (weak) IBOutlet NSMenuItem *syncMenuItem;
+@property (weak) IBOutlet NSMenuItem *preferencesMenuItem;
+@property (weak) IBOutlet NSMenuItem *quitMenuItem;
+
+
+@end
+
+
 @implementation AppDelegate
 {
 	NSStatusItem *_statusItem;
@@ -50,6 +61,12 @@
 	statusItemView.statusItem = _statusItem;
     statusItemView.menu = _statusMenu;
     [_statusItem setView:statusItemView];
+
+    _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
+    _preferencesMenuItem.title = NSLocalizedString(@"Preferences...", nil);
+    
+    NSString *applicationName = [[NSBundle mainBundle] localizedInfoDictionary][@"CFBundleDisplayName"];
+    _quitMenuItem.title = [NSString stringWithFormat:NSLocalizedString(@"Quit %@", @"Quit App"), applicationName];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -77,10 +94,21 @@
 	return YES;
 }
 
-- (void)syncNow:(id)sender
+- (IBAction)syncMenuItemAction:(id)sender
 {
-    [[DTITCReportManager sharedManager] startSync];
+    DTITCReportManager *reportManager = [DTITCReportManager sharedManager];
+    if (reportManager.isSynching)
+    {
+        [reportManager stopSync];
+        _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
+    }
+    else
+    {
+        [reportManager startSync];
+        _syncMenuItem.title = NSLocalizedString(@"Stop sync", nil);
+    }    
 }
+
 
 - (void)quitApplication:(id)sender
 {

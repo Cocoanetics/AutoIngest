@@ -11,6 +11,7 @@
 		1DA477B81723FB4C0048EACA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA477B71723FB4C0048EACA /* QuartzCore.framework */; };
 		1DA477BB1723FDFB0048EACA /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA477BA1723FDFB0048EACA /* StatusItemView.m */; };
 		1DA477BD1723FF820048EACA /* MenuItemAlt.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA477BC1723FF820048EACA /* MenuItemAlt.png */; };
+		1DA477E2172481240048EACA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DA477E4172481240048EACA /* InfoPlist.strings */; };
 		A7175E28172146EE0031058F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7175E27172146EE0031058F /* Cocoa.framework */; };
 		A7175E47172148390031058F /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7175E46172148390031058F /* PreferencesWindowController.xib */; };
 		A7175E4A172148450031058F /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E49172148450031058F /* PreferencesWindowController.m */; };
@@ -139,6 +140,7 @@
 		1DA477B91723FDFA0048EACA /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
 		1DA477BA1723FDFB0048EACA /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemView.m; sourceTree = "<group>"; };
 		1DA477BC1723FF820048EACA /* MenuItemAlt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuItemAlt.png; sourceTree = "<group>"; };
+		1DA477E3172481240048EACA /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A7175E24172146EE0031058F /* AutoIngest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoIngest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7175E27172146EE0031058F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A7175E2A172146EE0031058F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -163,10 +165,10 @@
 		A7415F35172170EA0092F4F8 /* GenericAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericAccount.h; sourceTree = "<group>"; };
 		A7415F36172170EA0092F4F8 /* GenericAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericAccount.m; sourceTree = "<group>"; };
 		A7415F39172173650092F4F8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		A7415F4217218D2F0092F4F8 /* DTITCReportManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTITCReportManager.h; path = /Users/oliver/Documents/Projects/AutoIngest/AutoIngest/Source/DTITCReportManager.h; sourceTree = "<absolute>"; };
-		A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTITCReportManager.m; path = /Users/oliver/Documents/Projects/AutoIngest/AutoIngest/Source/DTITCReportManager.m; sourceTree = "<absolute>"; };
-		A7D8C7871722D6BA00025675 /* DTITCReportDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTITCReportDownloadOperation.h; path = /Users/oliver/Documents/Projects/AutoIngest/AutoIngest/Source/DTITCReportDownloadOperation.h; sourceTree = "<absolute>"; };
-		A7D8C7881722D6BA00025675 /* DTITCReportDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTITCReportDownloadOperation.m; path = /Users/oliver/Documents/Projects/AutoIngest/AutoIngest/Source/DTITCReportDownloadOperation.m; sourceTree = "<absolute>"; };
+		A7415F4217218D2F0092F4F8 /* DTITCReportManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTITCReportManager.h; path = AutoIngest/Source/DTITCReportManager.h; sourceTree = SOURCE_ROOT; };
+		A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTITCReportManager.m; path = AutoIngest/Source/DTITCReportManager.m; sourceTree = SOURCE_ROOT; };
+		A7D8C7871722D6BA00025675 /* DTITCReportDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTITCReportDownloadOperation.h; path = AutoIngest/Source/DTITCReportDownloadOperation.h; sourceTree = SOURCE_ROOT; };
+		A7D8C7881722D6BA00025675 /* DTITCReportDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTITCReportDownloadOperation.m; path = AutoIngest/Source/DTITCReportDownloadOperation.m; sourceTree = SOURCE_ROOT; };
 		A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTFoundation.xcodeproj; path = DTFoundation/DTFoundation.xcodeproj; sourceTree = "<group>"; };
 		A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		A7D8C7DD1723FD5C00025675 /* LastSyncDateValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastSyncDateValueTransformer.h; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				1DA477A81723F36D0048EACA /* MenuItem.png */,
 				1DA477BC1723FF820048EACA /* MenuItemAlt.png */,
 				A7415F2F17216AE90092F4F8 /* Defaults.plist */,
+				1DA477E4172481240048EACA /* InfoPlist.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				A7415F3017216AE90092F4F8 /* Defaults.plist in Resources */,
 				1DA477A91723F36D0048EACA /* MenuItem.png in Resources */,
 				1DA477BD1723FF820048EACA /* MenuItemAlt.png in Resources */,
+				1DA477E2172481240048EACA /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +537,17 @@
 			targetProxy = A7D8C7CC1723198F00025675 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1DA477E4172481240048EACA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DA477E3172481240048EACA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A7175E3F172146EF0031058F /* Debug */ = {

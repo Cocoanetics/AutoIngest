@@ -24,9 +24,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 @end
 
 @implementation DTITCReportManager
-{
-	BOOL _synching;
-	
+{	
 	NSString *_reportFolder;
 	NSString *_vendorID;
 	
@@ -93,7 +91,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 
 - (void)startSync
 {
-	if (_synching)
+	if (_isSynching)
 	{
 		NSLog(@"Already Synching");
 		return;
@@ -171,7 +169,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	[_queue addOperationWithBlock:^{
 		[weakself _reportCompletionWithError:_error];
 		
-		_synching = NO;
+		_isSynching = NO;
 	}];
 	
 	if (!hasWorkToDo)
@@ -186,12 +184,12 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	
 	[_queue setSuspended:NO];
 	
-	_synching = YES;
+	_isSynching = YES;
 }
 
 - (void)stopSync
 {
-	if (!_synching)
+	if (!_isSynching)
 	{
 		return;
 	}
@@ -213,7 +211,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	[_queue setSuspended:NO];
 
 	
-	_synching = NO;
+	_isSynching = NO;
 }
 
 - (BOOL)canSync
@@ -333,7 +331,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	}
 	
 	// need to stop sync, folder changed
-	if (_synching && needsToStopSync)
+	if (_isSynching && needsToStopSync)
 	{
 		[self stopSync];
 	}
