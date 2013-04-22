@@ -137,8 +137,10 @@
 - (void)syncDidFinish:(NSNotification *)notification
 {
     dispatch_async(dispatch_get_main_queue(), ^{
+        
         StatusItemView *statusItemView = (StatusItemView *)_statusItem.view;
         statusItemView.isSyncing = NO;
+        _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
         
         NSError *error = [notification userInfo][@"Error"];
 		 
