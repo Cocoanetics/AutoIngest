@@ -16,7 +16,7 @@ To Do
 - ~~animate this icon while downloading is occuring~~
 - ~~change the "Sync Now" menu option to "Stop Sync" during download~~
 - provide an app icon for the app
-- Add downloading on a timer
+- ~~Add downloading on a timer~~
 - Add counting of how many items where downloaded per type during a sync session
 - report these via the didFinishNotification and output them in the user notification
 - add UI to configure multiple accounts + Vendor IDs
