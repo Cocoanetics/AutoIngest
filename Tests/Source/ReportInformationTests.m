@@ -78,6 +78,18 @@
     STAssertEquals(reportInfo.subType, ITCReportSubTypeDetailed, @"Wrong report sub type");
 }
 
+- (void)testIfTypePropertyIsCorrectForOptInReport
+{
+    ReportInformation *reportInfo = [ReportInformation reportInformationFromFilename:@"O_S_D_80000000_20121024.txt.gz"];
+    STAssertEquals(reportInfo.type, ITCReportTypeOptIn, @"Wrong report type");
+}
+
+- (void)testIfSubtypePropertyIsCorrectForOptInReport
+{
+    ReportInformation *reportInfo = [ReportInformation reportInformationFromFilename:@"O_S_D_80000000_20121024.txt.gz"];
+    STAssertEquals(reportInfo.subType, ITCReportSubTypeSummary, @"Wrong report sub type");
+}
+
 #pragma mark - typeStringValue
 
 - (void)testIfTypeStringValueIsCorrectForSalesReport
@@ -90,6 +102,12 @@
 {
     reportInformation.type = ITCReportTypeNewsstand;
     STAssertEqualObjects([reportInformation typeStringValue], @"Newsstand", @"Wrong type string for Newsstand report");
+}
+
+- (void)testIfTypeStringValueIsCorrectForOptInReport
+{
+    reportInformation.type = ITCReportTypeOptIn;
+    STAssertEqualObjects([reportInformation typeStringValue], @"OptIn", @"Wrong type string for OptIn report");
 }
 
 #pragma mark - subTypeStringValue

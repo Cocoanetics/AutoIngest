@@ -51,6 +51,9 @@
         case ITCReportTypeNewsstand:
             type = @"Newsstand";
             break;
+        case ITCReportTypeOptIn:
+            type = @"OptIn";
+            break;
         default:
             type = @"Unknow"; // TODO: handle Opt-In type. But only after DTITCConstants.h get updated with it
     }
@@ -100,17 +103,22 @@
 
 #pragma mark - Private Methods
 
-- (void)_setTypeFromFilenameChar:(NSString *)character // TODO: handle Opt-In type. But only after DTITCConstants.h get updated with it
+- (void)_setTypeFromFilenameChar:(NSString *)character
 {
+    _subType = ITCReportSubTypeSummary;
+
     if ([character isEqualToString:@"S"])
     {
         _type = ITCReportTypeSales;
-        _subType = ITCReportSubTypeSummary;
     }
     else if ([character isEqualToString:@"N_D"])
     {
         _type = ITCReportTypeNewsstand;
         _subType = ITCReportSubTypeDetailed;
+    }
+    else if ([character isEqualToString:@"O_S"])
+    {
+        _type = ITCReportTypeOptIn;
     }
 }
 
