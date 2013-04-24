@@ -21,6 +21,7 @@
 {
 	NSInteger currentFrame;
 	NSTimer *animTimer;
+	BOOL _animationIsStopping;
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -96,26 +97,36 @@
 - (void)startAnimating
 {
 	currentFrame = 0;
-	animTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(updateImage:) userInfo:nil repeats:YES];
+	animTimer = [NSTimer scheduledTimerWithTimeInterval:0.03 target:self selector:@selector(updateImage:) userInfo:nil repeats:YES];
+	
+	_animationIsStopping = NO;
 }
 
 - (void)stopAnimating
 {
-	[animTimer invalidate];
-	
-	currentFrame = 0;
-	[self updateImage:nil];
+	// animation stops on next time frame 0
+	_animationIsStopping = YES;
 }
 
 - (void)updateImage:(NSTimer *)timer
 {
+	currentFrame++;
+
+	if (currentFrame>86)
+	{
+		if (_animationIsStopping)
+		{
+			[animTimer invalidate];
+		}
+		
+		currentFrame = 0;
+	}
+
 	//get the image for the current frame
 	NSString *name = [NSString stringWithFormat:@"AutoIngest_%03d",(int)currentFrame];
 	NSImage *image = [NSImage imageNamed:name];
 	
 	[self setImage:image];
-	
-	currentFrame = (currentFrame+1)%87;
 }
 
 #pragma mark - Properties
