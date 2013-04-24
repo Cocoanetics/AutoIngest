@@ -42,62 +42,17 @@
 
 - (NSString *)typeStringValue
 {
-    NSString *type;
-    switch (_type)
-    {
-        case ITCReportTypeSales:
-            type = @"Sales";
-            break;
-        case ITCReportTypeNewsstand:
-            type = @"Newsstand";
-            break;
-        case ITCReportTypeOptIn:
-            type = @"OptIn";
-            break;
-        default:
-            type = @"Unknow"; // TODO: handle Opt-In type. But only after DTITCConstants.h get updated with it
-    }
-    return type;
+    return NSStringFromITCReportType(_type);
 }
 
 - (NSString *)subTypeStringValue
 {
-    NSString *subType;
-    switch (_subType)
-    {
-        case ITCReportSubTypeSummary:
-            subType = @"Summary";
-            break;
-        case ITCReportSubTypeDetailed:
-            subType = @"Detailed";
-            break;
-        default:
-            subType = @"Unknow";
-    }
-    return subType;
+    return NSStringFromITCReportSubType(_subType);
 }
 
 - (NSString *)dateTypeStringValue
 {
-    NSString *date;
-    switch (_dateType)
-    {
-        case ITCReportDateTypeDaily:
-            date = @"Daily";
-            break;
-        case ITCReportDateTypeWeekly:
-            date = @"Weekly";
-            break;
-        case ITCReportDateTypeMonthly:
-            date = @"Monthly";
-            break;
-        case ITCReportDateTypeYearly:
-            date = @"Yearly";
-            break;
-        default:
-            date = @"Unknow";
-    }
-    return date;
+    return NSStringFromITCReportDateType(_dateType);
 }
 
 

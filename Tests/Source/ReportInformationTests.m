@@ -107,7 +107,7 @@
 - (void)testIfTypeStringValueIsCorrectForOptInReport
 {
     reportInformation.type = ITCReportTypeOptIn;
-    STAssertEqualObjects([reportInformation typeStringValue], @"OptIn", @"Wrong type string for OptIn report");
+    STAssertEqualObjects([reportInformation typeStringValue], @"Opt-In", @"Wrong type string for OptIn report");
 }
 
 #pragma mark - subTypeStringValue
