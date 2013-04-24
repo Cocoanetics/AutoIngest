@@ -18,33 +18,35 @@
 
 
 @implementation StatusItemView
+{
+	NSInteger currentFrame;
+	NSTimer *animTimer;
+}
 
 - (id)initWithFrame:(NSRect)frame
 {
-    self = [super initWithFrame:frame];
-    if (self)
-    {
-        self.image = [NSImage imageNamed:@"MenuItem"];
-        self.wantsLayer = YES;
-    }
-    
-    return self;
+	self = [super initWithFrame:frame];
+	if (self)
+	{
+		self.image = [NSImage imageNamed:@"AutoIngest_000"];
+	}
+	
+	return self;
 }
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    if (_isMenuVisible)
+	if (_isMenuVisible)
 	{
-        [NSColor.selectedMenuItemColor set];
-        NSRectFill(dirtyRect);
-		self.image = [NSImage imageNamed:@"MenuItemAlt"];
-    }
+		[NSColor.selectedMenuItemColor set];
+		NSRectFill(dirtyRect);
+		
+		[self.image drawAtPoint:NSMakePoint(5, 2) fromRect:NSMakeRect(0, 0, 20, 19) operation:NSCompositeXOR fraction:1.0];
+	}
 	else
 	{
-        self.image = [NSImage imageNamed:@"MenuItem"];
+		[self.image drawAtPoint:NSMakePoint(5, 2) fromRect:NSMakeRect(0, 0, 20, 19) operation:NSCompositeSourceOver fraction:1.0];
 	}
-	
-	[self.image drawAtPoint:NSMakePoint(5, 2) fromRect:NSMakeRect(0, 0, 20, 19) operation:NSCompositeSourceOver fraction:1.0];
 }
 
 - (void)mouseDown:(NSEvent *)event
@@ -55,21 +57,21 @@
 - (void)openMenu
 {
 	[self.menu setDelegate:self];
-    [self.statusItem popUpStatusItemMenu:self.menu];
-    [self setNeedsDisplay:YES];
+	[self.statusItem popUpStatusItemMenu:self.menu];
+	[self setNeedsDisplay:YES];
 }
 
 - (void)menuWillOpen:(NSMenu *)menu
 {
 	self.isMenuVisible = YES;
-    [self setNeedsDisplay:YES];
+	[self setNeedsDisplay:YES];
 }
 
 - (void)menuDidClose:(NSMenu *)menu
 {
-    [menu setDelegate:nil];
+	[menu setDelegate:nil];
 	self.isMenuVisible = NO;
-    [self setNeedsDisplay:YES];
+	[self setNeedsDisplay:YES];
 }
 
 - (void)setIsSyncing:(BOOL)isSyncing
@@ -80,19 +82,48 @@
 		
 		if (!_isSyncing)
 		{
-			[self.layer removeAnimationForKey:@"syncAnimation"];
+			[self stopAnimating];
 		}
 		else
 		{
-			CABasicAnimation *syncAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-			syncAnimation.duration = .5f;
-			syncAnimation.repeatCount = INFINITY;
-			syncAnimation.autoreverses = YES;
-			syncAnimation.fromValue = @1;
-			syncAnimation.toValue = @.33;
-			[self.layer addAnimation:syncAnimation forKey:@"syncAnimation"];
+			[self startAnimating];
 		}
 	}
+}
+
+#pragma mark - Animation
+
+- (void)startAnimating
+{
+	currentFrame = 0;
+	animTimer = [NSTimer scheduledTimerWithTimeInterval:0.10 target:self selector:@selector(updateImage:) userInfo:nil repeats:YES];
+}
+
+- (void)stopAnimating
+{
+	[animTimer invalidate];
+	
+	currentFrame = 0;
+	[self updateImage:nil];
+}
+
+- (void)updateImage:(NSTimer *)timer
+{
+	//get the image for the current frame
+	NSString *name = [NSString stringWithFormat:@"AutoIngest_%03d",(int)currentFrame];
+	NSImage *image = [NSImage imageNamed:name];
+	
+	[self setImage:image];
+	
+	currentFrame = (currentFrame+1)%87;
+}
+
+#pragma mark - Properties
+
+- (void)setImage:(NSImage *)image
+{
+	_image = image;
+	[self setNeedsDisplay:YES];
 }
 
 @end
