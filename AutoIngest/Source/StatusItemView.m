@@ -96,7 +96,7 @@
 - (void)startAnimating
 {
 	currentFrame = 0;
-	animTimer = [NSTimer scheduledTimerWithTimeInterval:0.10 target:self selector:@selector(updateImage:) userInfo:nil repeats:YES];
+	animTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(updateImage:) userInfo:nil repeats:YES];
 }
 
 - (void)stopAnimating
