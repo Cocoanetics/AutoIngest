@@ -143,7 +143,11 @@
 		[NSApp activateIgnoringOtherApps:YES];
 	}
 	
-    [_preferencesController.window orderFrontRegardless];
+	NSWindow *preferencesWindow = _preferencesController.window;
+	if (preferencesWindow.isVisible)
+	{
+		[_preferencesController.window orderFront:self];
+	}
 }
 
 - (void)syncDidStart:(NSNotification *)notification
