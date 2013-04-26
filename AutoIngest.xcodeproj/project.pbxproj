@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1DA477A91723F36D0048EACA /* MenuItem.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA477A81723F36D0048EACA /* MenuItem.png */; };
 		1DA477B81723FB4C0048EACA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA477B71723FB4C0048EACA /* QuartzCore.framework */; };
 		1DA477BB1723FDFB0048EACA /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA477BA1723FDFB0048EACA /* StatusItemView.m */; };
-		1DA477BD1723FF820048EACA /* MenuItemAlt.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA477BC1723FF820048EACA /* MenuItemAlt.png */; };
 		1DA477E2172481240048EACA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DA477E4172481240048EACA /* InfoPlist.strings */; };
 		3DC53114172A65D4005D9183 /* AIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC53113172A65D4005D9183 /* AIApplication.m */; };
 		A7175E28172146EE0031058F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7175E27172146EE0031058F /* Cocoa.framework */; };
@@ -310,11 +308,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1DA477A81723F36D0048EACA /* MenuItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuItem.png; sourceTree = "<group>"; };
 		1DA477B71723FB4C0048EACA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1DA477B91723FDFA0048EACA /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
 		1DA477BA1723FDFB0048EACA /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemView.m; sourceTree = "<group>"; };
-		1DA477BC1723FF820048EACA /* MenuItemAlt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuItemAlt.png; sourceTree = "<group>"; };
 		1DA477E3172481240048EACA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DC53112172A65D4005D9183 /* AIApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIApplication.h; sourceTree = "<group>"; };
 		3DC53113172A65D4005D9183 /* AIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIApplication.m; sourceTree = "<group>"; };
@@ -602,8 +598,6 @@
 				A7175E52172148AA0031058F /* Credits.rtf */,
 				A7175E4B1721488A0031058F /* MainMenu.xib */,
 				A7175E46172148390031058F /* PreferencesWindowController.xib */,
-				1DA477A81723F36D0048EACA /* MenuItem.png */,
-				1DA477BC1723FF820048EACA /* MenuItemAlt.png */,
 				A7415F2F17216AE90092F4F8 /* Defaults.plist */,
 				1DA477E4172481240048EACA /* InfoPlist.strings */,
 			);
@@ -1033,8 +1027,6 @@
 				A7415F2C1721626A0092F4F8 /* Readme.markdown in Resources */,
 				A7415F2D1721626A0092F4F8 /* LICENSE in Resources */,
 				A7415F3017216AE90092F4F8 /* Defaults.plist in Resources */,
-				1DA477A91723F36D0048EACA /* MenuItem.png in Resources */,
-				1DA477BD1723FF820048EACA /* MenuItemAlt.png in Resources */,
 				1DA477E2172481240048EACA /* InfoPlist.strings in Resources */,
 				A7D4A25517286BF40042D0D1 /* AutoIngest_000.png in Resources */,
 				A7D4A25617286BF40042D0D1 /* AutoIngest_000@2x.png in Resources */,
