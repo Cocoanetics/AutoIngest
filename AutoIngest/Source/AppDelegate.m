@@ -73,13 +73,21 @@
 {
     DTITCReportManager *reportManager = [DTITCReportManager sharedManager]; // inits it
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDidStart:) name:DTITCReportManagerSyncDidStartNotification object:reportManager];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDidFinish:) name:DTITCReportManagerSyncDidFinishNotification object:reportManager];
-	
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(syncDidStart:) name:DTITCReportManagerSyncDidStartNotification object:reportManager];
+    [nc addObserver:self selector:@selector(syncDidFinish:) name:DTITCReportManagerSyncDidFinishNotification object:reportManager];
+
+	[nc addObserver:self selector:@selector(menuWillOpen:) name:AIMenuWillOpenNotification object:nil];
+
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"DownloadAutoSync"])
 	{
 		[reportManager startAutoSyncTimer];
 	}
+}
+
+- (void)applicationWillTerminate:(NSNotification *)aNotification
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Actions
@@ -127,6 +135,20 @@
 }
 
 #pragma mark - Notifications
+
+- (void)menuWillOpen:(NSNotification *)notification
+{
+	if (![NSApp isActive])
+	{
+		[NSApp activateIgnoringOtherApps:YES];
+	}
+	
+	NSWindow *preferencesWindow = _preferencesController.window;
+	if (preferencesWindow.isVisible)
+	{
+		[_preferencesController.window orderFront:self];
+	}
+}
 
 - (void)syncDidStart:(NSNotification *)notification
 {

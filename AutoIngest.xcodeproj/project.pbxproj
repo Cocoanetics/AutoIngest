@@ -12,6 +12,7 @@
 		1DA477BB1723FDFB0048EACA /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA477BA1723FDFB0048EACA /* StatusItemView.m */; };
 		1DA477BD1723FF820048EACA /* MenuItemAlt.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA477BC1723FF820048EACA /* MenuItemAlt.png */; };
 		1DA477E2172481240048EACA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DA477E4172481240048EACA /* InfoPlist.strings */; };
+		3DC53114172A65D4005D9183 /* AIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC53113172A65D4005D9183 /* AIApplication.m */; };
 		A7175E28172146EE0031058F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7175E27172146EE0031058F /* Cocoa.framework */; };
 		A7175E47172148390031058F /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7175E46172148390031058F /* PreferencesWindowController.xib */; };
 		A7175E4A172148450031058F /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E49172148450031058F /* PreferencesWindowController.m */; };
@@ -140,7 +141,9 @@
 		1DA477B91723FDFA0048EACA /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
 		1DA477BA1723FDFB0048EACA /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemView.m; sourceTree = "<group>"; };
 		1DA477BC1723FF820048EACA /* MenuItemAlt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuItemAlt.png; sourceTree = "<group>"; };
-		1DA477E3172481240048EACA /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1DA477E3172481240048EACA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3DC53112172A65D4005D9183 /* AIApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIApplication.h; sourceTree = "<group>"; };
+		3DC53113172A65D4005D9183 /* AIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIApplication.m; sourceTree = "<group>"; };
 		A7175E24172146EE0031058F /* AutoIngest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoIngest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7175E27172146EE0031058F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A7175E2A172146EE0031058F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -264,6 +267,8 @@
 				A7D8C7D11723F79500025675 /* Report Manager */,
 				A7415F32172170CB0092F4F8 /* Cleanup for DTFoundation */,
 				A7175E501721489A0031058F /* main.m */,
+				3DC53112172A65D4005D9183 /* AIApplication.h */,
+				3DC53113172A65D4005D9183 /* AIApplication.m */,
 				A7175E4D172148930031058F /* AppDelegate.h */,
 				A7175E4E172148930031058F /* AppDelegate.m */,
 				A7175E48172148450031058F /* PreferencesWindowController.h */,
@@ -520,6 +525,7 @@
 				1DA477BB1723FDFB0048EACA /* StatusItemView.m in Sources */,
 				A71E9869172409D800176AC8 /* DTITCReportManager.m in Sources */,
 				A71E9875172409DA00176AC8 /* DTITCReportDownloadOperation.m in Sources */,
+				3DC53114172A65D4005D9183 /* AIApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
