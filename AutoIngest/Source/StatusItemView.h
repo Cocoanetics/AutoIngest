@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+extern NSString * const AIMenuWillOpenNotification;
+
 @interface StatusItemView : NSView
 
 @property (nonatomic, strong) NSStatusItem *statusItem;

@@ -77,6 +77,8 @@
     [nc addObserver:self selector:@selector(syncDidStart:) name:DTITCReportManagerSyncDidStartNotification object:reportManager];
     [nc addObserver:self selector:@selector(syncDidFinish:) name:DTITCReportManagerSyncDidFinishNotification object:reportManager];
 
+	[nc addObserver:self selector:@selector(menuWillOpen:) name:AIMenuWillOpenNotification object:nil];
+
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"DownloadAutoSync"])
 	{
 		[reportManager startAutoSyncTimer];
@@ -133,6 +135,16 @@
 }
 
 #pragma mark - Notifications
+
+- (void)menuWillOpen:(NSNotification *)notification
+{
+	if (![NSApp isActive])
+	{
+		[NSApp activateIgnoringOtherApps:YES];
+	}
+	
+    [_preferencesController.window orderFrontRegardless];
+}
 
 - (void)syncDidStart:(NSNotification *)notification
 {

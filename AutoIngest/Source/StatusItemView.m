@@ -9,6 +9,8 @@
 #import "StatusItemView.h"
 #import <QuartzCore/QuartzCore.h>
 
+NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
+
 @interface StatusItemView ()<NSMenuDelegate>
 
 @property (nonatomic, strong) NSImage *image;
@@ -61,6 +63,8 @@
 
 - (void)menuWillOpen:(NSMenu *)menu
 {
+	[[NSNotificationCenter defaultCenter] postNotificationName:AIMenuWillOpenNotification object:self];
+	
 	self.isMenuVisible = YES;
     [self setNeedsDisplay:YES];
 }
