@@ -82,6 +82,11 @@
 	}
 }
 
+- (void)applicationWillTerminate:(NSNotification *)aNotification
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - Actions
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
