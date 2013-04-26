@@ -49,6 +49,11 @@
 				if ([self sendAction:@selector(terminate:) to:nil from:self])
 					return;
 			}
+			else if ([[event charactersIgnoringModifiers] isEqualToString:@"w"])
+			{
+				if ([self sendAction:@selector(orderOut:) to:nil from:self])
+					return;
+			}
 		}
 		else if (([event modifierFlags] & NSDeviceIndependentModifierFlagsMask) == (NSCommandKeyMask | NSShiftKeyMask))
 		{
