@@ -73,9 +73,10 @@
 {
     DTITCReportManager *reportManager = [DTITCReportManager sharedManager]; // inits it
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDidStart:) name:DTITCReportManagerSyncDidStartNotification object:reportManager];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncDidFinish:) name:DTITCReportManagerSyncDidFinishNotification object:reportManager];
-	
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(syncDidStart:) name:DTITCReportManagerSyncDidStartNotification object:reportManager];
+    [nc addObserver:self selector:@selector(syncDidFinish:) name:DTITCReportManagerSyncDidFinishNotification object:reportManager];
+
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"DownloadAutoSync"])
 	{
 		[reportManager startAutoSyncTimer];
