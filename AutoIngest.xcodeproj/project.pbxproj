@@ -542,6 +542,7 @@
 		A7D8C7DD1723FD5C00025675 /* LastSyncDateValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastSyncDateValueTransformer.h; sourceTree = "<group>"; };
 		A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastSyncDateValueTransformer.m; sourceTree = "<group>"; };
 		B3D044D9567E7785CEAF75FB /* ReportInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportInformation.h; sourceTree = "<group>"; };
+		BA6D12B07D998A4E3684E2AC /* AIUserDefaultsKeysConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIUserDefaultsKeysConstants.h; sourceTree = "<group>"; };
 		B3D04B6B23093F558AEB21A7 /* ReportInformationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportInformationTests.m; sourceTree = "<group>"; };
 		B3D04C30F0858A14CBE3058A /* ReportInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportInformation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -688,6 +689,7 @@
 				A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */,
 				1DA477B91723FDFA0048EACA /* StatusItemView.h */,
 				1DA477BA1723FDFB0048EACA /* StatusItemView.m */,
+				BA6D12B07D998A4E3684E2AC /* AIUserDefaultsKeysConstants.h */,
 			);
 			path = Source;
 			sourceTree = "<group>";
