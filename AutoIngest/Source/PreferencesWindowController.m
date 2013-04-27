@@ -9,7 +9,6 @@
 #import "PreferencesWindowController.h"
 
 #import "AccountManager.h"
-#import "GenericAccount.h"
 
 @interface PreferencesWindowController ()
 
@@ -68,7 +67,7 @@
     openPanel.prompt = @"Choose";
     
     // set default path
-    NSString *path = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadFolderPath"];
+    NSString *path = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsDownloadFolderPathKey];
     NSURL *URL = [NSURL fileURLWithPath:path];
     if (URL)
     {
@@ -81,7 +80,7 @@
 		if (result == NSFileHandlingPanelOKButton)
 		{
             NSString *path = [[openPanel URL] path];
-            [[NSUserDefaults standardUserDefaults] setObject:path forKey:@"DownloadFolderPath"];
+            [[NSUserDefaults standardUserDefaults] setObject:path forKey:AIUserDefaultsDownloadFolderPathKey];
 		}
 	}];
 }
