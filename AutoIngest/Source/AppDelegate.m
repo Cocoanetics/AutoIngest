@@ -10,7 +10,6 @@
 
 #import "PreferencesWindowController.h"
 #import "DTITCReportManager.h"
-#import "AccountManager.h"
 
 #import "StatusItemView.h"
 
@@ -43,13 +42,13 @@
     }
     
     // replace tilde if necessary
-    NSString *downloadPath = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadFolderPath"];
+    NSString *downloadPath = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsDownloadFolderPathKey];
     
     if ([downloadPath hasPrefix:@"~"])
     {
         downloadPath = [downloadPath stringByExpandingTildeInPath];
         
-        [[NSUserDefaults standardUserDefaults] setObject:downloadPath forKey:@"DownloadFolderPath"];
+        [[NSUserDefaults standardUserDefaults] setObject:downloadPath forKey:AIUserDefaultsDownloadFolderPathKey];
     }
 }
 
@@ -79,7 +78,7 @@
 
 	[nc addObserver:self selector:@selector(menuWillOpen:) name:AIMenuWillOpenNotification object:nil];
 
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"DownloadAutoSync"])
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldAutoSyncKey])
 	{
 		[reportManager startAutoSyncTimer];
 	}
@@ -179,8 +178,8 @@
 			 [note setTitle:@"AutoIngest"];
 			 NSString *infoText = [NSString stringWithFormat:@"Report download complete"];
 			 [note setInformativeText:infoText];
-			 
-			 [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"DownloadLastSuccessfulSync"];
+
+             [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:AIUserDefaultsLastSuccessfulSyncDateKey];
 		 }
        
         NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];

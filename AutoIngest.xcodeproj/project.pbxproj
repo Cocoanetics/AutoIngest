@@ -520,6 +520,7 @@
 		A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		A7D8C7DD1723FD5C00025675 /* LastSyncDateValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastSyncDateValueTransformer.h; sourceTree = "<group>"; };
 		A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastSyncDateValueTransformer.m; sourceTree = "<group>"; };
+		BA6D12B07D998A4E3684E2AC /* AIUserDefaultsKeysConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIUserDefaultsKeysConstants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -620,6 +621,7 @@
 				A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */,
 				1DA477B91723FDFA0048EACA /* StatusItemView.h */,
 				1DA477BA1723FDFB0048EACA /* StatusItemView.m */,
+				BA6D12B07D998A4E3684E2AC /* AIUserDefaultsKeysConstants.h */,
 			);
 			path = Source;
 			sourceTree = "<group>";

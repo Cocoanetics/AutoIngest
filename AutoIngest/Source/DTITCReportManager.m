@@ -71,7 +71,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 - (void)_downloadAllReportsOfType:(ITCReportType)reportType subType:(ITCReportSubType)reportSubType dateType:(ITCReportDateType)reportDateType fromAccount:(GenericAccount *)account
 {
 	DTITCReportDownloadOperation *op = [[DTITCReportDownloadOperation alloc] initForReportsOfType:reportType subType:reportSubType dateType:reportDateType fromAccount:account vendorID:_vendorID intoFolder:_reportFolder];
-	op.uncompressFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"UncompressReports"];
+	op.uncompressFiles = [[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldUncompressReportsKey];
 	op.delegate = self;
 	
 	[_queue addOperation:op];
@@ -223,7 +223,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		return NO;
 	}
 	
-	NSString *vendorID = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadVendorID"];
+	NSString *vendorID = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsVendoIDKey];
 	
 	// vendor ID must be only digits
 	if ([[vendorID stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"0123456789"]] length])
@@ -236,7 +236,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		return NO;
 	}
 	
-	NSString *reportFolder = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadFolderPath"];
+	NSString *reportFolder = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsDownloadFolderPathKey];
 	BOOL isDirectory = NO;
 	if ([[NSFileManager defaultManager] fileExistsAtPath:reportFolder isDirectory:&isDirectory])
 	{
@@ -311,8 +311,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	
 	BOOL needsToStopSync = NO;
 	
-	NSString *reportFolder = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadFolderPath"];
-	NSString *vendorID = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadVendorID"];
+	NSString *reportFolder = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsDownloadFolderPathKey];
+	NSString *vendorID = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsVendoIDKey];
    
 	if (![_reportFolder isEqualToString:reportFolder])
 	{
@@ -336,7 +336,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		[self stopSync];
 	}
 	
-	BOOL needsAutoSync = [[NSUserDefaults standardUserDefaults] boolForKey:@"DownloadAutoSync"];
+	BOOL needsAutoSync = [[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldAutoSyncKey];
 	BOOL hasActiveTimer = (_autoSyncTimer!=nil);
 	
 	if (needsAutoSync != hasActiveTimer)
