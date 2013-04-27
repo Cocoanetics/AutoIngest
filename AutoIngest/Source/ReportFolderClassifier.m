@@ -47,8 +47,7 @@
     {
         if (basePath)
         {
-            NSString *last = [basePath substringFromIndex:[basePath length] - 1];
-            if (![last isEqualToString:@"/"])
+            if (![basePath hasSuffix:@"/"])
             {
                 basePath = [basePath stringByAppendingFormat:@"/"];
             }
