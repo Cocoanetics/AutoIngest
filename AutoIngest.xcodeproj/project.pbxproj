@@ -643,7 +643,6 @@
 			children = (
 				A7D8C7D11723F79500025675 /* Report Manager */,
 				A7415F32172170CB0092F4F8 /* Cleanup for DTFoundation */,
-				3DC53130172D1C30005D9183 /* NoodleKit */,
 				3DC53216172D396F005D9183 /* Categories */,
 				A7175E501721489A0031058F /* main.m */,
 				3DC53112172A65D4005D9183 /* AIApplication.h */,
@@ -664,6 +663,7 @@
 		A7415EFB172161DD0092F4F8 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				3DC53130172D1C30005D9183 /* NoodleKit */,
 				A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */,
 				A7415F0E172161DD0092F4F8 /* TheMissingAPI.xcodeproj */,
 			);
