@@ -11,6 +11,7 @@
 
 #import "AccountManager.h"
 
+#import "NSDate+JXOffset.h"
 #import "NSTimer-NoodleExtensions.h"
 
 static DTITCReportManager *_sharedInstance = nil;
@@ -284,30 +285,34 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 }
 
 #pragma mark - Auto Sync
-- (void)scheduledNextAutoSyncTimer
+- (void)scheduledNextAutoSync
 {
 	[_autoSyncTimer invalidate];
 	
-	NSDate *today = [NSDate date];
-	NSDate *nextDate = nil;
-	NSInteger dayOffset = 1;
+	NSDate *now = [NSDate date];
+	NSDate *lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadLastSuccessfulSync"];
+	NSDate *lastSyncDateNextDay = [lastSyncDate dateWithDayOffset:1];
 	
-	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-	NSDateComponents *components = [[NSDateComponents alloc] init];
-	components.day = dayOffset;
-	nextDate = [gregorian dateByAddingComponents:components toDate:today options:0];
-	
-	_autoSyncTimer = [NSTimer scheduledTimerWithAbsoluteFireDate:nextDate block:^(NSTimer *timer) {
+	if (lastSyncDate == nil || [[now earlierDate:lastSyncDateNextDay] isEqualToDate:lastSyncDateNextDay]) {
+		// We have never synced or the last sync was too long ago.
 		[self startSync];
 		
-		[self scheduledNextAutoSyncTimer];
+		lastSyncDate = now;
+	}
+	
+	NSDate *nextSyncDate = [lastSyncDate dateWithDayOffset:1];
+	
+	_autoSyncTimer = [NSTimer scheduledTimerWithAbsoluteFireDate:nextSyncDate block:^(NSTimer *timer) {
+		[self startSync];
+		
+		[self scheduledNextAutoSync];
 	}];
 
 }
 
 - (void)startAutoSyncTimer
 {
-	[self scheduledNextAutoSyncTimer];
+	[self scheduledNextAutoSync];
 	
 	NSLog(@"AutoSync Timer enabled");
 }
