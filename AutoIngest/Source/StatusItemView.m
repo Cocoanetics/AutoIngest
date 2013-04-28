@@ -39,16 +39,20 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+	NSSize imageSize = self.image.size;
+	NSRect imageRect = NSMakeRect(0, 0, imageSize.width, imageSize.height);
+	NSPoint drawPos = NSMakePoint((self.bounds.size.width - imageSize.width)/2.0, 1.0 + (self.bounds.size.height - imageSize.height)/2.0) ;
+	
 	if (_isMenuVisible)
 	{
 		[NSColor.selectedMenuItemColor set];
 		NSRectFill(dirtyRect);
 		
-		[self.image drawAtPoint:NSMakePoint(5, 2) fromRect:NSMakeRect(0, 0, 20, 19) operation:NSCompositeXOR fraction:1.0];
+		[self.image drawAtPoint:drawPos fromRect:imageRect operation:NSCompositeXOR fraction:1.0];
 	}
 	else
 	{
-		[self.image drawAtPoint:NSMakePoint(5, 2) fromRect:NSMakeRect(0, 0, 20, 19) operation:NSCompositeSourceOver fraction:1.0];
+		[self.image drawAtPoint:drawPos fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
 	}
 }
 
@@ -126,7 +130,7 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 		currentFrame = 0;
 	}
 
-	//get the image for the current frame
+	// get the image for the current frame
 	NSString *name = [NSString stringWithFormat:@"AutoIngest_%03d",(int)currentFrame];
 	NSImage *image = [NSImage imageNamed:name];
 	
