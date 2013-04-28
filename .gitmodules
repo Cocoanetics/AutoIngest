@@ -4,3 +4,6 @@
 [submodule "Externals/DTFoundation"]
 	path = Externals/DTFoundation
 	url = https://github.com/Cocoanetics/DTFoundation.git
+[submodule "Externals/NoodleKit"]
+	path = Externals/NoodleKit
+	url = git@github.com:JanX2/NoodleKit.git

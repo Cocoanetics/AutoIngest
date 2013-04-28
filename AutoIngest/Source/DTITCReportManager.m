@@ -11,6 +11,8 @@
 
 #import "AccountManager.h"
 
+#import "NSTimer-NoodleExtensions.h"
+
 static DTITCReportManager *_sharedInstance = nil;
 
 NSString * const DTITCReportManagerSyncDidStartNotification = @"DTITCReportManagerSyncDidStartNotification";
@@ -282,11 +284,30 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 }
 
 #pragma mark - Auto Sync
-- (void)startAutoSyncTimer
+- (void)scheduledNextAutoSyncTimer
 {
 	[_autoSyncTimer invalidate];
 	
-	_autoSyncTimer = [NSTimer scheduledTimerWithTimeInterval:24*60*60 target:self selector:@selector(_autoSyncTimer:) userInfo:nil repeats:YES];
+	NSDate *today = [NSDate date];
+	NSDate *nextDate = nil;
+	NSInteger dayOffset = 1;
+	
+	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSDateComponents *components = [[NSDateComponents alloc] init];
+	components.day = dayOffset;
+	nextDate = [gregorian dateByAddingComponents:components toDate:today options:0];
+	
+	_autoSyncTimer = [NSTimer scheduledTimerWithAbsoluteFireDate:nextDate block:^(NSTimer *timer) {
+		[self startSync];
+		
+		[self scheduledNextAutoSyncTimer];
+	}];
+
+}
+
+- (void)startAutoSyncTimer
+{
+	[self scheduledNextAutoSyncTimer];
 	
 	NSLog(@"AutoSync Timer enabled");
 }
@@ -297,11 +318,6 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	_autoSyncTimer = nil;
 	
 	NSLog(@"AutoSync Timer disabled");
-}
-
-- (void)_autoSyncTimer:(NSTimer *)timer
-{
-	[self startSync];
 }
 
 #pragma mark - Notifications
