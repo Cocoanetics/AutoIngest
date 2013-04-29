@@ -326,7 +326,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     }
     
     // longer than a day ago, update right away
-    if (hoursSinceLastUpdate>0.0)
+    if (hoursSinceLastUpdate>=24.0)
     {
         NSLog(@"Last Sync longer than 24 hours ago, starting sync now");
         [self startSync];
