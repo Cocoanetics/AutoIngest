@@ -27,8 +27,6 @@
 
 - (id)initForReportsOfType:(ITCReportType)reportType subType:(ITCReportSubType)reportSubType dateType:(ITCReportDateType)reportDateType fromAccount:(GenericAccount *)account vendorID:(NSString *)vendorID intoFolder:(NSString *)folder;
 {
-	NSLog(@"init");
-	
 	self = [super init];
 	
 	if (self)

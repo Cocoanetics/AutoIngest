@@ -11,9 +11,6 @@
 
 #import "AccountManager.h"
 
-#import "NSDate+JXOffset.h"
-#import "NSTimer-NoodleExtensions.h"
-
 static DTITCReportManager *_sharedInstance = nil;
 
 NSString * const DTITCReportManagerSyncDidStartNotification = @"DTITCReportManagerSyncDidStartNotification";
@@ -58,8 +55,12 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		// load initial defaults
 		[self defaultsDidUpdate:nil];
 		
+        
 		// observe for defaults changes, e.g. download path
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(defaultsDidUpdate:) name:NSUserDefaultsDidChangeNotification object:nil];
+		[[NSNotificationCenter defaultCenter]; addObserver:self selector:@selector(defaultsDidUpdate:) name:NSUserDefaultsDidChangeNotification object:nil];
+        
+        // observe if the machine wakes from sleep
+        [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(machineDidWakeUp:) name:NSWorkspaceDidWakeNotification object:nil];
 	}
 	
 	return self;
@@ -68,8 +69,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
 }
-
 
 - (void)_downloadAllReportsOfType:(ITCReportType)reportType subType:(ITCReportSubType)reportSubType dateType:(ITCReportDateType)reportDateType fromAccount:(GenericAccount *)account
 {
@@ -90,6 +91,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	}
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:DTITCReportManagerSyncDidFinishNotification object:self userInfo:userInfo];
+    
+    NSLog(@"==== Report Synching Completed");
 }
 
 - (void)startSync
@@ -285,36 +288,15 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 }
 
 #pragma mark - Auto Sync
-- (void)scheduledNextAutoSync
+- (void)startAutoSyncTimer
 {
 	[_autoSyncTimer invalidate];
 	
-	NSDate *now = [NSDate date];
-	NSDate *lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadLastSuccessfulSync"];
-	NSDate *lastSyncDateNextDay = [lastSyncDate dateWithDayOffset:1];
-	
-	if (lastSyncDate == nil || [[now earlierDate:lastSyncDateNextDay] isEqualToDate:lastSyncDateNextDay]) {
-		// We have never synced or the last sync was too long ago.
-		[self startSync];
-		
-		lastSyncDate = now;
-	}
-	
-	NSDate *nextSyncDate = [lastSyncDate dateWithDayOffset:1];
-	
-	_autoSyncTimer = [NSTimer scheduledTimerWithAbsoluteFireDate:nextSyncDate block:^(NSTimer *timer) {
-		[self startSync];
-		
-		[self scheduledNextAutoSync];
-	}];
-
-}
-
-- (void)startAutoSyncTimer
-{
-	[self scheduledNextAutoSync];
+    _autoSyncTimer = [NSTimer scheduledTimerWithTimeInterval:24*60*60 target:self selector:@selector(_autoSyncTimer:) userInfo:nil repeats:YES];
 	
 	NSLog(@"AutoSync Timer enabled");
+    
+    [self _startAutoSyncIfNecessary];
 }
 
 - (void)stopAutoSyncTimer
@@ -323,6 +305,32 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	_autoSyncTimer = nil;
 	
 	NSLog(@"AutoSync Timer disabled");
+}
+
+- (void)_autoSyncTimer:(NSTimer *)timer
+{
+	[self startSync];
+}
+
+// starts synching if there was never a sync or the last successful sync is longer than 24 hours ago
+- (void)_startAutoSyncIfNecessary
+{
+    NSTimeInterval hoursSinceLastUpdate = 25;
+    
+    NSDate *lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadLastSuccessfulSync"];
+
+    if (lastSyncDate)
+    {
+        // time intervals are absolute
+        hoursSinceLastUpdate = -[lastSyncDate timeIntervalSinceNow]/3600.0;
+    }
+    
+    // longer than a day ago, update right away
+    if (hoursSinceLastUpdate>=24.0)
+    {
+        NSLog(@"Last Sync longer than 24 hours ago, starting sync now");
+        [self startSync];
+    }
 }
 
 #pragma mark - Notifications
@@ -371,6 +379,11 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 			[self stopAutoSyncTimer];
 		}
 	}
+}
+
+- (void)machineDidWakeUp:(NSNotification *)notification
+{
+    [self _startAutoSyncIfNecessary];
 }
 
 #pragma mark - DTITCReportDownloadOperation Delegate
