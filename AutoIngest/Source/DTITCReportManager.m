@@ -83,7 +83,14 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
             
             BOOL hasConnection = [manager _hasInternetConnection];
             
-            NSLog(@"my reach: %d", hasConnection);
+            if (hasConnection)
+            {
+                NSLog(@"Has Internet Connection");
+            }
+            else
+            {
+                NSLog(@"NO Internet Connection");
+            }
             
             if (manager->_waitingForConnectionToSync && hasConnection)
             {
@@ -143,6 +150,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	
 	// reset error status
 	self.error = nil;
+    
+    _waitingForConnectionToSync = NO;
 	
 	NSArray *accounts = [[AccountManager sharedAccountManager] accountsOfType:@"iTunes Connect"];
 	
