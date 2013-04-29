@@ -10,11 +10,13 @@
 
 #import "AccountManager.h"
 
+
 @interface PreferencesWindowController ()
 
 @property (nonatomic, strong) GenericAccount *account;
 
 @end
+
 
 @implementation PreferencesWindowController
 {
@@ -36,6 +38,13 @@
         {
             // initially only one account is supported
             _account = accounts[0];
+            self.vendorId = [[NSUserDefaults standardUserDefaults] valueForKey:@"DownloadVendorID"];
+            
+            [self validateUsername];
+            [self validateVendorId];
+            
+            [self addObserver:self forKeyPath:@"username" options:NSKeyValueObservingOptionNew context:nil];
+            [self addObserver:self forKeyPath:@"vendorId" options:NSKeyValueObservingOptionNew context:nil];
         }
     }
 	
@@ -54,6 +63,39 @@
         _account = [[AccountManager sharedAccountManager] addAccountForService:@"iTunes Connect" user:_username];
     }
 }
+
+#pragma mark - KVO
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"username"])
+    {
+        [self validateUsername];
+    }
+    else if ([keyPath isEqualToString:@"vendorId"])
+    {
+        [self validateVendorId];
+        [[NSUserDefaults standardUserDefaults] setValue:self.vendorId forKey:@"DownloadVendorID"];
+    }
+}
+
+
+- (void)validateUsername
+{
+    NSString *emailRegEx = @".+@.+\\.[A-Za-z]{2}[A-Za-z]*";
+    NSPredicate *emailPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
+    self.usernameColor = [emailPredicate evaluateWithObject:self.username] ? [NSColor textColor] : [NSColor redColor];
+}
+
+
+- (void)validateVendorId
+{
+    NSString *vendorRegEx = @"8\\d{7}";
+    NSPredicate *vendorIdPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", vendorRegEx];
+    self.vendorIdColor = [vendorIdPredicate evaluateWithObject:self.vendorId] ? [NSColor textColor] : [NSColor redColor];
+}
+
 
 #pragma mark - Actions
 
