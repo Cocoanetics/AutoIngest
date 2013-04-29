@@ -51,6 +51,7 @@
     return self;
 }
 
+
 - (void)_createAccountIfNecessary
 {
     if (_account)
@@ -63,6 +64,14 @@
         _account = [[AccountManager sharedAccountManager] addAccountForService:@"iTunes Connect" user:_username];
     }
 }
+
+
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"username" context:nil];
+    [self removeObserver:self forKeyPath:@"vendorId" context:nil];
+}
+
 
 #pragma mark - KVO
 
@@ -79,6 +88,9 @@
         [[NSUserDefaults standardUserDefaults] setValue:self.vendorId forKey:@"DownloadVendorID"];
     }
 }
+
+
+#pragma mark - Validation
 
 
 - (void)validateUsername
