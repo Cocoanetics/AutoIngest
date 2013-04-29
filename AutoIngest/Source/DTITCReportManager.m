@@ -338,14 +338,17 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 #pragma mark - Auto Sync
 - (void)startAutoSyncTimer
 {
-	[_autoSyncTimer invalidate];
-	
+    [_autoSyncTimer invalidate];
+    
     // check every hour if the auto-sync criteria is met
     _autoSyncTimer = [NSTimer scheduledTimerWithTimeInterval:60*60 target:self selector:@selector(_startAutoSyncIfNecessary) userInfo:nil repeats:YES];
-	
-	NSLog(@"AutoSync Timer enabled");
     
-    [self _startAutoSyncIfNecessary];
+    NSLog(@"AutoSync Timer enabled");
+
+    // do that on next run loop for notifications to have a chance to be received
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self _startAutoSyncIfNecessary];
+    });
 }
 
 - (void)stopAutoSyncTimer
@@ -359,6 +362,11 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 // starts synching if there was never a sync or the last successful sync is longer than 24 hours ago
 - (void)_startAutoSyncIfNecessary
 {
+    if (_isSynching)
+    {
+        return;
+    }
+    
     NSDate *lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadLastSuccessfulSync"];
 
     if (lastSyncDate)
