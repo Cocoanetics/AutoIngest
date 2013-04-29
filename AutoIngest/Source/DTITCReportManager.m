@@ -10,6 +10,10 @@
 #import "DTITCReportDownloadOperation.h"
 
 #import "AccountManager.h"
+#import "DTReachability.h"
+
+#import <SystemConfiguration/SystemConfiguration.h>
+#import <arpa/inet.h>
 
 static DTITCReportManager *_sharedInstance = nil;
 
@@ -31,6 +35,12 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	NSOperationQueue *_queue;
 	
 	NSTimer *_autoSyncTimer;
+    
+    // Reachability
+    id _reachabilityObserver;
+    SCNetworkConnectionFlags _connectionFlags;
+    
+    BOOL _waitingForConnectionToSync;
 }
 
 + (DTITCReportManager *)sharedManager
@@ -57,10 +67,37 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		
         
 		// observe for defaults changes, e.g. download path
-		[[NSNotificationCenter defaultCenter]; addObserver:self selector:@selector(defaultsDidUpdate:) name:NSUserDefaultsDidChangeNotification object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(defaultsDidUpdate:) name:NSUserDefaultsDidChangeNotification object:nil];
         
         // observe if the machine wakes from sleep
         [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(machineDidWakeUp:) name:NSWorkspaceDidWakeNotification object:nil];
+        
+        // Reachability
+        __weak DTITCReportManager *weakself = self;
+        
+        _reachabilityObserver = [DTReachability addReachabilityObserverWithBlock:^(SCNetworkConnectionFlags connectionFlags) {
+            
+            // assign to strong first
+            DTITCReportManager *manager = weakself;
+            manager->_connectionFlags = connectionFlags;
+            
+            BOOL hasConnection = [manager _hasInternetConnection];
+            
+            if (hasConnection)
+            {
+                NSLog(@"Has Internet Connection");
+            }
+            else
+            {
+                NSLog(@"NO Internet Connection");
+            }
+            
+            if (manager->_waitingForConnectionToSync && hasConnection)
+            {
+                NSLog(@"Internet became available and waiting for that to sync");
+                [manager startSync];
+            }
+        }];
 	}
 	
 	return self;
@@ -70,6 +107,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
     [[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
+    
+    [DTReachability removeReachabilityObserver:_reachabilityObserver];
 }
 
 - (void)_downloadAllReportsOfType:(ITCReportType)reportType subType:(ITCReportSubType)reportSubType dateType:(ITCReportDateType)reportDateType fromAccount:(GenericAccount *)account
@@ -111,6 +150,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	
 	// reset error status
 	self.error = nil;
+    
+    _waitingForConnectionToSync = NO;
 	
 	NSArray *accounts = [[AccountManager sharedAccountManager] accountsOfType:@"iTunes Connect"];
 	
@@ -287,6 +328,13 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	return YES;
 }
 
+- (BOOL)_hasInternetConnection
+{
+    BOOL isReachable = ((_connectionFlags & kSCNetworkFlagsReachable) != 0);
+    BOOL needsConnection = ((_connectionFlags & kSCNetworkFlagsConnectionRequired) != 0);
+    return (isReachable && !needsConnection);
+}
+
 #pragma mark - Auto Sync
 - (void)startAutoSyncTimer
 {
@@ -328,8 +376,16 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     // longer than a day ago, update right away
     if (hoursSinceLastUpdate>=24.0)
     {
-        NSLog(@"Last Sync longer than 24 hours ago, starting sync now");
-        [self startSync];
+        if ([self _hasInternetConnection])
+        {
+            NSLog(@"Last Sync longer than 24 hours ago, starting sync now");
+            [self startSync];
+        }
+        else
+        {
+            NSLog(@"Last Sync longer than 24 hours ago, but no internet connection, deferring sync");
+            _waitingForConnectionToSync = YES;
+        }
     }
 }
 

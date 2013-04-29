@@ -27,6 +27,8 @@
 		A7415F37172170EA0092F4F8 /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F34172170EA0092F4F8 /* AccountManager.m */; };
 		A7415F38172170EA0092F4F8 /* GenericAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F36172170EA0092F4F8 /* GenericAccount.m */; };
 		A7415F3A172173650092F4F8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F39172173650092F4F8 /* Security.framework */; };
+		A7675E4A172E661900C548CB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7675E49172E661900C548CB /* SystemConfiguration.framework */; };
+		A7675E58172E6CA000C548CB /* DTReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A7675E57172E6CA000C548CB /* DTReachability.m */; };
 		A7D4A25517286BF40042D0D1 /* AutoIngest_000.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D4A1A717286BF40042D0D1 /* AutoIngest_000.png */; };
 		A7D4A25617286BF40042D0D1 /* AutoIngest_000@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D4A1A817286BF40042D0D1 /* AutoIngest_000@2x.png */; };
 		A7D4A25717286BF40042D0D1 /* AutoIngest_001.png in Resources */ = {isa = PBXBuildFile; fileRef = A7D4A1A917286BF40042D0D1 /* AutoIngest_001.png */; };
@@ -340,6 +342,9 @@
 		A7415F39172173650092F4F8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A7415F4217218D2F0092F4F8 /* DTITCReportManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTITCReportManager.h; path = AutoIngest/Source/DTITCReportManager.h; sourceTree = SOURCE_ROOT; };
 		A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTITCReportManager.m; path = AutoIngest/Source/DTITCReportManager.m; sourceTree = SOURCE_ROOT; };
+		A7675E49172E661900C548CB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A7675E56172E6CA000C548CB /* DTReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTReachability.h; sourceTree = "<group>"; };
+		A7675E57172E6CA000C548CB /* DTReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTReachability.m; sourceTree = "<group>"; };
 		A7D4A1A717286BF40042D0D1 /* AutoIngest_000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AutoIngest_000.png; sourceTree = "<group>"; };
 		A7D4A1A817286BF40042D0D1 /* AutoIngest_000@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AutoIngest_000@2x.png"; sourceTree = "<group>"; };
 		A7D4A1A917286BF40042D0D1 /* AutoIngest_001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AutoIngest_001.png; sourceTree = "<group>"; };
@@ -528,6 +533,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7675E4A172E661900C548CB /* SystemConfiguration.framework in Frameworks */,
 				1DA477B81723FB4C0048EACA /* QuartzCore.framework in Frameworks */,
 				A7D8C7CE1723199300025675 /* libDTZipArchive_Mac.a in Frameworks */,
 				A7D8C7AE172316D900025675 /* libz.1.2.5.dylib in Frameworks */,
@@ -562,6 +568,7 @@
 		A7175E26172146EE0031058F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A7675E49172E661900C548CB /* SystemConfiguration.framework */,
 				A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */,
 				A7175E27172146EE0031058F /* Cocoa.framework */,
 				A7415F39172173650092F4F8 /* Security.framework */,
@@ -656,6 +663,8 @@
 		A7415F32172170CB0092F4F8 /* Cleanup for DTFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				A7675E56172E6CA000C548CB /* DTReachability.h */,
+				A7675E57172E6CA000C548CB /* DTReachability.m */,
 				A7415F33172170EA0092F4F8 /* AccountManager.h */,
 				A7415F34172170EA0092F4F8 /* AccountManager.m */,
 				A7415F35172170EA0092F4F8 /* GenericAccount.h */,
@@ -1225,6 +1234,7 @@
 				A71E9869172409D800176AC8 /* DTITCReportManager.m in Sources */,
 				A71E9875172409DA00176AC8 /* DTITCReportDownloadOperation.m in Sources */,
 				3DC53114172A65D4005D9183 /* AIApplication.m in Sources */,
+				A7675E58172E6CA000C548CB /* DTReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
