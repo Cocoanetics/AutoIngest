@@ -373,17 +373,25 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     {
         NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDate *now =[NSDate date];
-        NSDateComponents *lastSyncComps = [gregorian components:NSDayCalendarUnit | NSHourCalendarUnit fromDate:lastSyncDate];
-        NSDateComponents *nowComps = [gregorian components:NSDayCalendarUnit | NSHourCalendarUnit fromDate:now];
+        NSDateComponents *lastSyncComps = [gregorian components:NSDayCalendarUnit fromDate:lastSyncDate];
+        NSDateComponents *nowComps = [gregorian components:NSDayCalendarUnit fromDate:now];
         NSDateComponents *diffComps = [gregorian components:NSDayCalendarUnit fromDate:lastSyncDate toDate:now options:0];
         
         if (lastSyncComps.day != nowComps.day)
         {
-            if (diffComps.day <= 1 && nowComps.hour >= lastSyncComps.hour)
+            // different date, only sync if its at least the same hour in day or later
+            if (diffComps.day <= 1 && nowComps.hour < lastSyncComps.hour)
             {
                 // less than a day
                 return;
             }
+            
+            // either last sync is longer then 1 day or its a later hour in the day than last sync on day before
+        }
+        else
+        {
+            // same date, never sync
+            return;
         }
     }
     
