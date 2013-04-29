@@ -340,7 +340,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 {
 	[_autoSyncTimer invalidate];
 	
-    _autoSyncTimer = [NSTimer scheduledTimerWithTimeInterval:24*60*60 target:self selector:@selector(_autoSyncTimer:) userInfo:nil repeats:YES];
+    // check every hour if the auto-sync criteria is met
+    _autoSyncTimer = [NSTimer scheduledTimerWithTimeInterval:60*60 target:self selector:@selector(_startAutoSyncIfNecessary) userInfo:nil repeats:YES];
 	
 	NSLog(@"AutoSync Timer enabled");
     
@@ -355,37 +356,37 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	NSLog(@"AutoSync Timer disabled");
 }
 
-- (void)_autoSyncTimer:(NSTimer *)timer
-{
-	[self startSync];
-}
-
 // starts synching if there was never a sync or the last successful sync is longer than 24 hours ago
 - (void)_startAutoSyncIfNecessary
 {
-    NSTimeInterval hoursSinceLastUpdate = 25;
-    
     NSDate *lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadLastSuccessfulSync"];
 
     if (lastSyncDate)
     {
-        // time intervals are absolute
-        hoursSinceLastUpdate = -[lastSyncDate timeIntervalSinceNow]/3600.0;
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        
+        NSDateComponents *lastSyncComps = [gregorian components:NSDayCalendarUnit | NSHourCalendarUnit fromDate:lastSyncDate];
+        NSDateComponents *nowComps = [gregorian components:NSDayCalendarUnit | NSHourCalendarUnit fromDate:[NSDate date]];
+        
+        if (lastSyncComps.day != nowComps.day)
+        {
+            if (nowComps.hour < lastSyncComps.hour)
+            {
+                // less than a day
+                return;
+            }
+        }
     }
     
-    // longer than a day ago, update right away
-    if (hoursSinceLastUpdate>=24.0)
+    if ([self _hasInternetConnection])
     {
-        if ([self _hasInternetConnection])
-        {
-            NSLog(@"Last Sync longer than 24 hours ago, starting sync now");
-            [self startSync];
-        }
-        else
-        {
-            NSLog(@"Last Sync longer than 24 hours ago, but no internet connection, deferring sync");
-            _waitingForConnectionToSync = YES;
-        }
+        NSLog(@"Last Sync longer than 24 hours ago, starting sync now");
+        [self startSync];
+    }
+    else
+    {
+        NSLog(@"Last Sync longer than 24 hours ago, but no internet connection, deferring sync");
+        _waitingForConnectionToSync = YES;
     }
 }
 
