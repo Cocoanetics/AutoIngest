@@ -371,7 +371,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
         
         if (lastSyncComps.day != nowComps.day)
         {
-            if (diffComps.day <= 1 && nowComps.hour < lastSyncComps.hour)
+            if (diffComps.day <= 1 && nowComps.hour >= lastSyncComps.hour)
             {
                 // less than a day
                 return;
