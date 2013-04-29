@@ -364,13 +364,14 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     if (lastSyncDate)
     {
         NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        
+        NSDate *now =[NSDate date];
         NSDateComponents *lastSyncComps = [gregorian components:NSDayCalendarUnit | NSHourCalendarUnit fromDate:lastSyncDate];
-        NSDateComponents *nowComps = [gregorian components:NSDayCalendarUnit | NSHourCalendarUnit fromDate:[NSDate date]];
+        NSDateComponents *nowComps = [gregorian components:NSDayCalendarUnit | NSHourCalendarUnit fromDate:now];
+        NSDateComponents *diffComps = [gregorian components:NSDayCalendarUnit fromDate:lastSyncDate toDate:now options:0];
         
         if (lastSyncComps.day != nowComps.day)
         {
-            if (nowComps.hour < lastSyncComps.hour)
+            if (diffComps.day <= 1 && nowComps.hour < lastSyncComps.hour)
             {
                 // less than a day
                 return;
