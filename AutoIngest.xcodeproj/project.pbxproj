@@ -11,9 +11,6 @@
 		1DA477BB1723FDFB0048EACA /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA477BA1723FDFB0048EACA /* StatusItemView.m */; };
 		1DA477E2172481240048EACA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DA477E4172481240048EACA /* InfoPlist.strings */; };
 		3DC53114172A65D4005D9183 /* AIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC53113172A65D4005D9183 /* AIApplication.m */; };
-		3DC531DB172D1C31005D9183 /* NSTimer-NoodleExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC5319A172D1C31005D9183 /* NSTimer-NoodleExtensions.m */; };
-		3DC531DD172D1C31005D9183 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3DC5319D172D1C31005D9183 /* README.md */; };
-		3DC53204172D1CA6005D9183 /* NoodleGlue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC53203172D1CA5005D9183 /* NoodleGlue.m */; };
 		3DC53209172D37D4005D9183 /* NSDate+JXOffset.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC53208172D37D2005D9183 /* NSDate+JXOffset.m */; };
 		A7175E28172146EE0031058F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7175E27172146EE0031058F /* Cocoa.framework */; };
 		A7175E47172148390031058F /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7175E46172148390031058F /* PreferencesWindowController.xib */; };
@@ -318,11 +315,6 @@
 		1DA477E3172481240048EACA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DC53112172A65D4005D9183 /* AIApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIApplication.h; sourceTree = "<group>"; };
 		3DC53113172A65D4005D9183 /* AIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIApplication.m; sourceTree = "<group>"; };
-		3DC53199172D1C31005D9183 /* NSTimer-NoodleExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer-NoodleExtensions.h"; sourceTree = "<group>"; };
-		3DC5319A172D1C31005D9183 /* NSTimer-NoodleExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer-NoodleExtensions.m"; sourceTree = "<group>"; };
-		3DC5319D172D1C31005D9183 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		3DC53202172D1CA5005D9183 /* NoodleGlue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleGlue.h; sourceTree = "<group>"; };
-		3DC53203172D1CA5005D9183 /* NoodleGlue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleGlue.m; sourceTree = "<group>"; };
 		3DC53207172D37D2005D9183 /* NSDate+JXOffset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+JXOffset.h"; sourceTree = "<group>"; };
 		3DC53208172D37D2005D9183 /* NSDate+JXOffset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JXOffset.m"; sourceTree = "<group>"; };
 		A7175E24172146EE0031058F /* AutoIngest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoIngest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -551,19 +543,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3DC53130172D1C30005D9183 /* NoodleKit */ = {
-			isa = PBXGroup;
-			children = (
-				3DC53202172D1CA5005D9183 /* NoodleGlue.h */,
-				3DC53203172D1CA5005D9183 /* NoodleGlue.m */,
-				3DC53199172D1C31005D9183 /* NSTimer-NoodleExtensions.h */,
-				3DC5319A172D1C31005D9183 /* NSTimer-NoodleExtensions.m */,
-				3DC5319D172D1C31005D9183 /* README.md */,
-			);
-			name = NoodleKit;
-			path = Externals/NoodleKit;
-			sourceTree = SOURCE_ROOT;
-		};
 		3DC53216172D396F005D9183 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -663,7 +642,6 @@
 		A7415EFB172161DD0092F4F8 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
-				3DC53130172D1C30005D9183 /* NoodleKit */,
 				A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */,
 				A7415F0E172161DD0092F4F8 /* TheMissingAPI.xcodeproj */,
 			);
@@ -1240,7 +1218,6 @@
 				A7D4A30017286BF50042D0D1 /* AutoIngest_085@2x.png in Resources */,
 				A7D4A30117286BF50042D0D1 /* AutoIngest_086.png in Resources */,
 				A7D4A30217286BF50042D0D1 /* AutoIngest_086@2x.png in Resources */,
-				3DC531DD172D1C31005D9183 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1261,8 +1238,6 @@
 				A71E9869172409D800176AC8 /* DTITCReportManager.m in Sources */,
 				A71E9875172409DA00176AC8 /* DTITCReportDownloadOperation.m in Sources */,
 				3DC53114172A65D4005D9183 /* AIApplication.m in Sources */,
-				3DC531DB172D1C31005D9183 /* NSTimer-NoodleExtensions.m in Sources */,
-				3DC53204172D1CA6005D9183 /* NoodleGlue.m in Sources */,
 				3DC53209172D37D4005D9183 /* NSDate+JXOffset.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
