@@ -166,28 +166,31 @@
         StatusItemView *statusItemView = (StatusItemView *)_statusItem.view;
         statusItemView.isSyncing = NO;
         _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
-        
-        NSError *error = [notification userInfo][@"Error"];
-		 
-        NSUserNotification *note = [[NSUserNotification alloc] init];
-		 
-		 if (error)
-		 {
-			 [note setTitle:@"Report Syncing Error"];
-			 NSString *infoText = [error localizedDescription];
-			 [note setInformativeText:infoText];
-		 }
-		 else
-		 {
-			 [note setTitle:@"AutoIngest"];
-			 NSString *infoText = [NSString stringWithFormat:@"Report download complete"];
-			 [note setInformativeText:infoText];
 
-             [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:AIUserDefaultsLastSuccessfulSyncDateKey];
-		 }
-       
-        NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
-        [center deliverNotification:note];
+        if ([NSUserNotification class] && [NSUserNotificationCenter class])
+        {
+            NSError *error = [notification userInfo][@"Error"];
+
+            NSUserNotification *note = [[NSUserNotification alloc] init];
+
+            if (error)
+            {
+                [note setTitle:@"Report Syncing Error"];
+                NSString *infoText = [error localizedDescription];
+                [note setInformativeText:infoText];
+            }
+            else
+            {
+                [note setTitle:@"AutoIngest"];
+                NSString *infoText = [NSString stringWithFormat:@"Report download complete"];
+                [note setInformativeText:infoText];
+
+                [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:AIUserDefaultsLastSuccessfulSyncDateKey];
+            }
+
+            NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
+            [center deliverNotification:note];
+        }
     });
 }
 
