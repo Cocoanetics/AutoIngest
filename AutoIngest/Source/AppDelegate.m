@@ -12,7 +12,7 @@
 #import "DTITCReportManager.h"
 
 #import "StatusItemView.h"
-#import "ReportOrganizer.h"
+#import "ReportDownloadFolderMonitor.h"
 
 
 @interface AppDelegate ()
@@ -84,7 +84,7 @@
 		[reportManager startAutoSyncTimer];
 	}
 
-    [[ReportOrganizer sharedOrganizer] startMonitoringDownloadFolder];
+    [[ReportDownloadFolderMonitor sharedMonitor] startMonitoring];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
@@ -122,7 +122,7 @@
 
 - (void)quitApplication:(id)sender
 {
-    [[ReportOrganizer sharedOrganizer] stopMonitoringDownloadFolder];
+    [[ReportDownloadFolderMonitor sharedMonitor] stopMonitoring];
     [NSApp quitApplication:sender];
 }
 

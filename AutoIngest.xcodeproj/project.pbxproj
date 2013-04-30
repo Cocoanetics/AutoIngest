@@ -213,7 +213,8 @@
 		A7D8C7DF1723FD5D00025675 /* LastSyncDateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */; };
 		B3D043B6512F71D5175266EF /* ReportInformationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D04B6B23093F558AEB21A7 /* ReportInformationTests.m */; };
 		B3D04B9FCD64FB689ADC5E01 /* ReportInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D04C30F0858A14CBE3058A /* ReportInformation.m */; };
-		BA6D19073710E05AA752824B /* ReportOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6D1E9F111DBF987D2A1482 /* ReportOrganizer.m */; };
+		BA6D19073710E05AA752824B /* ReportDownloadFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6D1E9F111DBF987D2A1482 /* ReportDownloadFolderMonitor.m */; };
+		BA6D1A0682049414654C5095 /* ReportOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6D158FC54C3128B8973127 /* ReportOrganizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -550,9 +551,11 @@
 		B3D044D9567E7785CEAF75FB /* ReportInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportInformation.h; sourceTree = "<group>"; };
 		B3D04B6B23093F558AEB21A7 /* ReportInformationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportInformationTests.m; sourceTree = "<group>"; };
 		B3D04C30F0858A14CBE3058A /* ReportInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportInformation.m; sourceTree = "<group>"; };
-		BA6D12941BE7ED081B31E153 /* ReportOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportOrganizer.h; sourceTree = "<group>"; };
+		BA6D109EB0F42E2F11C2F3BE /* ReportOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportOrganizer.h; sourceTree = "<group>"; };
+		BA6D12941BE7ED081B31E153 /* ReportDownloadFolderMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportDownloadFolderMonitor.h; sourceTree = "<group>"; };
 		BA6D12B07D998A4E3684E2AC /* AIUserDefaultsKeysConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIUserDefaultsKeysConstants.h; sourceTree = "<group>"; };
-		BA6D1E9F111DBF987D2A1482 /* ReportOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportOrganizer.m; sourceTree = "<group>"; };
+		BA6D158FC54C3128B8973127 /* ReportOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportOrganizer.m; sourceTree = "<group>"; };
+		BA6D1E9F111DBF987D2A1482 /* ReportDownloadFolderMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportDownloadFolderMonitor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -609,8 +612,10 @@
 				5541682317259DA600762241 /* ReportFolderClassifier.m */,
 				B3D04C30F0858A14CBE3058A /* ReportInformation.m */,
 				B3D044D9567E7785CEAF75FB /* ReportInformation.h */,
-				BA6D1E9F111DBF987D2A1482 /* ReportOrganizer.m */,
-				BA6D12941BE7ED081B31E153 /* ReportOrganizer.h */,
+				BA6D1E9F111DBF987D2A1482 /* ReportDownloadFolderMonitor.m */,
+				BA6D12941BE7ED081B31E153 /* ReportDownloadFolderMonitor.h */,
+				BA6D158FC54C3128B8973127 /* ReportOrganizer.m */,
+				BA6D109EB0F42E2F11C2F3BE /* ReportOrganizer.h */,
 			);
 			name = "Report Organizer";
 			sourceTree = "<group>";
@@ -1361,8 +1366,9 @@
 				5541682417259DA600762241 /* ReportFolderClassifier.m in Sources */,
 				B3D04B9FCD64FB689ADC5E01 /* ReportInformation.m in Sources */,
 				3DC53114172A65D4005D9183 /* AIApplication.m in Sources */,
-				BA6D19073710E05AA752824B /* ReportOrganizer.m in Sources */,
+				BA6D19073710E05AA752824B /* ReportDownloadFolderMonitor.m in Sources */,
 				A7675E58172E6CA000C548CB /* DTReachability.m in Sources */,
+				BA6D1A0682049414654C5095 /* ReportOrganizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
