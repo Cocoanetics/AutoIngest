@@ -11,7 +11,8 @@
 
 NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 
-@interface StatusItemView ()<NSMenuDelegate>
+// Rename to StatusItemController
+@interface StatusItemView () <NSMenuDelegate>
 
 @property (nonatomic, strong) NSImage *image;
 @property (nonatomic) BOOL isMenuVisible;
@@ -21,42 +22,38 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 
 @implementation StatusItemView
 {
-	NSInteger currentFrame;
-	NSTimer *animTimer;
+	int _currentFrame;
+	NSTimer *_animationTimer;
 	BOOL _animationIsStopping;
 }
 
-- (id)initWithFrame:(NSRect)frame
+#pragma mark -
+#pragma mark Object livecycle
+
+- (id)initWithStatusItem:(NSStatusItem *)statusItem
 {
-	self = [super initWithFrame:frame];
-	if (self)
-	{
-		self.image = [NSImage imageNamed:@"AutoIngest_000"];
+	self = [super init];
+	
+	if (self != nil) {
+		_currentFrame = 0;
+		
+		_statusItem = statusItem;
+		_statusItem.target = self;
+		_statusItem.action = @selector(statusItemClicked:);
+		
+		NSImage *image = [self imageForFrameNumber:_currentFrame];
+		self.image = image;
+
+		//[self startAnimating];
 	}
 	
 	return self;
 }
 
-- (void)drawRect:(NSRect)dirtyRect
-{
-	NSSize imageSize = self.image.size;
-	NSRect imageRect = NSMakeRect(0, 0, imageSize.width, imageSize.height);
-	NSPoint drawPos = NSMakePoint((self.bounds.size.width - imageSize.width)/2.0, 1.0 + (self.bounds.size.height - imageSize.height)/2.0) ;
-	
-	if (_isMenuVisible)
-	{
-		[NSColor.selectedMenuItemColor set];
-		NSRectFill(dirtyRect);
-		
-		[self.image drawAtPoint:drawPos fromRect:imageRect operation:NSCompositeXOR fraction:1.0];
-	}
-	else
-	{
-		[self.image drawAtPoint:drawPos fromRect:imageRect operation:NSCompositeSourceOver fraction:1.0];
-	}
-}
+#pragma mark -
+#pragma mark Events
 
-- (void)mouseDown:(NSEvent *)event
+- (IBAction)statusItemClicked:(id)sender;
 {
 	[self openMenu];
 }
@@ -65,7 +62,6 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 {
 	[self.menu setDelegate:self];
 	[self.statusItem popUpStatusItemMenu:self.menu];
-	[self setNeedsDisplay:YES];
 }
 
 - (void)menuWillOpen:(NSMenu *)menu
@@ -73,14 +69,13 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 	[[NSNotificationCenter defaultCenter] postNotificationName:AIMenuWillOpenNotification object:self];
 	
 	self.isMenuVisible = YES;
-	[self setNeedsDisplay:YES];
 }
 
 - (void)menuDidClose:(NSMenu *)menu
 {
 	[menu setDelegate:nil];
+	
 	self.isMenuVisible = NO;
-	[self setNeedsDisplay:YES];
 }
 
 - (void)setIsSyncing:(BOOL)isSyncing
@@ -104,45 +99,59 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 
 - (void)startAnimating
 {
-	currentFrame = 0;
-	animTimer = [NSTimer scheduledTimerWithTimeInterval:0.03 target:self selector:@selector(updateImage:) userInfo:nil repeats:YES];
+	_currentFrame = 0;
+	_animationTimer = [NSTimer scheduledTimerWithTimeInterval:0.03 target:self selector:@selector(updateImage:) userInfo:nil repeats:YES];
 	
 	_animationIsStopping = NO;
 }
 
 - (void)stopAnimating
 {
-	// animation stops on next time frame 0
+	// Animation stops the next time frame 0 comes around.
 	_animationIsStopping = YES;
 }
 
 - (void)updateImage:(NSTimer *)timer
 {
-	currentFrame++;
-
-	if (currentFrame>86)
+#define LAST_FRAME_NUMBER	86
+	
+	_currentFrame++;
+	
+	if (_currentFrame > LAST_FRAME_NUMBER)
 	{
 		if (_animationIsStopping)
 		{
-			[animTimer invalidate];
+			[_animationTimer invalidate];
 		}
 		
-		currentFrame = 0;
+		_currentFrame = 0;
 	}
-
-	// get the image for the current frame
-	NSString *name = [NSString stringWithFormat:@"AutoIngest_%03d",(int)currentFrame];
-	NSImage *image = [NSImage imageNamed:name];
 	
-	[self setImage:image];
+	NSImage *image = [self imageForFrameNumber:_currentFrame];
+	
+	if (image != nil)
+	{
+		self.image = image;
+	}
 }
 
-#pragma mark - Properties
-
-- (void)setImage:(NSImage *)image
+- (NSImage *)imageForFrameNumber:(int)frameNumber
 {
-	_image = image;
-	[self setNeedsDisplay:YES];
+	NSString *name = [NSString stringWithFormat:@"AutoIngest Animation %02d Template.pdf", (int)frameNumber]; // Apple recommends to include the filename extension. 
+	NSImage *image = [NSImage imageNamed:name]; // FIXME: Implement caching.
+	
+	return image;
+}
+
+#pragma mark -
+#pragma mark Properties
+- (void)setImage:(NSImage *)newImage
+{
+    if (_image != newImage) {
+        _image = newImage;
+		_statusItem.image = _image;
+        _statusItem.highlightMode = YES;
+    }
 }
 
 @end
