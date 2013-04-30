@@ -65,6 +65,8 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 
 - (void)menuWillOpen:(NSMenu *)menu
 {
+	[self stopAnimatingImmediately];
+
 	[[NSNotificationCenter defaultCenter] postNotificationName:AIMenuWillOpenNotification object:self];
 	
 	self.isMenuVisible = YES;
@@ -72,6 +74,11 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 
 - (void)menuDidClose:(NSMenu *)menu
 {
+	if (_isSyncing)
+	{
+		[self startAnimating];
+	}
+	
 	[menu setDelegate:nil];
 	
 	self.isMenuVisible = NO;
@@ -110,6 +117,24 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 	_animationIsStopping = YES;
 }
 
+- (void)resetAnimation
+{
+	if (_animationIsStopping)
+	{
+		[_animationTimer invalidate];
+	}
+	
+	_currentFrame = 0;
+	
+	[self safelySetImageForCurrentFrame];
+}
+
+- (void)stopAnimatingImmediately
+{
+	[self stopAnimating];
+	[self resetAnimation];
+}
+
 - (void)updateImage:(NSTimer *)timer
 {
 #define LAST_FRAME_NUMBER	86
@@ -118,28 +143,30 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 	
 	if (_currentFrame > LAST_FRAME_NUMBER)
 	{
-		if (_animationIsStopping)
-		{
-			[_animationTimer invalidate];
-		}
-		
-		_currentFrame = 0;
+		[self resetAnimation];
 	}
-	
-	NSImage *image = [self imageForFrameNumber:_currentFrame];
-	
-	if (image != nil)
+	else
 	{
-		_statusItem.image = image;
+		[self safelySetImageForCurrentFrame];
 	}
 }
 
 - (NSImage *)imageForFrameNumber:(int)frameNumber
 {
 	NSString *name = [NSString stringWithFormat:@"AutoIngest Animation %02d Template.pdf", (int)frameNumber]; // Apple recommends to include the filename extension. 
-	NSImage *image = [NSImage imageNamed:name]; // FIXME: Implement caching.
+	NSImage *image = [NSImage imageNamed:name];
 	
 	return image;
+}
+
+- (void)safelySetImageForCurrentFrame
+{
+    NSImage *image = [self imageForFrameNumber:_currentFrame];
+	
+	if (image != nil)
+	{
+		_statusItem.image = image;
+	}
 }
 
 @end
