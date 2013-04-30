@@ -19,7 +19,7 @@ void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCallBackIn
 + (ReportOrganizer *)sharedOrganizer
 {
     static ReportOrganizer *sharedInstance;
-    dispatch_once_t once;
+    static dispatch_once_t once;
     dispatch_once(&once, ^{
         sharedInstance = [[ReportOrganizer alloc] initPrivate];
     });
@@ -54,9 +54,7 @@ void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCallBackIn
         [self stopMonitoringDownloadFolder];
     }
 
-    #if __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_10_8
     dispatch_release(_serialQueue);
-    #endif
 }
 
 #pragma mark - Public API
@@ -121,7 +119,6 @@ void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCallBackIn
 - (void)organizeAllReports
 {
     dispatch_sync(_serialQueue, ^{
-        // TODO do the organization
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSError *error = nil;
         NSArray *contents = [fileManager contentsOfDirectoryAtPath:_downloadFolder error:&error];
@@ -132,6 +129,7 @@ void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCallBackIn
         }
 
         NSLog(@"%@ - contents %@", [NSDate date], contents);
+        // TODO do the organization
     });
 }
 
