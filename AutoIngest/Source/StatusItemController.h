@@ -1,5 +1,5 @@
 //
-//  StatusItemView.h
+//  StatusItemController.h
 //  AutoIngest
 //
 //  Created by Rico Becker on 4/21/13.
@@ -10,7 +10,7 @@
 
 extern NSString * const AIMenuWillOpenNotification;
 
-@interface StatusItemView : NSObject
+@interface StatusItemController : NSObject
 
 @property (nonatomic, readwrite, strong) NSMenu *menu;
 

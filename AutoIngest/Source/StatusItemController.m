@@ -1,25 +1,24 @@
 //
-//  StatusItemView.m
+//  StatusItemController.m
 //  AutoIngest
 //
 //  Created by Rico Becker on 4/21/13.
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-#import "StatusItemView.h"
+#import "StatusItemController.h"
 #import <QuartzCore/QuartzCore.h>
 
 NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 
-// Rename to StatusItemController
-@interface StatusItemView () <NSMenuDelegate>
+@interface StatusItemController () <NSMenuDelegate>
 
 @property (nonatomic) BOOL isMenuVisible;
 
 @end
 
 
-@implementation StatusItemView
+@implementation StatusItemController
 {
 	int _currentFrame;
 	NSTimer *_animationTimer;

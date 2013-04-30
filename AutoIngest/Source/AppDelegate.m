@@ -11,7 +11,7 @@
 #import "PreferencesWindowController.h"
 #import "DTITCReportManager.h"
 
-#import "StatusItemView.h"
+#import "StatusItemController.h"
 
 
 @interface AppDelegate ()
@@ -26,7 +26,7 @@
 
 @implementation AppDelegate
 {
-	StatusItemView *_statusItemView;
+	StatusItemController *_statusItemController;
 	PreferencesWindowController *_preferencesController;
 }
 
@@ -56,8 +56,8 @@
 {
     NSStatusBar *systemStatusBar = [NSStatusBar systemStatusBar];
 	NSStatusItem *statusItem = [systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
-    _statusItemView = [[StatusItemView alloc] initWithStatusItem:statusItem];
-    _statusItemView.menu = _statusMenu;
+    _statusItemController = [[StatusItemController alloc] initWithStatusItem:statusItem];
+    _statusItemController.menu = _statusMenu;
 
     _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
     _preferencesMenuItem.title = NSLocalizedString(@"Preferences...", nil);
@@ -149,14 +149,14 @@
 
 - (void)syncDidStart:(NSNotification *)notification
 {
-    _statusItemView.isSyncing = YES;
+    _statusItemController.isSyncing = YES;
 }
 
 - (void)syncDidFinish:(NSNotification *)notification
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        _statusItemView.isSyncing = NO;
+        _statusItemController.isSyncing = NO;
         _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
 
         if ([NSUserNotification class] && [NSUserNotificationCenter class])
