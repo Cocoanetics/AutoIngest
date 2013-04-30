@@ -154,7 +154,7 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 - (NSImage *)imageForFrameNumber:(int)frameNumber
 {
 	NSString *name = [NSString stringWithFormat:@"AutoIngest Animation %02d Template.pdf", (int)frameNumber]; // Apple recommends to include the filename extension. 
-	NSImage *image = [NSImage imageNamed:name]; // FIXME: Implement caching.
+	NSImage *image = [NSImage imageNamed:name];
 	
 	return image;
 }
