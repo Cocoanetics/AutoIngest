@@ -14,7 +14,6 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 // Rename to StatusItemController
 @interface StatusItemView () <NSMenuDelegate>
 
-@property (nonatomic, strong) NSImage *image;
 @property (nonatomic) BOOL isMenuVisible;
 
 @end
@@ -36,13 +35,14 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 	
 	if (self != nil) {
 		_currentFrame = 0;
-		
+
+		NSImage *image = [self imageForFrameNumber:_currentFrame];
+
 		_statusItem = statusItem;
+		_statusItem.image = image;
+        _statusItem.highlightMode = YES;
 		_statusItem.target = self;
 		_statusItem.action = @selector(statusItemClicked:);
-		
-		NSImage *image = [self imageForFrameNumber:_currentFrame];
-		self.image = image;
 
 		//[self startAnimating];
 	}
@@ -131,7 +131,7 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 	
 	if (image != nil)
 	{
-		self.image = image;
+		_statusItem.image = image;
 	}
 }
 
@@ -141,17 +141,6 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 	NSImage *image = [NSImage imageNamed:name]; // FIXME: Implement caching.
 	
 	return image;
-}
-
-#pragma mark -
-#pragma mark Properties
-- (void)setImage:(NSImage *)newImage
-{
-    if (_image != newImage) {
-        _image = newImage;
-		_statusItem.image = _image;
-        _statusItem.highlightMode = YES;
-    }
 }
 
 @end
