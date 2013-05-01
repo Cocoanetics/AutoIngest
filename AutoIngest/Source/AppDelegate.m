@@ -11,8 +11,7 @@
 #import "PreferencesWindowController.h"
 #import "DTITCReportManager.h"
 
-#import "StatusItemView.h"
-#import "ReportDownloadFolderMonitor.h"
+#import "StatusItemController.h"
 
 
 @interface AppDelegate ()
@@ -27,7 +26,7 @@
 
 @implementation AppDelegate
 {
-	NSStatusItem *_statusItem;
+	StatusItemController *_statusItemController;
 	PreferencesWindowController *_preferencesController;
 }
 
@@ -56,11 +55,9 @@
 - (void)awakeFromNib
 {
     NSStatusBar *systemStatusBar = [NSStatusBar systemStatusBar];
-	_statusItem = [systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
-    StatusItemView *statusItemView = [[StatusItemView alloc] initWithFrame:CGRectMake(0, 0, systemStatusBar.thickness, systemStatusBar.thickness)];
-	statusItemView.statusItem = _statusItem;
-    statusItemView.menu = _statusMenu;
-    [_statusItem setView:statusItemView];
+	NSStatusItem *statusItem = [systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
+    _statusItemController = [[StatusItemController alloc] initWithStatusItem:statusItem];
+    _statusItemController.menu = _statusMenu;
 
     _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
     _preferencesMenuItem.title = NSLocalizedString(@"Preferences...", nil);
@@ -83,8 +80,6 @@
 	{
 		[reportManager startAutoSyncTimer];
 	}
-
-    [[ReportDownloadFolderMonitor sharedMonitor] startMonitoring];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
@@ -122,8 +117,7 @@
 
 - (void)quitApplication:(id)sender
 {
-    [[ReportDownloadFolderMonitor sharedMonitor] stopMonitoring];
-    [NSApp quitApplication:sender];
+	[NSApp quitApplication:sender];
 }
 
 - (void)showPreferences:(id)sender
@@ -155,16 +149,14 @@
 
 - (void)syncDidStart:(NSNotification *)notification
 {
-    StatusItemView *statusItemView = (StatusItemView *)_statusItem.view;
-    statusItemView.isSyncing = YES;
+    _statusItemController.isSyncing = YES;
 }
 
 - (void)syncDidFinish:(NSNotification *)notification
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        StatusItemView *statusItemView = (StatusItemView *)_statusItem.view;
-        statusItemView.isSyncing = NO;
+        _statusItemController.isSyncing = NO;
         _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
 
         if ([NSUserNotification class] && [NSUserNotificationCenter class])
