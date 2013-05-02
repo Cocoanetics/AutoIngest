@@ -41,7 +41,7 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 		_statusItem.image = image;
         _statusItem.highlightMode = YES;
 
-		_menu = menu;
+		self.menu = menu;
 
 		//[self startAnimating];
 	}
