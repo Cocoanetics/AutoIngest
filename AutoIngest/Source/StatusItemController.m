@@ -28,7 +28,7 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 #pragma mark -
 #pragma mark Object livecycle
 
-- (id)initWithStatusItem:(NSStatusItem *)statusItem
+- (id)initWithStatusItem:(NSStatusItem *)statusItem menu:(NSMenu *)menu;
 {
 	self = [super init];
 	
@@ -40,6 +40,8 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 		_statusItem = statusItem;
 		_statusItem.image = image;
         _statusItem.highlightMode = YES;
+
+		_menu = menu;
 
 		//[self startAnimating];
 	}

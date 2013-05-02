@@ -56,8 +56,7 @@
 {
     NSStatusBar *systemStatusBar = [NSStatusBar systemStatusBar];
 	NSStatusItem *statusItem = [systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
-    _statusItemController = [[StatusItemController alloc] initWithStatusItem:statusItem];
-    _statusItemController.menu = _statusMenu;
+    _statusItemController = [[StatusItemController alloc] initWithStatusItem:statusItem menu:_statusMenu];
 
     _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
     _preferencesMenuItem.title = NSLocalizedString(@"Preferences...", nil);
