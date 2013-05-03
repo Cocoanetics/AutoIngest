@@ -17,6 +17,6 @@ extern NSString * const AIMenuWillOpenNotification;
 @property (nonatomic, strong) NSStatusItem *statusItem;
 @property (nonatomic) BOOL isSyncing;
 
-- (id)initWithStatusItem:(NSStatusItem *)statusItem;
+- (id)initWithStatusItem:(NSStatusItem *)statusItem menu:(NSMenu *)menu;
 
 @end

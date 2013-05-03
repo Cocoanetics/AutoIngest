@@ -28,7 +28,7 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 #pragma mark -
 #pragma mark Object livecycle
 
-- (id)initWithStatusItem:(NSStatusItem *)statusItem
+- (id)initWithStatusItem:(NSStatusItem *)statusItem menu:(NSMenu *)menu;
 {
 	self = [super init];
 	
@@ -40,8 +40,8 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 		_statusItem = statusItem;
 		_statusItem.image = image;
         _statusItem.highlightMode = YES;
-		_statusItem.target = self;
-		_statusItem.action = @selector(statusItemClicked:);
+
+		_menu = menu;
 
 		//[self startAnimating];
 	}
@@ -51,17 +51,6 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 
 #pragma mark -
 #pragma mark Events
-
-- (IBAction)statusItemClicked:(id)sender;
-{
-	[self openMenu];
-}
-
-- (void)openMenu
-{
-	[self.menu setDelegate:self];
-	[self.statusItem popUpStatusItemMenu:self.menu];
-}
 
 - (void)menuWillOpen:(NSMenu *)menu
 {
@@ -78,8 +67,6 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 	{
 		[self startAnimating];
 	}
-	
-	[menu setDelegate:nil];
 	
 	self.isMenuVisible = NO;
 }
@@ -167,6 +154,21 @@ NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 	{
 		_statusItem.image = image;
 	}
+}
+
+#pragma mark -
+#pragma mark Properties
+
+- (void)setMenu:(NSMenu *)menu
+{
+    if (_menu != menu) {
+		[_menu setDelegate:nil];
+		
+        _menu = menu;
+		
+		[_statusItem setMenu:_menu];
+		[_menu setDelegate:self];
+    }
 }
 
 @end
