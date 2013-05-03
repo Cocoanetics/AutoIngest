@@ -65,6 +65,70 @@
 		A7415F3A172173650092F4F8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F39172173650092F4F8 /* Security.framework */; };
 		A7675E4A172E661900C548CB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7675E49172E661900C548CB /* SystemConfiguration.framework */; };
 		A7675E58172E6CA000C548CB /* DTReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A7675E57172E6CA000C548CB /* DTReachability.m */; };
+		A76B51051733B21E00807B82 /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E49172148450031058F /* PreferencesWindowController.m */; };
+		A76B51061733B21E00807B82 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E4E172148930031058F /* AppDelegate.m */; };
+		A76B51071733B21E00807B82 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E501721489A0031058F /* main.m */; };
+		A76B51081733B21E00807B82 /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F34172170EA0092F4F8 /* AccountManager.m */; };
+		A76B51091733B21E00807B82 /* GenericAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F36172170EA0092F4F8 /* GenericAccount.m */; };
+		A76B510A1733B21E00807B82 /* LastSyncDateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */; };
+		A76B510B1733B21E00807B82 /* StatusItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA477BA1723FDFB0048EACA /* StatusItemController.m */; };
+		A76B510C1733B21E00807B82 /* DTITCReportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */; };
+		A76B510D1733B21E00807B82 /* DTITCReportDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8C7881722D6BA00025675 /* DTITCReportDownloadOperation.m */; };
+		A76B510E1733B21E00807B82 /* AIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC53113172A65D4005D9183 /* AIApplication.m */; };
+		A76B510F1733B21E00807B82 /* DTReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A7675E57172E6CA000C548CB /* DTReachability.m */; };
+		A76B51111733B21E00807B82 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76B50F01733B1FB00807B82 /* Sparkle.framework */; };
+		A76B51121733B21E00807B82 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7675E49172E661900C548CB /* SystemConfiguration.framework */; };
+		A76B51131733B21E00807B82 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA477B71723FB4C0048EACA /* QuartzCore.framework */; };
+		A76B51141733B21E00807B82 /* libDTZipArchive_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7C5172317AD00025675 /* libDTZipArchive_Mac.a */; };
+		A76B51151733B21E00807B82 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */; };
+		A76B51161733B21E00807B82 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F39172173650092F4F8 /* Security.framework */; };
+		A76B51171733B21E00807B82 /* libITCReportDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F23172161E20092F4F8 /* libITCReportDownloader.a */; };
+		A76B51181733B21E00807B82 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7175E27172146EE0031058F /* Cocoa.framework */; };
+		A76B511A1733B21E00807B82 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7175E46172148390031058F /* PreferencesWindowController.xib */; };
+		A76B511B1733B21E00807B82 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7175E4B1721488A0031058F /* MainMenu.xib */; };
+		A76B511C1733B21E00807B82 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A7175E52172148AA0031058F /* Credits.rtf */; };
+		A76B511D1733B21E00807B82 /* Readme.markdown in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2A1721626A0092F4F8 /* Readme.markdown */; };
+		A76B511E1733B21E00807B82 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2B1721626A0092F4F8 /* LICENSE */; };
+		A76B511F1733B21E00807B82 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2F17216AE90092F4F8 /* Defaults.plist */; };
+		A76B51201733B21E00807B82 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DA477E4172481240048EACA /* InfoPlist.strings */; };
+		A76B51211733B21E00807B82 /* AutoIngest Animation 77 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E66E172FE2DC002F1C95 /* AutoIngest Animation 77 Template.pdf */; };
+		A76B51221733B21E00807B82 /* AutoIngest Animation 78 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E66F172FE2DC002F1C95 /* AutoIngest Animation 78 Template.pdf */; };
+		A76B51231733B21E00807B82 /* AutoIngest Animation 79 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E670172FE2DC002F1C95 /* AutoIngest Animation 79 Template.pdf */; };
+		A76B51241733B21E00807B82 /* AutoIngest Animation 80 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E671172FE2DC002F1C95 /* AutoIngest Animation 80 Template.pdf */; };
+		A76B51251733B21E00807B82 /* AutoIngest Animation 81 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E672172FE2DC002F1C95 /* AutoIngest Animation 81 Template.pdf */; };
+		A76B51261733B21E00807B82 /* AutoIngest Animation 82 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E673172FE2DC002F1C95 /* AutoIngest Animation 82 Template.pdf */; };
+		A76B51271733B21E00807B82 /* AutoIngest Animation 83 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E674172FE2DC002F1C95 /* AutoIngest Animation 83 Template.pdf */; };
+		A76B51281733B21E00807B82 /* AutoIngest Animation 84 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E675172FE2DC002F1C95 /* AutoIngest Animation 84 Template.pdf */; };
+		A76B51291733B21E00807B82 /* AutoIngest Animation 85 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E676172FE2DC002F1C95 /* AutoIngest Animation 85 Template.pdf */; };
+		A76B512A1733B21E00807B82 /* AutoIngest Animation 86 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E677172FE2DC002F1C95 /* AutoIngest Animation 86 Template.pdf */; };
+		A76B512B1733B21E00807B82 /* AutoIngest Animation 68 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E678172FE2DC002F1C95 /* AutoIngest Animation 68 Template.pdf */; };
+		A76B512C1733B21E00807B82 /* AutoIngest Animation 69 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E679172FE2DC002F1C95 /* AutoIngest Animation 69 Template.pdf */; };
+		A76B512D1733B21E00807B82 /* AutoIngest Animation 70 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67A172FE2DC002F1C95 /* AutoIngest Animation 70 Template.pdf */; };
+		A76B512E1733B21E00807B82 /* AutoIngest Animation 71 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67B172FE2DC002F1C95 /* AutoIngest Animation 71 Template.pdf */; };
+		A76B512F1733B21E00807B82 /* AutoIngest Animation 72 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67C172FE2DC002F1C95 /* AutoIngest Animation 72 Template.pdf */; };
+		A76B51301733B21E00807B82 /* AutoIngest Animation 73 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67D172FE2DC002F1C95 /* AutoIngest Animation 73 Template.pdf */; };
+		A76B51311733B21E00807B82 /* AutoIngest Animation 74 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67E172FE2DC002F1C95 /* AutoIngest Animation 74 Template.pdf */; };
+		A76B51321733B21E00807B82 /* AutoIngest Animation 75 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67F172FE2DC002F1C95 /* AutoIngest Animation 75 Template.pdf */; };
+		A76B51331733B21E00807B82 /* AutoIngest Animation 76 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E680172FE2DC002F1C95 /* AutoIngest Animation 76 Template.pdf */; };
+		A76B51341733B21E00807B82 /* AutoIngest Animation 49 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E681172FE2DC002F1C95 /* AutoIngest Animation 49 Template.pdf */; };
+		A76B51351733B21E00807B82 /* AutoIngest Animation 54 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E682172FE2DC002F1C95 /* AutoIngest Animation 54 Template.pdf */; };
+		A76B51361733B21E00807B82 /* AutoIngest Animation 59 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E683172FE2DC002F1C95 /* AutoIngest Animation 59 Template.pdf */; };
+		A76B51371733B21E00807B82 /* AutoIngest Animation 64 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E684172FE2DC002F1C95 /* AutoIngest Animation 64 Template.pdf */; };
+		A76B51381733B21E00807B82 /* AutoIngest Animation 65 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E685172FE2DC002F1C95 /* AutoIngest Animation 65 Template.pdf */; };
+		A76B51391733B21E00807B82 /* AutoIngest Animation 66 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E686172FE2DC002F1C95 /* AutoIngest Animation 66 Template.pdf */; };
+		A76B513A1733B21E00807B82 /* AutoIngest Animation 67 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E687172FE2DC002F1C95 /* AutoIngest Animation 67 Template.pdf */; };
+		A76B513B1733B21E00807B82 /* AutoIngest Animation 04 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E688172FE2DC002F1C95 /* AutoIngest Animation 04 Template.pdf */; };
+		A76B513C1733B21E00807B82 /* AutoIngest Animation 09 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E689172FE2DC002F1C95 /* AutoIngest Animation 09 Template.pdf */; };
+		A76B513D1733B21E00807B82 /* AutoIngest Animation 14 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68A172FE2DC002F1C95 /* AutoIngest Animation 14 Template.pdf */; };
+		A76B513E1733B21E00807B82 /* AutoIngest Animation 19 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68B172FE2DC002F1C95 /* AutoIngest Animation 19 Template.pdf */; };
+		A76B513F1733B21E00807B82 /* AutoIngest Animation 24 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68C172FE2DC002F1C95 /* AutoIngest Animation 24 Template.pdf */; };
+		A76B51401733B21E00807B82 /* AutoIngest Animation 29 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68D172FE2DC002F1C95 /* AutoIngest Animation 29 Template.pdf */; };
+		A76B51411733B21E00807B82 /* AutoIngest Animation 34 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68E172FE2DC002F1C95 /* AutoIngest Animation 34 Template.pdf */; };
+		A76B51421733B21E00807B82 /* AutoIngest Animation 39 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68F172FE2DC002F1C95 /* AutoIngest Animation 39 Template.pdf */; };
+		A76B51431733B21E00807B82 /* AutoIngest Animation 44 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E690172FE2DC002F1C95 /* AutoIngest Animation 44 Template.pdf */; };
+		A76B51441733B21E00807B82 /* AutoIngest Animation 00 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E691172FE2DC002F1C95 /* AutoIngest Animation 00 Template.pdf */; };
+		A76B514B1733B66200807B82 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A76B50F01733B1FB00807B82 /* Sparkle.framework */; };
+		A76B514E1733BF6B00807B82 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = A76B514D1733BF6B00807B82 /* dsa_pub.pem */; };
 		A7D8C7AE172316D900025675 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */; };
 		A7D8C7CE1723199300025675 /* libDTZipArchive_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7C5172317AD00025675 /* libDTZipArchive_Mac.a */; };
 		A7D8C7DF1723FD5D00025675 /* LastSyncDateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */; };
@@ -86,6 +150,62 @@
 			remoteInfo = Autoingest;
 		};
 		A7415F26172161EF0092F4F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7415F0E172161DD0092F4F8 /* TheMissingAPI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A7414AF614DFB5CB00E436DD;
+			remoteInfo = "Static Library";
+		};
+		A76B50EF1733B1FB00807B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = Sparkle;
+		};
+		A76B50F11733B1FB00807B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 61B5F90209C4CEE200B25A18;
+			remoteInfo = "Sparkle Test App";
+		};
+		A76B50F31733B1FB00807B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 612279D90DB5470200AB99EA;
+			remoteInfo = "Sparkle Unit Tests";
+		};
+		A76B50F51733B1FB00807B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D06E8D00FD68C7C005AE3F6;
+			remoteInfo = BinaryDelta;
+		};
+		A76B50F71733B1FB00807B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55C14BB7136EEF1500649790;
+			remoteInfo = finish_installation;
+		};
+		A76B50FF1733B21E00807B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = Sparkle;
+		};
+		A76B51011733B21E00807B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A7D8C7AF1723174600025675;
+			remoteInfo = "DTZipArchive (Mac)";
+		};
+		A76B51031733B21E00807B82 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A7415F0E172161DD0092F4F8 /* TheMissingAPI.xcodeproj */;
 			proxyType = 1;
@@ -171,6 +291,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A76B514A1733B65500807B82 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A76B514B1733B66200807B82 /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1DA477B71723FB4C0048EACA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1DA477B91723FDFA0048EACA /* StatusItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemController.h; sourceTree = "<group>"; };
@@ -243,6 +376,9 @@
 		A7675E49172E661900C548CB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A7675E56172E6CA000C548CB /* DTReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTReachability.h; sourceTree = "<group>"; };
 		A7675E57172E6CA000C548CB /* DTReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTReachability.m; sourceTree = "<group>"; };
+		A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sparkle.xcodeproj; path = Sparkle/Sparkle.xcodeproj; sourceTree = "<group>"; };
+		A76B51481733B21E00807B82 /* AutoIngest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoIngest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A76B514D1733BF6B00807B82 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		A7D8C7871722D6BA00025675 /* DTITCReportDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTITCReportDownloadOperation.h; path = AutoIngest/Source/DTITCReportDownloadOperation.h; sourceTree = SOURCE_ROOT; };
 		A7D8C7881722D6BA00025675 /* DTITCReportDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTITCReportDownloadOperation.m; path = AutoIngest/Source/DTITCReportDownloadOperation.m; sourceTree = SOURCE_ROOT; };
 		A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTFoundation.xcodeproj; path = DTFoundation/DTFoundation.xcodeproj; sourceTree = "<group>"; };
@@ -267,6 +403,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A76B51101733B21E00807B82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A76B51111733B21E00807B82 /* Sparkle.framework in Frameworks */,
+				A76B51121733B21E00807B82 /* SystemConfiguration.framework in Frameworks */,
+				A76B51131733B21E00807B82 /* QuartzCore.framework in Frameworks */,
+				A76B51141733B21E00807B82 /* libDTZipArchive_Mac.a in Frameworks */,
+				A76B51151733B21E00807B82 /* libz.1.2.5.dylib in Frameworks */,
+				A76B51161733B21E00807B82 /* Security.framework in Frameworks */,
+				A76B51171733B21E00807B82 /* libITCReportDownloader.a in Frameworks */,
+				A76B51181733B21E00807B82 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -285,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				A7175E24172146EE0031058F /* AutoIngest.app */,
+				A76B51481733B21E00807B82 /* AutoIngest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -332,6 +484,7 @@
 				A7175E46172148390031058F /* PreferencesWindowController.xib */,
 				A7415F2F17216AE90092F4F8 /* Defaults.plist */,
 				1DA477E4172481240048EACA /* InfoPlist.strings */,
+				A76B514D1733BF6B00807B82 /* dsa_pub.pem */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -360,6 +513,7 @@
 		A7415EFB172161DD0092F4F8 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */,
 				A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */,
 				A7415F0E172161DD0092F4F8 /* TheMissingAPI.xcodeproj */,
 			);
@@ -395,6 +549,18 @@
 				A7415F36172170EA0092F4F8 /* GenericAccount.m */,
 			);
 			name = "Cleanup for DTFoundation";
+			sourceTree = "<group>";
+		};
+		A76B50DE1733B1FA00807B82 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A76B50F01733B1FB00807B82 /* Sparkle.framework */,
+				A76B50F21733B1FB00807B82 /* Sparkle Test App.app */,
+				A76B50F41733B1FB00807B82 /* Sparkle Unit Tests.octest */,
+				A76B50F61733B1FB00807B82 /* BinaryDelta */,
+				A76B50F81733B1FB00807B82 /* finish_installation.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		A7D4A1A617286BF40042D0D1 /* Status Icon */ = {
@@ -490,6 +656,27 @@
 			productReference = A7175E24172146EE0031058F /* AutoIngest.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A76B50FD1733B21E00807B82 /* AutoIngest (Sparkle) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A76B51451733B21E00807B82 /* Build configuration list for PBXNativeTarget "AutoIngest (Sparkle)" */;
+			buildPhases = (
+				A76B51041733B21E00807B82 /* Sources */,
+				A76B51101733B21E00807B82 /* Frameworks */,
+				A76B51191733B21E00807B82 /* Resources */,
+				A76B514A1733B65500807B82 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A76B50FE1733B21E00807B82 /* PBXTargetDependency */,
+				A76B51001733B21E00807B82 /* PBXTargetDependency */,
+				A76B51021733B21E00807B82 /* PBXTargetDependency */,
+			);
+			name = "AutoIngest (Sparkle)";
+			productName = AutoIngest;
+			productReference = A76B51481733B21E00807B82 /* AutoIngest.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -516,6 +703,10 @@
 					ProjectRef = A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */;
 				},
 				{
+					ProductGroup = A76B50DE1733B1FA00807B82 /* Products */;
+					ProjectRef = A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */;
+				},
+				{
 					ProductGroup = A7415F1E172161E20092F4F8 /* Products */;
 					ProjectRef = A7415F0E172161DD0092F4F8 /* TheMissingAPI.xcodeproj */;
 				},
@@ -523,6 +714,7 @@
 			projectRoot = "";
 			targets = (
 				A7175E23172146EE0031058F /* AutoIngest */,
+				A76B50FD1733B21E00807B82 /* AutoIngest (Sparkle) */,
 			);
 		};
 /* End PBXProject section */
@@ -540,6 +732,41 @@
 			fileType = "compiled.mach-o.executable";
 			path = Autoingest;
 			remoteRef = A7415F24172161E20092F4F8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A76B50F01733B1FB00807B82 /* Sparkle.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Sparkle.framework;
+			remoteRef = A76B50EF1733B1FB00807B82 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A76B50F21733B1FB00807B82 /* Sparkle Test App.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Sparkle Test App.app";
+			remoteRef = A76B50F11733B1FB00807B82 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A76B50F41733B1FB00807B82 /* Sparkle Unit Tests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Sparkle Unit Tests.octest";
+			remoteRef = A76B50F31733B1FB00807B82 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A76B50F61733B1FB00807B82 /* BinaryDelta */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = BinaryDelta;
+			remoteRef = A76B50F51733B1FB00807B82 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A76B50F81733B1FB00807B82 /* finish_installation.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = finish_installation.app;
+			remoteRef = A76B50F71733B1FB00807B82 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		A7D8C799172316BE00025675 /* DTFoundation.framework */ = {
@@ -665,6 +892,57 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A76B51191733B21E00807B82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A76B511A1733B21E00807B82 /* PreferencesWindowController.xib in Resources */,
+				A76B511B1733B21E00807B82 /* MainMenu.xib in Resources */,
+				A76B511C1733B21E00807B82 /* Credits.rtf in Resources */,
+				A76B511D1733B21E00807B82 /* Readme.markdown in Resources */,
+				A76B511E1733B21E00807B82 /* LICENSE in Resources */,
+				A76B511F1733B21E00807B82 /* Defaults.plist in Resources */,
+				A76B51201733B21E00807B82 /* InfoPlist.strings in Resources */,
+				A76B51211733B21E00807B82 /* AutoIngest Animation 77 Template.pdf in Resources */,
+				A76B51221733B21E00807B82 /* AutoIngest Animation 78 Template.pdf in Resources */,
+				A76B51231733B21E00807B82 /* AutoIngest Animation 79 Template.pdf in Resources */,
+				A76B51241733B21E00807B82 /* AutoIngest Animation 80 Template.pdf in Resources */,
+				A76B51251733B21E00807B82 /* AutoIngest Animation 81 Template.pdf in Resources */,
+				A76B51261733B21E00807B82 /* AutoIngest Animation 82 Template.pdf in Resources */,
+				A76B51271733B21E00807B82 /* AutoIngest Animation 83 Template.pdf in Resources */,
+				A76B51281733B21E00807B82 /* AutoIngest Animation 84 Template.pdf in Resources */,
+				A76B51291733B21E00807B82 /* AutoIngest Animation 85 Template.pdf in Resources */,
+				A76B512A1733B21E00807B82 /* AutoIngest Animation 86 Template.pdf in Resources */,
+				A76B512B1733B21E00807B82 /* AutoIngest Animation 68 Template.pdf in Resources */,
+				A76B512C1733B21E00807B82 /* AutoIngest Animation 69 Template.pdf in Resources */,
+				A76B512D1733B21E00807B82 /* AutoIngest Animation 70 Template.pdf in Resources */,
+				A76B512E1733B21E00807B82 /* AutoIngest Animation 71 Template.pdf in Resources */,
+				A76B512F1733B21E00807B82 /* AutoIngest Animation 72 Template.pdf in Resources */,
+				A76B51301733B21E00807B82 /* AutoIngest Animation 73 Template.pdf in Resources */,
+				A76B51311733B21E00807B82 /* AutoIngest Animation 74 Template.pdf in Resources */,
+				A76B51321733B21E00807B82 /* AutoIngest Animation 75 Template.pdf in Resources */,
+				A76B51331733B21E00807B82 /* AutoIngest Animation 76 Template.pdf in Resources */,
+				A76B51341733B21E00807B82 /* AutoIngest Animation 49 Template.pdf in Resources */,
+				A76B51351733B21E00807B82 /* AutoIngest Animation 54 Template.pdf in Resources */,
+				A76B51361733B21E00807B82 /* AutoIngest Animation 59 Template.pdf in Resources */,
+				A76B51371733B21E00807B82 /* AutoIngest Animation 64 Template.pdf in Resources */,
+				A76B51381733B21E00807B82 /* AutoIngest Animation 65 Template.pdf in Resources */,
+				A76B51391733B21E00807B82 /* AutoIngest Animation 66 Template.pdf in Resources */,
+				A76B513A1733B21E00807B82 /* AutoIngest Animation 67 Template.pdf in Resources */,
+				A76B513B1733B21E00807B82 /* AutoIngest Animation 04 Template.pdf in Resources */,
+				A76B513C1733B21E00807B82 /* AutoIngest Animation 09 Template.pdf in Resources */,
+				A76B513D1733B21E00807B82 /* AutoIngest Animation 14 Template.pdf in Resources */,
+				A76B513E1733B21E00807B82 /* AutoIngest Animation 19 Template.pdf in Resources */,
+				A76B513F1733B21E00807B82 /* AutoIngest Animation 24 Template.pdf in Resources */,
+				A76B51401733B21E00807B82 /* AutoIngest Animation 29 Template.pdf in Resources */,
+				A76B51411733B21E00807B82 /* AutoIngest Animation 34 Template.pdf in Resources */,
+				A76B51421733B21E00807B82 /* AutoIngest Animation 39 Template.pdf in Resources */,
+				A76B51431733B21E00807B82 /* AutoIngest Animation 44 Template.pdf in Resources */,
+				A76B51441733B21E00807B82 /* AutoIngest Animation 00 Template.pdf in Resources */,
+				A76B514E1733BF6B00807B82 /* dsa_pub.pem in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -686,6 +964,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A76B51041733B21E00807B82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A76B51051733B21E00807B82 /* PreferencesWindowController.m in Sources */,
+				A76B51061733B21E00807B82 /* AppDelegate.m in Sources */,
+				A76B51071733B21E00807B82 /* main.m in Sources */,
+				A76B51081733B21E00807B82 /* AccountManager.m in Sources */,
+				A76B51091733B21E00807B82 /* GenericAccount.m in Sources */,
+				A76B510A1733B21E00807B82 /* LastSyncDateValueTransformer.m in Sources */,
+				A76B510B1733B21E00807B82 /* StatusItemController.m in Sources */,
+				A76B510C1733B21E00807B82 /* DTITCReportManager.m in Sources */,
+				A76B510D1733B21E00807B82 /* DTITCReportDownloadOperation.m in Sources */,
+				A76B510E1733B21E00807B82 /* AIApplication.m in Sources */,
+				A76B510F1733B21E00807B82 /* DTReachability.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -693,6 +989,21 @@
 			isa = PBXTargetDependency;
 			name = "Static Library";
 			targetProxy = A7415F26172161EF0092F4F8 /* PBXContainerItemProxy */;
+		};
+		A76B50FE1733B21E00807B82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Sparkle;
+			targetProxy = A76B50FF1733B21E00807B82 /* PBXContainerItemProxy */;
+		};
+		A76B51001733B21E00807B82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DTZipArchive (Mac)";
+			targetProxy = A76B51011733B21E00807B82 /* PBXContainerItemProxy */;
+		};
+		A76B51021733B21E00807B82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Static Library";
+			targetProxy = A76B51031733B21E00807B82 /* PBXContainerItemProxy */;
 		};
 		A7D8C7CD1723198F00025675 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -798,6 +1109,37 @@
 			};
 			name = Release;
 		};
+		A76B51461733B21E00807B82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AutoIngest/AutoIngest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SPARKLE=1",
+				);
+				INFOPLIST_FILE = "AutoIngest/AutoIngest-Info.plist";
+				PRODUCT_NAME = AutoIngest;
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader/Core\"/** \"${PROJECT_DIR}/Externals/DTFoundation/Core\"/**";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A76B51471733B21E00807B82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AutoIngest/AutoIngest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "SPARKLE=1";
+				INFOPLIST_FILE = "AutoIngest/AutoIngest-Info.plist";
+				PRODUCT_NAME = AutoIngest;
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader/Core\"/** \"${PROJECT_DIR}/Externals/DTFoundation/Core\"/**";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -815,6 +1157,15 @@
 			buildConfigurations = (
 				A7175E42172146EF0031058F /* Debug */,
 				A7175E43172146EF0031058F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A76B51451733B21E00807B82 /* Build configuration list for PBXNativeTarget "AutoIngest (Sparkle)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A76B51461733B21E00807B82 /* Debug */,
+				A76B51471733B21E00807B82 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
