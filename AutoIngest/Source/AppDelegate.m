@@ -105,6 +105,7 @@
 
 #if SPARKLE
 	_sparkle = [[SUUpdater alloc] init];
+	[_sparkle setDelegate:self];
 #endif
 }
 
@@ -216,6 +217,15 @@
             [center deliverNotification:note];
         }
     });
+}
+
+#pragma mark - NSApplication Delegate
+
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
+{
+	[[DTITCReportManager sharedManager] stopSync];
+	
+	return NSTerminateNow;
 }
 
 
