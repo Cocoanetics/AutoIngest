@@ -11,8 +11,11 @@
 #import "PreferencesWindowController.h"
 #import "DTITCReportManager.h"
 
-#import "StatusItemView.h"
+#import "StatusItemController.h"
 
+#if SPARKLE
+#import <Sparkle/Sparkle.h>
+#endif
 
 @interface AppDelegate ()
 
@@ -26,8 +29,11 @@
 
 @implementation AppDelegate
 {
-	NSStatusItem *_statusItem;
+	StatusItemController *_statusItemController;
 	PreferencesWindowController *_preferencesController;
+	
+	// Sparkle
+	id _sparkle;
 }
 
 
@@ -55,11 +61,8 @@
 - (void)awakeFromNib
 {
     NSStatusBar *systemStatusBar = [NSStatusBar systemStatusBar];
-	_statusItem = [systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
-    StatusItemView *statusItemView = [[StatusItemView alloc] initWithFrame:CGRectMake(0, 0, systemStatusBar.thickness, systemStatusBar.thickness)];
-	statusItemView.statusItem = _statusItem;
-    statusItemView.menu = _statusMenu;
-    [_statusItem setView:statusItemView];
+	NSStatusItem *statusItem = [systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
+    _statusItemController = [[StatusItemController alloc] initWithStatusItem:statusItem menu:_statusMenu];
 
     _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
     _preferencesMenuItem.title = NSLocalizedString(@"Preferences...", nil);
@@ -82,12 +85,29 @@
 	{
 		[reportManager startAutoSyncTimer];
 	}
+	
+	[self _startSparkleIfAvailable];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+#pragma mark - Sparkle
+
+- (void) _startSparkleIfAvailable
+{
+	if (!NSClassFromString(@"SUUpdater"))
+	{
+		return;
+	}
+
+#if SPARKLE
+	_sparkle = [[SUUpdater alloc] init];
+#endif
+}
+
 
 #pragma mark - Actions
 
@@ -127,10 +147,20 @@
 	if (!_preferencesController)
 	{
 		_preferencesController = [[PreferencesWindowController alloc] initWithWindowNibName:@"PreferencesWindowController"];
+		
+		if (_sparkle)
+		{
+			_preferencesController.sparkleEnabled = YES;
+		}
 	}
 	
 	[_preferencesController showWindow:sender];
     [_preferencesController.window orderFrontRegardless];
+}
+
+- (void)checkForUpdates:(id)sender
+{
+	[_sparkle checkForUpdates:sender];
 }
 
 #pragma mark - Notifications
@@ -151,16 +181,14 @@
 
 - (void)syncDidStart:(NSNotification *)notification
 {
-    StatusItemView *statusItemView = (StatusItemView *)_statusItem.view;
-    statusItemView.isSyncing = YES;
+    _statusItemController.isSyncing = YES;
 }
 
 - (void)syncDidFinish:(NSNotification *)notification
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        StatusItemView *statusItemView = (StatusItemView *)_statusItem.view;
-        statusItemView.isSyncing = NO;
+        _statusItemController.isSyncing = NO;
         _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
 
         if ([NSUserNotification class] && [NSUserNotificationCenter class])
