@@ -20,6 +20,8 @@ xcodebuild {
         configuration = 'Release'
 }
 
+
+
 task('sparkle-notes') {
 	if (project.hasProperty('notes')) {
 		def notes = project['notes']
@@ -42,9 +44,22 @@ task('sparkle-notes') {
 }
 
 task sparkleZip(dependsOn:'xcodebuild') {
+	def directory = project.xcodebuild.symRoot.absolutePath + '/' + project.xcodebuild.configuration + '/AutoIngest.app/Contents'
+	
+	def outputDirectory = ".";
+	if (project.hasProperty('sparkle.output')) {
+		outputDirectory = project['sparkle.output'];
+	}
+	
 	doLast {
- 		def buildOutputDirectory = new File(project.xcodebuild.symRoot, project.xcodebuild.configuration)
 		def ant = new groovy.util.AntBuilder()
-		ant.zip(destfile: "AutoIngest.zip",	basedir: buildOutputDirectory, includes: "AutoIngest.app/**")
+		ant.zip(destfile: outputDirectory + "/AutoIngest.zip") {
+			zipfileset ( prefix:"AutoIngest.app/Contents/", dir: directory, excludes : "MacOS/*", includes : "*/**");
+			zipfileset ( prefix:"AutoIngest.app/Contents/MacOS", dir: directory + "/MacOS", includes : "*", filemode : 755);
+		}
+		
+		ant.move(file: "releasenotes.html",  todir: outputDirectory)
+	  
 	}
 }
+
