@@ -81,7 +81,7 @@
         return;
     }
 
-    ReportFolderClassifier *folderClassifier = [[ReportFolderClassifier alloc] initWithBasePath:_downloadFolder];
+    ReportFolderClassifier *folderClassifier = [[ReportFolderClassifier alloc] initWithBasePath:folder];
     for (NSURL *path in contents)
     {
         if ([self urlIsDirectory:path]) continue;
@@ -90,7 +90,13 @@
         if ([ReportInformation isFileNameAReport:fileName])
         {
             NSString *destination = [folderClassifier pathForReportFileName:fileName];
-            NSLog(@"File %@ will be moved to %@", fileName, destination);
+            if (![self createDirectoryIfNeeded:destination]) continue;
+
+            NSURL *destFile = [[NSURL fileURLWithPath:destination] URLByAppendingPathComponent:fileName];
+            if (![fileManager fileExistsAtPath:[destFile path]])
+            {
+                [self moveFileAtURL:path toURL:destFile];
+            }
         }
     }
 
@@ -130,6 +136,33 @@
     if (error)
     {
         NSLog(@"Error getting %@ from %@: %@", key, url, error);
+    }
+}
+
+- (BOOL)createDirectoryIfNeeded:(NSString *)directory
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL createdOrAlreadyExists = [fileManager fileExistsAtPath:directory];
+    if (!createdOrAlreadyExists)
+    {
+        NSError *createDirError;
+        createdOrAlreadyExists = [fileManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&createDirError];
+        if (createDirError)
+        {
+            NSLog(@"Couldn't create directory '%@'. Cause: %@", directory, createDirError);
+            createdOrAlreadyExists = NO;
+        }
+    }
+    return createdOrAlreadyExists;
+}
+
+- (void)moveFileAtURL:(NSURL *)file toURL:(NSURL *)destination
+{
+    NSError *error;
+    [[NSFileManager defaultManager] moveItemAtURL:file toURL:destination error:&error];
+    if (error)
+    {
+        NSLog(@"Error moving file to %@. Cause: %@", destination, error);
     }
 }
 
