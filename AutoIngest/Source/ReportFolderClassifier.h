@@ -12,6 +12,6 @@
 @property (nonatomic, copy) NSString *basePath;
 
 - (id)initWithBasePath:(NSString *)basePath;
-- (NSString *)pathForReportFileName:(NSString *)filename;
+- (NSString *)pathForReportFileName:(NSString *)fileName;
 
 @end

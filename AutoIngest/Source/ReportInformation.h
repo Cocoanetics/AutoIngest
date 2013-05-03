@@ -9,7 +9,8 @@
 
 @interface ReportInformation : NSObject
 
-+ (ReportInformation *)reportInformationFromFilename:(NSString *)filename;
++ (BOOL)isFileNameAReport:(NSString *)fileName;
++ (ReportInformation *)reportInformationFromFileName:(NSString *)fileName;
 
 @property (nonatomic) ITCReportType type;
 @property (nonatomic) ITCReportSubType subType;

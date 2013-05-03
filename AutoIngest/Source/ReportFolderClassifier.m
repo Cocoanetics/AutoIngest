@@ -23,10 +23,10 @@
     return self;
 }
 
-- (NSString *)pathForReportFileName:(NSString *)filename
+- (NSString *)pathForReportFileName:(NSString *)fileName
 {
     NSString *path;
-    ReportInformation *reportInfo = [ReportInformation reportInformationFromFilename:filename];
+    ReportInformation *reportInfo = [ReportInformation reportInformationFromFileName:fileName];
     if (reportInfo)
     {
         path = [self.basePath stringByAppendingFormat:@"%li/%@/%@/%@/",

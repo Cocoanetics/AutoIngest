@@ -5,11 +5,12 @@
 
 
 #import "ReportOrganizer.h"
+#import "ReportInformation.h"
+#import "ReportFolderClassifier.h"
 
 
 @implementation ReportOrganizer {
     NSString *_downloadFolder;
-    BOOL _isOrganizing;
     NSOperationQueue *_queue;
 }
 
@@ -59,8 +60,7 @@
     if ([_queue operationCount] > 0) return;
 
     __weak ReportOrganizer *weakSelf = self;
-    [_queue addOperationWithBlock:^
-    {
+    [_queue addOperationWithBlock:^{
         [weakSelf _organizeFolder:[_downloadFolder copy]];
     }];
 }
@@ -71,15 +71,29 @@
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error = nil;
-    NSArray *contents = [fileManager contentsOfDirectoryAtPath:folder error:&error];
+    NSArray *contents = [fileManager contentsOfDirectoryAtURL:[[NSURL alloc] initWithString:folder]
+                                   includingPropertiesForKeys:@[NSURLIsDirectoryKey, NSURLNameKey]
+                                                      options:NSDirectoryEnumerationSkipsHiddenFiles
+                                                        error:&error];
     if (error)
     {
         NSLog(@"Couldn't get contents of directory '%@'. Error %@", folder, error);
         return;
     }
 
-    NSLog(@"%@ - contents %@", [NSDate date], contents);
-    // TODO do the organization
+    ReportFolderClassifier *folderClassifier = [[ReportFolderClassifier alloc] initWithBasePath:_downloadFolder];
+    for (NSURL *path in contents)
+    {
+        if ([self urlIsDirectory:path]) continue;
+
+        NSString *fileName = [self fileNameForURL:path];
+        if ([ReportInformation isFileNameAReport:fileName])
+        {
+            NSString *destination = [folderClassifier pathForReportFileName:fileName];
+            NSLog(@"File %@ will be moved to %@", fileName, destination);
+        }
+    }
+
 }
 
 - (void)defaultsDidUpdate:(NSNotification *)notification
@@ -92,5 +106,31 @@
     }
 }
 
+
+#pragma mark - Private Methods
+
+- (BOOL)urlIsDirectory:(NSURL *)url
+{
+    NSNumber *isDirectory;
+    [self value:&isDirectory inURL:url key:NSURLIsDirectoryKey];
+    return [isDirectory boolValue];
+}
+
+- (NSString *)fileNameForURL:(NSURL *)url
+{
+    NSString *name;
+    [self value:&name inURL:url key:NSURLNameKey];
+    return name;
+}
+
+- (void)value:(out id *)value inURL:(NSURL *)url key:(NSString *)key
+{
+    NSError *error;
+    [url getResourceValue:value forKey:key error:&error];
+    if (error)
+    {
+        NSLog(@"Error getting %@ from %@: %@", key, url, error);
+    }
+}
 
 @end
