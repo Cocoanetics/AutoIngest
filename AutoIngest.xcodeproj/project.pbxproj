@@ -1129,12 +1129,14 @@
 		A76B51471733B21E00807B82 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application: Drobnik KG";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AutoIngest/AutoIngest-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "SPARKLE=1";
 				INFOPLIST_FILE = "AutoIngest/AutoIngest-Info.plist";
 				PRODUCT_NAME = AutoIngest;
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader/Core\"/** \"${PROJECT_DIR}/Externals/DTFoundation/Core\"/**";
 				WRAPPER_EXTENSION = app;
 			};

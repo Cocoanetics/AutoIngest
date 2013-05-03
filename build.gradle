@@ -15,4 +15,5 @@ apply plugin: 'xcode'
 xcodebuild {
 	sdk = 'macosx'
 	target = 'AutoIngest (Sparkle)'
+        configuration = 'Release'
 }
