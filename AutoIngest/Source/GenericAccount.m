@@ -25,8 +25,8 @@
 	NSString *_pk_service;
 }
 
-@property(nonatomic, retain) NSString *pk_account;
-@property(nonatomic, retain) NSString *pk_service;
+@property(nonatomic, strong) NSString *pk_account;
+@property(nonatomic, strong) NSString *pk_service;
 
 @end
 
