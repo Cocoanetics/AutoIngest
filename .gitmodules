@@ -4,3 +4,6 @@
 [submodule "Externals/DTFoundation"]
 	path = Externals/DTFoundation
 	url = https://github.com/Cocoanetics/DTFoundation.git
+[submodule "Externals/Sparkle"]
+	path = Externals/Sparkle
+	url = https://github.com/ryanmaxwell/Sparkle.git
