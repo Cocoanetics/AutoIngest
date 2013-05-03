@@ -56,6 +56,7 @@ task sparkleZip(dependsOn:'xcodebuild') {
 		ant.zip(destfile: outputDirectory + "/AutoIngest.zip") {
 			zipfileset ( prefix:"AutoIngest.app/Contents/", dir: directory, excludes : "MacOS/*", includes : "*/**");
 			zipfileset ( prefix:"AutoIngest.app/Contents/MacOS", dir: directory + "/MacOS", includes : "*", filemode : 755);
+			zipfileset ( prefix:"AutoIngest.app/Contents/Frameworks/Sparkle.framework/Resources/finish_installation.app/Contents/MacOS", dir: directory + "/Frameworks/Sparkle.framework/Resources/finish_installation.app/Contents/MacOS/", includes : "*", filemode : 755);
 		}
 		
 		ant.move(file: "releasenotes.html",  todir: outputDirectory)
