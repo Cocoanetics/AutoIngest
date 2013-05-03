@@ -1,3 +1,5 @@
+import org.pegdown.PegDownProcessor
+
 buildscript {
     repositories {
 				maven {
@@ -16,4 +18,26 @@ xcodebuild {
 	sdk = 'macosx'
 	target = 'AutoIngest (Sparkle)'
         configuration = 'Release'
+}
+
+task('sparkle-notes') {
+	if (project.hasProperty('notes')) {
+		def notes = project['notes']
+
+		def matcher = notes =~ /^\s*"(.*)"$/
+
+		if (notes ==~ /^<\w+>.*<\/\w+>$/) {
+			notes = notes;
+		} else {
+			// convert markdown
+			PegDownProcessor pegDownProcessor = new PegDownProcessor();
+			notes = pegDownProcessor.markdownToHtml(notes)
+		}
+		String html = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><title>Release Notes</title></head><body>" + notes + "</body></html>";
+		new File("releasenotes.html").write(html, "UTF-8");
+
+	} else {
+		println "No notes found"
+	}
+
 }
