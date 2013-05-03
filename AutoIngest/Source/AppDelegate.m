@@ -219,14 +219,17 @@
     });
 }
 
-#pragma mark - NSApplication Delegate
+#pragma mark - Sparkle Delegate
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
-	[[DTITCReportManager sharedManager] stopSync];
-	
+	NSLog(@"should terminate");
 	return NSTerminateNow;
 }
 
+- (void)updaterWillRelaunchApplication:(id)updater
+{
+	NSLog(@"updater will relaunch");
+}
 
 @end
