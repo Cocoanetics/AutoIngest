@@ -31,7 +31,7 @@
 	<key>NSPrincipalClass</key>
 	<string>AIApplication</string>
 	<key>SUFeedURL</key>
-	<string>http://beta.cocoanetics.com/AutoIngest/appcast.xml</string>
+	<string>http://beta.cocoanetics.com/Cocoanetics/com.cocoanetics.AutoIngest/appcast.xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
 </dict>
