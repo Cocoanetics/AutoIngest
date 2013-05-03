@@ -24,12 +24,12 @@
 	<string>1</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
+	<key>LSUIElement</key>
+	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>AIApplication</string>
-	<key>LSUIElement</key>
-	<true/>
 	<key>SUFeedURL</key>
 	<string>http://beta.cocoanetics.com/AutoIngest/appcast.xml</string>
 	<key>SUPublicDSAKeyFile</key>

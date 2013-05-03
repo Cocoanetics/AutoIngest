@@ -13,7 +13,9 @@
 
 #import "StatusItemController.h"
 
+#if SPARKLE
 #import <Sparkle/Sparkle.h>
+#endif
 
 @interface AppDelegate ()
 
