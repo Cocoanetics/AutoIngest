@@ -9,6 +9,7 @@
 #import "DTITCReportDownloadOperation.h"
 #import "GenericAccount.h"
 #import "DTZipArchive.h"
+#import "ReportFolderClassifier.h"
 
 @implementation DTITCReportDownloadOperation
 {
@@ -49,7 +50,7 @@
 - (BOOL)_alreadyDownloadedReportForDate:(NSDate *)reportDate reportType:(ITCReportType)reportType reportDateType:(ITCReportDateType)reportDateType reportSubType:(ITCReportSubType)reportSubType
 {
 	NSAssert(_downloader, @"Need a downloader set");
-	
+
 	NSString *predictedZippedName = [_downloader predictedFileNameForDate:reportDate
 																		 reportType:_reportType
 																	reportDateType:_reportDateType
@@ -61,10 +62,15 @@
 																			reportDateType:_reportDateType
 																			 reportSubType:_reportSubType
 																				 compressed:NO];
-	
-	NSString *predictedZippedOutputPath = [_reportFolder stringByAppendingPathComponent:predictedZippedName];
-	NSString *predictedUnzippedOutputPath = [_reportFolder stringByAppendingPathComponent:predictedUnzippedName];
-	
+	NSString *folder = _reportFolder;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldAutoOrganizeReportsKey])
+    {
+        folder = [[[ReportFolderClassifier alloc] initWithBasePath:folder] pathForReportFileName:predictedZippedName];
+    }
+
+	NSString *predictedZippedOutputPath = [folder stringByAppendingPathComponent:predictedZippedName];
+	NSString *predictedUnzippedOutputPath = [folder stringByAppendingPathComponent:predictedUnzippedName];
+
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	
 	if ([fileManager fileExistsAtPath:predictedZippedOutputPath])

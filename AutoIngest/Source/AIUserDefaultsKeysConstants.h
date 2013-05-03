@@ -7,5 +7,6 @@
 static NSString *const AIUserDefaultsDownloadFolderPathKey = @"DownloadFolderPath";
 static NSString *const AIUserDefaultsLastSuccessfulSyncDateKey = @"DownloadLastSuccessfulSync";
 static NSString *const AIUserDefaultsShouldAutoSyncKey = @"DownloadAutoSync";
+static NSString *const AIUserDefaultsShouldAutoOrganizeReportsKey = @"ShouldAutoOrganizeReports";
 static NSString *const AIUserDefaultsShouldUncompressReportsKey = @"UncompressReports";
 static NSString *const AIUserDefaultsVendoIDKey = @"DownloadVendorID";

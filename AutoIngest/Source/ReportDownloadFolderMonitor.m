@@ -95,6 +95,12 @@ void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCallBackIn
     });
 }
 
+- (BOOL)isMonitoring
+{
+    return _isMonitoring;
+}
+
+
 #pragma - Private Methods
     
 - (void)defaultsDidUpdate:(NSNotification *)notification
@@ -106,7 +112,6 @@ void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCallBackIn
 
         if (![_downloadFolder isEqualToString:reportFolder])
         {
-            NSLog(@"ReportDownloadFolderMonitor: Download Folder changed to %@", reportFolder);
             _downloadFolder = reportFolder;
             if (_isMonitoring)
             {

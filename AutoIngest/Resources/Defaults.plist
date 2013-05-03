@@ -18,5 +18,7 @@
 	<false/>
 	<key>UncompressReports</key>
 	<false/>
+	<key>ShouldAutoOrganizeReports</key>
+	<false/>
 </dict>
 </plist>
