@@ -13,6 +13,7 @@
 
 #import "StatusItemController.h"
 
+#import <Sparkle/Sparkle.h>
 
 @interface AppDelegate ()
 
@@ -28,6 +29,9 @@
 {
 	StatusItemController *_statusItemController;
 	PreferencesWindowController *_preferencesController;
+	
+	// Sparkle
+	id _sparkle;
 }
 
 
@@ -79,12 +83,29 @@
 	{
 		[reportManager startAutoSyncTimer];
 	}
+	
+	[self _startSparkleIfAvailable];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+#pragma mark - Sparkle
+
+- (void) _startSparkleIfAvailable
+{
+	if (!NSClassFromString(@"SUUpdater"))
+	{
+		return;
+	}
+
+#if SPARKLE
+	_sparkle = [[SUUpdater alloc] init];
+#endif
+}
+
 
 #pragma mark - Actions
 
@@ -124,10 +145,20 @@
 	if (!_preferencesController)
 	{
 		_preferencesController = [[PreferencesWindowController alloc] initWithWindowNibName:@"PreferencesWindowController"];
+		
+		if (_sparkle)
+		{
+			_preferencesController.sparkleEnabled = YES;
+		}
 	}
 	
 	[_preferencesController showWindow:sender];
     [_preferencesController.window orderFrontRegardless];
+}
+
+- (void)checkForUpdates:(id)sender
+{
+	[_sparkle checkForUpdates:sender];
 }
 
 #pragma mark - Notifications

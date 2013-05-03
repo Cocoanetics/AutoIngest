@@ -42,6 +42,21 @@
     return self;
 }
 
+- (void)awakeFromNib
+{
+	// set version
+	NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+	
+	NSString *marketingVersion = infoDictionary[@"CFBundleShortVersionString"];
+	NSString *buildVersion = infoDictionary[@"CFBundleVersion"];
+	
+	NSString *version = [NSString stringWithFormat:@"Version %@ (%@)", marketingVersion, buildVersion];
+	self.versionLabel.stringValue = version;
+	
+	// enable update button if we have Sparkle
+	[self.updateButton setEnabled:self.sparkleEnabled];
+}
+
 - (void)_createAccountIfNecessary
 {
     if (_account)
