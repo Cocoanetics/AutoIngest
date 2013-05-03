@@ -44,7 +44,7 @@ task('sparkle-notes') {
 task sparkleZip(dependsOn:'xcodebuild') {
 	doLast {
  		def buildOutputDirectory = new File(project.xcodebuild.symRoot, project.xcodebuild.configuration)
-		def ant = new groovy.util.AntBuilder()
-		ant.zip(destfile: "AutoIngest.zip",	basedir: buildOutputDirectory, includes: "AutoIngest.app")
+		def ant = new groovy.util.+()
+		ant.zip(destfile: "AutoIngest.zip",	basedir: buildOutputDirectory, includes: "AutoIngest.app/**")
 	}
 }
