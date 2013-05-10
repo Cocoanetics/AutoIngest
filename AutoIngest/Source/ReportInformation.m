@@ -1,25 +1,25 @@
 //
+//  ReportInformation.h
+//  AutoIngest
+//
 //  Created by Felipe Cypriano on 22/04/13.
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
-
 
 #import "ReportInformation.h"
 
 static NSString *const kCheckFileNameIsAReportRegexPattern = @"(S|O_S|N_D)_(D|W|M|Y)_(\\d{8})_(\\d{4,8})\\.(txt(\\.gz)?)";
 static NSString *const kObtainReportDataFromFileNameRegexPattern = @"(S|O_S|N_D)_(D|W|M|Y)_(\\d{8})";
 
-@implementation ReportInformation {
-
-}
-
 static NSCache *_cache;
+
+
+@implementation ReportInformation
 
 + (void)initialize
 {
     _cache = [[NSCache alloc] init];
 }
-
 
 + (BOOL)isFileNameAReport:(NSString *)fileName
 {
@@ -39,7 +39,6 @@ static NSCache *_cache;
     NSRange range = NSMakeRange(0, [fileName length]);
     return [regex numberOfMatchesInString:fileName options:0 range:range] > 0;
 }
-
 
 + (ReportInformation *)reportInformationFromFileName:(NSString *)fileName
 {

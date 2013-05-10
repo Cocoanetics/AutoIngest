@@ -1,15 +1,17 @@
 //
+//  ReportOrganizer.m
+//  AutoIngest
+//
 //  Created by Felipe Cypriano on 30/04/13.
+//  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
-//
-
 
 #import "ReportOrganizer.h"
 #import "ReportInformation.h"
 #import "ReportFolderClassifier.h"
 
-
-@implementation ReportOrganizer {
+@implementation ReportOrganizer
+{
     NSString *_downloadFolder;
     NSOperationQueue *_queue;
 }
@@ -21,6 +23,7 @@
     dispatch_once(&token, ^{
         sharedInstance = [[ReportOrganizer alloc] initPrivate];
     });
+	
     return sharedInstance;
 }
 
@@ -57,7 +60,11 @@
 
 - (void)organizeAllReports
 {
-    if ([_queue operationCount] > 0) return;
+    if ([_queue operationCount])
+	{
+		// organizing already going on
+		return;
+	}
 
     __weak ReportOrganizer *weakSelf = self;
     [_queue addOperationWithBlock:^{
@@ -84,18 +91,33 @@
     ReportFolderClassifier *folderClassifier = [[ReportFolderClassifier alloc] initWithBasePath:folder];
     for (NSURL *path in contents)
     {
-        if ([self urlIsDirectory:path]) continue;
+        if ([self _urlIsDirectory:path])
+		{
+			// we don't care about folders
+			continue;
+		}
 
         NSString *fileName = [self fileNameForURL:path];
+		
         if ([ReportInformation isFileNameAReport:fileName])
         {
             NSString *destination = [folderClassifier pathForReportFileName:fileName];
-            if (![self createDirectoryIfNeeded:destination]) continue;
+			
+            if (![self _createDirectoryIfNeeded:destination])
+			{
+				continue;
+			}
 
             NSURL *destFile = [[NSURL fileURLWithPath:destination] URLByAppendingPathComponent:fileName];
-            if (![fileManager fileExistsAtPath:[destFile path]])
+			
+            if ([fileManager fileExistsAtPath:[destFile path]])
+			{
+				NSLog(@"Report Cannot move %@ to %@ as there already exists a report there", fileName, destination);
+			}
+			else
             {
-                [self moveFileAtURL:path toURL:destFile];
+				// move the report into the structure
+                [self _moveFileAtURL:path toURL:destFile];
             }
         }
     }
@@ -115,31 +137,34 @@
 
 #pragma mark - Private Methods
 
-- (BOOL)urlIsDirectory:(NSURL *)url
+- (BOOL)_urlIsDirectory:(NSURL *)url
 {
     NSNumber *isDirectory;
-    [self value:&isDirectory inURL:url key:NSURLIsDirectoryKey];
+    [self _value:&isDirectory inURL:url key:NSURLIsDirectoryKey];
+	
     return [isDirectory boolValue];
 }
 
 - (NSString *)fileNameForURL:(NSURL *)url
 {
     NSString *name;
-    [self value:&name inURL:url key:NSURLNameKey];
+    [self _value:&name inURL:url key:NSURLNameKey];
+	
     return name;
 }
 
-- (void)value:(out id *)value inURL:(NSURL *)url key:(NSString *)key
+- (void)_value:(out id *)value inURL:(NSURL *)url key:(NSString *)key
 {
     NSError *error;
     [url getResourceValue:value forKey:key error:&error];
+	
     if (error)
     {
         NSLog(@"Error getting %@ from %@: %@", key, url, error);
     }
 }
 
-- (BOOL)createDirectoryIfNeeded:(NSString *)directory
+- (BOOL)_createDirectoryIfNeeded:(NSString *)directory
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL createdOrAlreadyExists = [fileManager fileExistsAtPath:directory];
@@ -156,10 +181,11 @@
     return createdOrAlreadyExists;
 }
 
-- (void)moveFileAtURL:(NSURL *)file toURL:(NSURL *)destination
+- (void)_moveFileAtURL:(NSURL *)file toURL:(NSURL *)destination
 {
     NSError *error;
     [[NSFileManager defaultManager] moveItemAtURL:file toURL:destination error:&error];
+	
     if (error)
     {
         NSLog(@"Error moving file to %@. Cause: %@", destination, error);

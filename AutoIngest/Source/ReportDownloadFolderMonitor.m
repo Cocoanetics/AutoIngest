@@ -1,8 +1,10 @@
 //
+//  ReportDownloadFolderMonitor.m
+//  AutoIngest
+//
 //  Created by Felipe Cypriano on 27/04/13.
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
-
 
 #import "ReportDownloadFolderMonitor.h"
 #import "ReportOrganizer.h"
@@ -10,7 +12,8 @@
 // FSEventStreamCallback
 void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCallBackInfo, size_t numEvents, void *eventPaths, const FSEventStreamEventFlags eventFlags[], const FSEventStreamEventId eventIds[]);
 
-@implementation ReportDownloadFolderMonitor {
+@implementation ReportDownloadFolderMonitor
+{
     NSString *_downloadFolder;
     BOOL _isMonitoring;
     FSEventStreamRef _eventStream;
