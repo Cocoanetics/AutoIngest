@@ -212,6 +212,27 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		hasWorkToDo = YES;
 	}
 	
+	if ([defaults boolForKey:@"DownloadOptInWeekly"])
+	{
+		[self _downloadAllReportsOfType:ITCReportTypeOptIn subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeWeekly fromAccount:account];
+		
+		hasWorkToDo = YES;
+	}
+	
+	if ([defaults boolForKey:@"DownloadNewsstandDaily"])
+	{
+		[self _downloadAllReportsOfType:ITCReportTypeNewsstand subType:ITCReportSubTypeDetailed dateType:ITCReportDateTypeDaily fromAccount:account];
+		
+		hasWorkToDo = YES;
+	}
+	
+	if ([defaults boolForKey:@"DownloadNewsstandWeekly"])
+	{
+		[self _downloadAllReportsOfType:ITCReportTypeNewsstand subType:ITCReportSubTypeDetailed dateType:ITCReportDateTypeWeekly fromAccount:account];
+		
+		hasWorkToDo = YES;
+	}
+	
 	// completion
 	[_queue addOperationWithBlock:^{
 		[weakself _reportCompletionWithError:_error];
