@@ -66,8 +66,8 @@
 		A7175E53172148AA0031058F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A7175E52172148AA0031058F /* Credits.rtf */; };
 		A71E9869172409D800176AC8 /* DTITCReportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */; };
 		A71E9875172409DA00176AC8 /* DTITCReportDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8C7881722D6BA00025675 /* DTITCReportDownloadOperation.m */; };
-		A7212219173C0544003C6F0A /* libDTReachability (Mac).a in Frameworks */ = {isa = PBXBuildFile; fileRef = A721220F173C051F003C6F0A /* libDTReachability (Mac).a */; };
-		A721221A173C054C003C6F0A /* libDTReachability (Mac).a in Frameworks */ = {isa = PBXBuildFile; fileRef = A721220F173C051F003C6F0A /* libDTReachability (Mac).a */; };
+		A7212219173C0544003C6F0A /* libDTReachability_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A721220F173C051F003C6F0A /* libDTReachability_Mac.a */; };
+		A721221A173C054C003C6F0A /* libDTReachability_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A721220F173C051F003C6F0A /* libDTReachability_Mac.a */; };
 		A7415F28172161F30092F4F8 /* libITCReportDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F23172161E20092F4F8 /* libITCReportDownloader.a */; };
 		A7415F2C1721626A0092F4F8 /* Readme.markdown in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2A1721626A0092F4F8 /* Readme.markdown */; };
 		A7415F2D1721626A0092F4F8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2B1721626A0092F4F8 /* LICENSE */; };
@@ -142,6 +142,8 @@
 		A7D8C7AE172316D900025675 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */; };
 		A7D8C7CE1723199300025675 /* libDTZipArchive_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7C5172317AD00025675 /* libDTZipArchive_Mac.a */; };
 		A7D8C7DF1723FD5D00025675 /* LastSyncDateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */; };
+		A7DD30EE173D15B7005B4CC8 /* libDTFoundation_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C79F172316BE00025675 /* libDTFoundation_Mac.a */; };
+		A7DD30EF173D15BD005B4CC8 /* libDTFoundation_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C79F172316BE00025675 /* libDTFoundation_Mac.a */; };
 		B3D043B6512F71D5175266EF /* ReportInformationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D04B6B23093F558AEB21A7 /* ReportInformationTests.m */; };
 		B3D04B9FCD64FB689ADC5E01 /* ReportInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D04C30F0858A14CBE3058A /* ReportInformation.m */; };
 		BA6D19073710E05AA752824B /* ReportDownloadFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6D1E9F111DBF987D2A1482 /* ReportDownloadFolderMonitor.m */; };
@@ -330,6 +332,20 @@
 			remoteGlobalIDString = A7D8C7AF1723174600025675;
 			remoteInfo = "DTZipArchive (Mac)";
 		};
+		A7DD30DC173D15B0005B4CC8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A710A4FF1607556000437D36;
+			remoteInfo = "Static Library (Mac)";
+		};
+		A7DD30F0173D15C3005B4CC8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A710A4FF1607556000437D36;
+			remoteInfo = "Static Library (Mac)";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -456,7 +472,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A721221A173C054C003C6F0A /* libDTReachability (Mac).a in Frameworks */,
+				A7DD30EE173D15B7005B4CC8 /* libDTFoundation_Mac.a in Frameworks */,
+				A721221A173C054C003C6F0A /* libDTReachability_Mac.a in Frameworks */,
 				A7675E4A172E661900C548CB /* SystemConfiguration.framework in Frameworks */,
 				1DA477B81723FB4C0048EACA /* QuartzCore.framework in Frameworks */,
 				A7D8C7CE1723199300025675 /* libDTZipArchive_Mac.a in Frameworks */,
@@ -471,7 +488,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7212219173C0544003C6F0A /* libDTReachability (Mac).a in Frameworks */,
+				A7DD30EF173D15BD005B4CC8 /* libDTFoundation_Mac.a in Frameworks */,
+				A7212219173C0544003C6F0A /* libDTReachability_Mac.a in Frameworks */,
 				A76B51111733B21E00807B82 /* Sparkle.framework in Frameworks */,
 				A76B51121733B21E00807B82 /* SystemConfiguration.framework in Frameworks */,
 				A76B51131733B21E00807B82 /* QuartzCore.framework in Frameworks */,
@@ -720,8 +738,8 @@
 				A7D8C7C5172317AD00025675 /* libDTZipArchive_Mac.a */,
 				A7D8C7A7172316BE00025675 /* libDTUTI.a */,
 				A7D8C7A9172316BE00025675 /* libDTUTI.a */,
-				A721220D173C051F003C6F0A /* libDTReachability (iOS).a */,
-				A721220F173C051F003C6F0A /* libDTReachability (Mac).a */,
+				A721220D173C051F003C6F0A /* libDTReachability_iOS.a */,
+				A721220F173C051F003C6F0A /* libDTReachability_Mac.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -752,7 +770,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				5541681417259A5600762241 /* PBXTargetDependency */,
 			);
 			name = AutoIngestTests;
 			productName = AutoIngestTests;
@@ -770,6 +787,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A7DD30DD173D15B0005B4CC8 /* PBXTargetDependency */,
 				A7212216173C052E003C6F0A /* PBXTargetDependency */,
 				A7D8C7CD1723198F00025675 /* PBXTargetDependency */,
 				A7415F27172161EF0092F4F8 /* PBXTargetDependency */,
@@ -791,6 +809,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A7DD30F1173D15C3005B4CC8 /* PBXTargetDependency */,
 				A7212218173C0534003C6F0A /* PBXTargetDependency */,
 				A76B50FE1733B21E00807B82 /* PBXTargetDependency */,
 				A76B51001733B21E00807B82 /* PBXTargetDependency */,
@@ -845,17 +864,17 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A721220D173C051F003C6F0A /* libDTReachability (iOS).a */ = {
+		A721220D173C051F003C6F0A /* libDTReachability_iOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libDTReachability (iOS).a";
+			path = libDTReachability_iOS.a;
 			remoteRef = A721220C173C051F003C6F0A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A721220F173C051F003C6F0A /* libDTReachability (Mac).a */ = {
+		A721220F173C051F003C6F0A /* libDTReachability_Mac.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libDTReachability (Mac).a";
+			path = libDTReachability_Mac.a;
 			remoteRef = A721220E173C051F003C6F0A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1197,6 +1216,16 @@
 			name = "DTZipArchive (Mac)";
 			targetProxy = A7D8C7CC1723198F00025675 /* PBXContainerItemProxy */;
 		};
+		A7DD30DD173D15B0005B4CC8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Static Library (Mac)";
+			targetProxy = A7DD30DC173D15B0005B4CC8 /* PBXContainerItemProxy */;
+		};
+		A7DD30F1173D15C3005B4CC8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Static Library (Mac)";
+			targetProxy = A7DD30F0173D15C3005B4CC8 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1309,6 +1338,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AutoIngest/AutoIngest-Prefix.pch";
 				INFOPLIST_FILE = "AutoIngest/AutoIngest-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader/Core\"/** \"${PROJECT_DIR}/Externals/DTFoundation/Core\"/**";
 				WRAPPER_EXTENSION = app;
@@ -1322,6 +1352,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AutoIngest/AutoIngest-Prefix.pch";
 				INFOPLIST_FILE = "AutoIngest/AutoIngest-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader/Core\"/** \"${PROJECT_DIR}/Externals/DTFoundation/Core\"/**";
 				WRAPPER_EXTENSION = app;
@@ -1340,6 +1371,7 @@
 					"SPARKLE=1",
 				);
 				INFOPLIST_FILE = "AutoIngest/AutoIngest-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = AutoIngest;
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader/Core\"/** \"${PROJECT_DIR}/Externals/DTFoundation/Core\"/**";
@@ -1356,6 +1388,7 @@
 				GCC_PREFIX_HEADER = "AutoIngest/AutoIngest-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "SPARKLE=1";
 				INFOPLIST_FILE = "AutoIngest/AutoIngest-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = AutoIngest;
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader/Core\"/** \"${PROJECT_DIR}/Externals/DTFoundation/Core\"/**";

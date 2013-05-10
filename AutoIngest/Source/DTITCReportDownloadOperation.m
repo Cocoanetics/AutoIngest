@@ -10,6 +10,7 @@
 #import "GenericAccount.h"
 #import "DTZipArchive.h"
 #import "ReportFolderClassifier.h"
+#import "NSString+DTPaths.h"
 
 @implementation DTITCReportDownloadOperation
 {
@@ -194,21 +195,59 @@
 												  
 												  return;
 											  }
+
+											  
+											  if ([_delegate respondsToSelector:@selector(operation:didDownloadReportWithDate:)])
+											  {
+												  [_delegate operation:self didDownloadReportWithDate:reportDate];
+											  }
+											  
+											  NSLog(@"Downloaded Report %@", fileName);
+											  downloadedFiles++;
+
 											  
 											  // get current working directory
 											  NSString *outputPath = [_reportFolder stringByAppendingPathComponent:fileName];
+											  
+											  if (self.uncompressFiles)
+											  {
+												  // save the data to a temporary file
+												  NSString *tmpFilePath = [NSString pathForTemporaryFile];
+												  
+												  NSError *writeError = nil;
+												  if (![data writeToFile:tmpFilePath options:NSDataWritingAtomic error:&writeError])
+												  {
+													  NSLog(@"%@", [writeError localizedDescription]);
+													  return;
+												  }
+												  
+												  DTZipArchive *zipArchive = [DTZipArchive archiveAtPath:tmpFilePath];
+												  
+												  [zipArchive enumerateUncompressedFilesAsDataUsingBlock:^(NSString *fileName, NSData *data, BOOL *stop) {
+													  NSError *writeError = nil;
+													  if (![data writeToFile:outputPath options:NSDataWritingAtomic error:&writeError])
+													  {
+														  NSLog(@"%@", [writeError localizedDescription]);
+													  }
+												  }];
+												  
+												  NSFileManager *fileManager = [[NSFileManager alloc] init];
+												  [fileManager removeItemAtPath:tmpFilePath error:NULL];
+											  }
+											  else
+											  {
+												  // write data to file
+												  NSError *writeError = nil;
+												  if (![data writeToFile:outputPath options:NSDataWritingAtomic error:&writeError])
+												  {
+													   NSLog(@"%@", [writeError localizedDescription]);
+												  }
+											  }
 											  
 											  // write data to file
 											  NSError *writeError = nil;
 											  if ([data writeToFile:outputPath options:NSDataWritingAtomic error:&writeError])
 											  {
-												  if ([_delegate respondsToSelector:@selector(operation:didDownloadReportWithDate:)])
-												  {
-													  [_delegate operation:self didDownloadReportWithDate:reportDate];
-												  }
-												  
-												  NSLog(@"Downloaded Report %@", fileName);
-												  downloadedFiles++;
 												  
 												  // optional uncompressing
 												  if (self.uncompressFiles)
