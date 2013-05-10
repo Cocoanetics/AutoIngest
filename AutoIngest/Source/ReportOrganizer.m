@@ -76,7 +76,7 @@
 
 - (void)_organizeFolder:(NSString *)folder
 {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
     NSError *error = nil;
     NSArray *contents = [fileManager contentsOfDirectoryAtURL:[[NSURL alloc] initWithString:folder]
                                    includingPropertiesForKeys:@[NSURLIsDirectoryKey, NSURLNameKey]
