@@ -91,8 +91,10 @@
 
     if ([defaults boolForKey:AIUserDefaultsShouldAutoOrganizeReportsKey])
     {
+		[[ReportOrganizer sharedOrganizer] organizeAllReports];
         [[ReportDownloadFolderMonitor sharedMonitor] startMonitoring];
     }
+	
     [nc addObserver:self selector:@selector(startStopDownloadFolderMonitor:) name:NSUserDefaultsDidChangeNotification object:nil];
 	
 	[self _startSparkleIfAvailable];
