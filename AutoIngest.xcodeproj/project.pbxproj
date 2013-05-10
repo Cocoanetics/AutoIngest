@@ -47,6 +47,16 @@
 		3D98E6B4172FE2DC002F1C95 /* AutoIngest Animation 44 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E690172FE2DC002F1C95 /* AutoIngest Animation 44 Template.pdf */; };
 		3D98E6B5172FE2DC002F1C95 /* AutoIngest Animation 00 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E691172FE2DC002F1C95 /* AutoIngest Animation 00 Template.pdf */; };
 		3DC53114172A65D4005D9183 /* AIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC53113172A65D4005D9183 /* AIApplication.m */; };
+		554167F91725929700762241 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554167F81725929700762241 /* SenTestingKit.framework */; };
+		554167FA1725929700762241 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7175E27172146EE0031058F /* Cocoa.framework */; };
+		5541680E1725941100762241 /* ReportFolderClassifierTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5541680D1725941100762241 /* ReportFolderClassifierTests.m */; };
+		5541682417259DA600762241 /* ReportFolderClassifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 5541682317259DA600762241 /* ReportFolderClassifier.m */; };
+		5541682C1725C0B300762241 /* libITCReportDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F23172161E20092F4F8 /* libITCReportDownloader.a */; };
+		557DDFFD17345D8700A4FF77 /* ReportOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6D158FC54C3128B8973127 /* ReportOrganizer.m */; };
+		557DE00917345D9700A4FF77 /* ReportOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6D158FC54C3128B8973127 /* ReportOrganizer.m */; };
+		557DE00A17345D9900A4FF77 /* ReportDownloadFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6D1E9F111DBF987D2A1482 /* ReportDownloadFolderMonitor.m */; };
+		557DE00B17345D9C00A4FF77 /* ReportInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D04C30F0858A14CBE3058A /* ReportInformation.m */; };
+		557DE00C17345DA000A4FF77 /* ReportFolderClassifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 5541682317259DA600762241 /* ReportFolderClassifier.m */; };
 		A7175E28172146EE0031058F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7175E27172146EE0031058F /* Cocoa.framework */; };
 		A7175E47172148390031058F /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7175E46172148390031058F /* PreferencesWindowController.xib */; };
 		A7175E4A172148450031058F /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E49172148450031058F /* PreferencesWindowController.m */; };
@@ -132,6 +142,9 @@
 		A7D8C7AE172316D900025675 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */; };
 		A7D8C7CE1723199300025675 /* libDTZipArchive_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7C5172317AD00025675 /* libDTZipArchive_Mac.a */; };
 		A7D8C7DF1723FD5D00025675 /* LastSyncDateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */; };
+		B3D043B6512F71D5175266EF /* ReportInformationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D04B6B23093F558AEB21A7 /* ReportInformationTests.m */; };
+		B3D04B9FCD64FB689ADC5E01 /* ReportInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D04C30F0858A14CBE3058A /* ReportInformation.m */; };
+		BA6D19073710E05AA752824B /* ReportDownloadFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6D1E9F111DBF987D2A1482 /* ReportDownloadFolderMonitor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -375,6 +388,13 @@
 		3D98E691172FE2DC002F1C95 /* AutoIngest Animation 00 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 00 Template.pdf"; sourceTree = "<group>"; };
 		3DC53112172A65D4005D9183 /* AIApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIApplication.h; sourceTree = "<group>"; };
 		3DC53113172A65D4005D9183 /* AIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIApplication.m; sourceTree = "<group>"; };
+		554167F71725929700762241 /* AutoIngestTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutoIngestTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		554167F81725929700762241 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		554168091725932900762241 /* AutoIngestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AutoIngestTests-Info.plist"; sourceTree = "<group>"; };
+		5541680A1725932900762241 /* AutoIngestTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AutoIngestTests-Prefix.pch"; sourceTree = "<group>"; };
+		5541680D1725941100762241 /* ReportFolderClassifierTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportFolderClassifierTests.m; sourceTree = "<group>"; };
+		5541682217259DA600762241 /* ReportFolderClassifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportFolderClassifier.h; sourceTree = "<group>"; };
+		5541682317259DA600762241 /* ReportFolderClassifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportFolderClassifier.m; sourceTree = "<group>"; };
 		A7175E24172146EE0031058F /* AutoIngest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoIngest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7175E27172146EE0031058F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A7175E2A172146EE0031058F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -411,10 +431,27 @@
 		A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		A7D8C7DD1723FD5C00025675 /* LastSyncDateValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastSyncDateValueTransformer.h; sourceTree = "<group>"; };
 		A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastSyncDateValueTransformer.m; sourceTree = "<group>"; };
+		B3D044D9567E7785CEAF75FB /* ReportInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportInformation.h; sourceTree = "<group>"; };
+		B3D04B6B23093F558AEB21A7 /* ReportInformationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportInformationTests.m; sourceTree = "<group>"; };
+		B3D04C30F0858A14CBE3058A /* ReportInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportInformation.m; sourceTree = "<group>"; };
+		BA6D109EB0F42E2F11C2F3BE /* ReportOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportOrganizer.h; sourceTree = "<group>"; };
+		BA6D12941BE7ED081B31E153 /* ReportDownloadFolderMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportDownloadFolderMonitor.h; sourceTree = "<group>"; };
 		BA6D12B07D998A4E3684E2AC /* AIUserDefaultsKeysConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIUserDefaultsKeysConstants.h; sourceTree = "<group>"; };
+		BA6D158FC54C3128B8973127 /* ReportOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportOrganizer.m; sourceTree = "<group>"; };
+		BA6D1E9F111DBF987D2A1482 /* ReportDownloadFolderMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportDownloadFolderMonitor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		554167F31725929700762241 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5541682C1725C0B300762241 /* libITCReportDownloader.a in Frameworks */,
+				554167F91725929700762241 /* SenTestingKit.framework in Frameworks */,
+				554167FA1725929700762241 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A7175E21172146EE0031058F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -449,12 +486,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		554168081725932900762241 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				554168091725932900762241 /* AutoIngestTests-Info.plist */,
+				5541680A1725932900762241 /* AutoIngestTests-Prefix.pch */,
+				5541680B1725932900762241 /* Source */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		5541680B1725932900762241 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				5541680D1725941100762241 /* ReportFolderClassifierTests.m */,
+				B3D04B6B23093F558AEB21A7 /* ReportInformationTests.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		5541682617259DB700762241 /* Report Organizer */ = {
+			isa = PBXGroup;
+			children = (
+				5541682217259DA600762241 /* ReportFolderClassifier.h */,
+				5541682317259DA600762241 /* ReportFolderClassifier.m */,
+				B3D044D9567E7785CEAF75FB /* ReportInformation.h */,
+				B3D04C30F0858A14CBE3058A /* ReportInformation.m */,
+				BA6D12941BE7ED081B31E153 /* ReportDownloadFolderMonitor.h */,
+				BA6D1E9F111DBF987D2A1482 /* ReportDownloadFolderMonitor.m */,
+				BA6D109EB0F42E2F11C2F3BE /* ReportOrganizer.h */,
+				BA6D158FC54C3128B8973127 /* ReportOrganizer.m */,
+			);
+			name = "Report Organizer";
+			sourceTree = "<group>";
+		};
 		A7175E1B172146EE0031058F = {
 			isa = PBXGroup;
 			children = (
 				A7415F291721625E0092F4F8 /* Documentation */,
 				A7415EFB172161DD0092F4F8 /* Externals */,
 				A7175E2D172146EE0031058F /* AutoIngest */,
+				554168081725932900762241 /* Tests */,
 				A7175E26172146EE0031058F /* Frameworks */,
 				A7175E25172146EE0031058F /* Products */,
 			);
@@ -464,6 +536,7 @@
 			isa = PBXGroup;
 			children = (
 				A7175E24172146EE0031058F /* AutoIngest.app */,
+				554167F71725929700762241 /* AutoIngestTests.octest */,
 				A76B51481733B21E00807B82 /* AutoIngest.app */,
 			);
 			name = Products;
@@ -476,6 +549,7 @@
 				A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */,
 				A7175E27172146EE0031058F /* Cocoa.framework */,
 				A7415F39172173650092F4F8 /* Security.framework */,
+				554167F81725929700762241 /* SenTestingKit.framework */,
 				A7175E29172146EE0031058F /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -520,6 +594,7 @@
 		A7175E45172147800031058F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				5541682617259DB700762241 /* Report Organizer */,
 				A7D8C7D11723F79500025675 /* Report Manager */,
 				A7415F32172170CB0092F4F8 /* Cleanup for DTFoundation */,
 				A7175E501721489A0031058F /* main.m */,
@@ -665,6 +740,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		554167F61725929700762241 /* AutoIngestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 554168071725929700762241 /* Build configuration list for PBXNativeTarget "AutoIngestTests" */;
+			buildPhases = (
+				554167F21725929700762241 /* Sources */,
+				554167F31725929700762241 /* Frameworks */,
+				554167F41725929700762241 /* Resources */,
+				554167F51725929700762241 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5541681417259A5600762241 /* PBXTargetDependency */,
+			);
+			name = AutoIngestTests;
+			productName = AutoIngestTests;
+			productReference = 554167F71725929700762241 /* AutoIngestTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		A7175E23172146EE0031058F /* AutoIngest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A7175E41172146EF0031058F /* Build configuration list for PBXNativeTarget "AutoIngest" */;
@@ -744,6 +838,7 @@
 			projectRoot = "";
 			targets = (
 				A7175E23172146EE0031058F /* AutoIngest */,
+				554167F61725929700762241 /* AutoIngestTests */,
 				A76B50FD1733B21E00807B82 /* AutoIngest (Sparkle) */,
 			);
 		};
@@ -886,6 +981,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		554167F41725929700762241 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A7175E22172146EE0031058F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -989,7 +1091,32 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		554167F51725929700762241 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		554167F21725929700762241 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5541680E1725941100762241 /* ReportFolderClassifierTests.m in Sources */,
+				B3D043B6512F71D5175266EF /* ReportInformationTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A7175E20172146EE0031058F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1003,7 +1130,11 @@
 				1DA477BB1723FDFB0048EACA /* StatusItemController.m in Sources */,
 				A71E9869172409D800176AC8 /* DTITCReportManager.m in Sources */,
 				A71E9875172409DA00176AC8 /* DTITCReportDownloadOperation.m in Sources */,
+				5541682417259DA600762241 /* ReportFolderClassifier.m in Sources */,
+				B3D04B9FCD64FB689ADC5E01 /* ReportInformation.m in Sources */,
 				3DC53114172A65D4005D9183 /* AIApplication.m in Sources */,
+				BA6D19073710E05AA752824B /* ReportDownloadFolderMonitor.m in Sources */,
+				557DDFFD17345D8700A4FF77 /* ReportOrganizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1021,6 +1152,10 @@
 				A76B510C1733B21E00807B82 /* DTITCReportManager.m in Sources */,
 				A76B510D1733B21E00807B82 /* DTITCReportDownloadOperation.m in Sources */,
 				A76B510E1733B21E00807B82 /* AIApplication.m in Sources */,
+				557DE00917345D9700A4FF77 /* ReportOrganizer.m in Sources */,
+				557DE00A17345D9900A4FF77 /* ReportDownloadFolderMonitor.m in Sources */,
+				557DE00B17345D9C00A4FF77 /* ReportInformation.m in Sources */,
+				557DE00C17345DA000A4FF77 /* ReportFolderClassifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1076,6 +1211,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		554168051725929700762241 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/$(PROJECT_NAME).app/Contents/MacOS/$(PROJECT_NAME)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tests/AutoIngestTests-Prefix.pch";
+				INFOPLIST_FILE = "Tests/AutoIngestTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader\"/**";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		554168061725929700762241 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/$(PROJECT_NAME).app/Contents/MacOS/$(PROJECT_NAME)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tests/AutoIngestTests-Prefix.pch";
+				INFOPLIST_FILE = "Tests/AutoIngestTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader\"/**";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		A7175E3F172146EF0031058F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1199,6 +1366,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		554168071725929700762241 /* Build configuration list for PBXNativeTarget "AutoIngestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				554168051725929700762241 /* Debug */,
+				554168061725929700762241 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A7175E1F172146EE0031058F /* Build configuration list for PBXProject "AutoIngest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

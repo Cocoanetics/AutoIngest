@@ -12,6 +12,8 @@
 #import "DTITCReportManager.h"
 
 #import "StatusItemController.h"
+#import "ReportDownloadFolderMonitor.h"
+#import "ReportOrganizer.h"
 
 #if SPARKLE
 #import <Sparkle/Sparkle.h>
@@ -81,10 +83,17 @@
 
 	[nc addObserver:self selector:@selector(menuWillOpen:) name:AIMenuWillOpenNotification object:nil];
 
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldAutoSyncKey])
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults boolForKey:AIUserDefaultsShouldAutoSyncKey])
 	{
 		[reportManager startAutoSyncTimer];
 	}
+
+    if ([defaults boolForKey:AIUserDefaultsShouldAutoOrganizeReportsKey])
+    {
+        [[ReportDownloadFolderMonitor sharedMonitor] startMonitoring];
+    }
+    [nc addObserver:self selector:@selector(startStopDownloadFolderMonitor:) name:NSUserDefaultsDidChangeNotification object:nil];
 	
 	[self _startSparkleIfAvailable];
 }
@@ -92,6 +101,12 @@
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    ReportDownloadFolderMonitor *monitor = [ReportDownloadFolderMonitor sharedMonitor];
+    if ([monitor isMonitoring])
+    {
+         [monitor stopMonitoring];
+    }
 }
 
 #pragma mark - Sparkle
@@ -217,6 +232,21 @@
             [center deliverNotification:note];
         }
     });
+}
+
+- (void)startStopDownloadFolderMonitor:(NSNotification *)notification
+{
+    BOOL shouldOrganize = [[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldAutoOrganizeReportsKey];
+    ReportDownloadFolderMonitor *monitor = [ReportDownloadFolderMonitor sharedMonitor];
+    if (shouldOrganize)
+    {
+        [[ReportOrganizer sharedOrganizer] organizeAllReports];
+        [monitor startMonitoring];
+    }
+    else if ([monitor isMonitoring])
+    {
+        [monitor stopMonitoring];
+    }
 }
 
 #pragma mark - Sparkle Delegate
