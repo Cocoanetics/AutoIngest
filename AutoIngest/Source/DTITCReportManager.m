@@ -41,8 +41,9 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     SCNetworkConnectionFlags _connectionFlags;
     
     BOOL _waitingForConnectionToSync;
-	
-	NSMutableDictionary *
+
+	// synching statistics
+	NSMutableDictionary *_syncStatsByType;
 }
 
 + (DTITCReportManager *)sharedManager
@@ -130,11 +131,16 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 
 - (void)_reportCompletionWithError:(NSError *)error
 {
-	NSDictionary *userInfo = nil;
+	NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
 	
 	if (error)
 	{
-		userInfo = @{@"Error": _error};
+		userInfo[@"Error"] = _error;
+	}
+	
+	if (_syncStatsByType)
+	{
+		userInfo[@"Stats"] = _syncStatsByType;
 	}
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:DTITCReportManagerSyncDidFinishNotification object:self userInfo:userInfo];
@@ -160,6 +166,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	self.error = nil;
     
     _waitingForConnectionToSync = NO;
+	_syncStatsByType = [[NSMutableDictionary alloc] init];
 	
 	NSArray *accounts = [[AccountManager sharedAccountManager] accountsOfType:@"iTunes Connect"];
 	
@@ -518,5 +525,22 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	[self stopSync];
 }
 
+- (void)operation:(DTITCReportDownloadOperation *)operation didDownloadReportWithDate:(NSDate *)date
+{
+	NSString *key = [NSString stringWithFormat:@"%@ %@", NSStringFromITCReportDateType(operation.reportDateType), NSStringFromITCReportType(operation.reportType)];
+	
+	NSNumber *countNum = _syncStatsByType[key];
+	
+	if (countNum)
+	{
+		countNum = @([countNum integerValue]+1);
+	}
+	else
+	{
+		countNum = @1;
+	}
+	
+	_syncStatsByType[key] = countNum;
+}
 
 @end

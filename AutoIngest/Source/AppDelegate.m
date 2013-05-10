@@ -210,10 +210,12 @@
         
         _statusItemController.isSyncing = NO;
         _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
+		
+		NSDictionary *userInfo = [notification userInfo];
 
         if ([NSUserNotification class] && [NSUserNotificationCenter class])
         {
-            NSError *error = [notification userInfo][@"Error"];
+            NSError *error = userInfo[@"Error"];
 
             NSUserNotification *note = [[NSUserNotification alloc] init];
 
@@ -225,10 +227,40 @@
             }
             else
             {
-                [note setTitle:@"AutoIngest"];
-                NSString *infoText = [NSString stringWithFormat:@"Report download complete"];
-                [note setInformativeText:infoText];
-
+                [note setTitle:@"Report download complete"];
+				
+				NSString *infoText = nil;
+				
+				NSDictionary *statsDict = userInfo[@"Stats"];
+				
+				if ([statsDict count])
+				{
+					NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
+					
+					NSUInteger index = 0;
+					for (NSString *oneKey in statsDict)
+					{
+						if (index)
+						{
+							[tmpString appendString:@", "];
+						}
+						
+						NSNumber *number = statsDict[oneKey];
+						
+						[tmpString appendFormat:@"%@ %@", number, oneKey];
+						
+						index++;
+					}
+					
+					infoText = tmpString;
+				}
+				else
+				{
+					infoText = @"No Reports Downloaded";
+				}
+				
+				[note setInformativeText:infoText];
+				
                 [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:AIUserDefaultsLastSuccessfulSyncDateKey];
             }
 
