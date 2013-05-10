@@ -367,6 +367,11 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		return NO;
 	}
 	
+	if (![self _hasInternetConnection])
+	{
+		return NO;
+	}
+	
 	return YES;
 }
 
