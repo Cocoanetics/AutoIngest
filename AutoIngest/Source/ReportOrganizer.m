@@ -78,7 +78,7 @@
 {
     NSFileManager *fileManager = [[NSFileManager alloc] init];
     NSError *error = nil;
-    NSArray *contents = [fileManager contentsOfDirectoryAtURL:[[NSURL alloc] initWithString:folder]
+    NSArray *contents = [fileManager contentsOfDirectoryAtURL:[NSURL fileURLWithPath:folder isDirectory:YES]
                                    includingPropertiesForKeys:@[NSURLIsDirectoryKey, NSURLNameKey]
                                                       options:NSDirectoryEnumerationSkipsHiddenFiles
                                                         error:&error];
