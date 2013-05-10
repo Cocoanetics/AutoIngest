@@ -23,9 +23,9 @@ xcodebuild {
 
 
 task('sparkle-notes') {
-	if (project.hasProperty('notes')) {
-		def notes = project['notes']
-
+	def notes = "$System.env.CHANGELOG"
+	if (notes) {
+		
 		def matcher = notes =~ /^\s*"(.*)"$/
 
 		if (notes ==~ /^<\w+>.*<\/\w+>$/) {
@@ -59,7 +59,7 @@ task sparkleZip(dependsOn:'xcodebuild') {
 			zipfileset ( prefix:"AutoIngest.app/Contents/Frameworks/Sparkle.framework/Resources/finish_installation.app/Contents/MacOS", dir: directory + "/Frameworks/Sparkle.framework/Resources/finish_installation.app/Contents/MacOS/", includes : "*", filemode : 755);
 		}
 		
-		ant.move(file: "releasenotes.html",  todir: outputDirectory)
+		ant.move(file: "releasenotes.html",  todir: outputDirectory, quiet: true)
 	  
 	}
 }
