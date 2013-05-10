@@ -17,7 +17,6 @@ void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCallBackIn
     NSString *_downloadFolder;
     BOOL _isMonitoring;
     FSEventStreamRef _eventStream;
-    dispatch_queue_t _serialQueue;
 }
 
 + (ReportDownloadFolderMonitor *)sharedMonitor
@@ -35,8 +34,6 @@ void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCallBackIn
     self = [super init];
     if (self)
     {
-        _serialQueue = dispatch_queue_create("com.dropbnik.autoingest.reportdownloadfoldermonitor", DISPATCH_QUEUE_SERIAL);
-
         _downloadFolder = [[NSUserDefaults standardUserDefaults] stringForKey:AIUserDefaultsDownloadFolderPathKey];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(defaultsDidUpdate:) name:NSUserDefaultsDidChangeNotification object:nil];
     }
@@ -57,16 +54,18 @@ void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCallBackIn
     {
         [self stopMonitoring];
     }
-
-    dispatch_release(_serialQueue);
 }
 
 #pragma mark - Public API
 
 - (void)startMonitoring
 {
-    dispatch_sync(_serialQueue, ^{
-        if (_isMonitoring) return;
+	@synchronized(self)
+	{
+        if (_isMonitoring)
+		{
+			return;
+		}
 
         CFArrayRef pathsToWatch = (__bridge CFArrayRef) @[_downloadFolder];
         _eventStream = FSEventStreamCreate(NULL,
@@ -81,13 +80,17 @@ void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCallBackIn
         FSEventStreamStart(_eventStream);
 
         _isMonitoring = YES;
-    });
+    }
 }
 
 - (void)stopMonitoring
 {
-    dispatch_sync(_serialQueue, ^{
-        if (!_isMonitoring) return;
+	@synchronized(self)
+	{
+        if (!_isMonitoring)
+		{
+			return;
+		}
 
         FSEventStreamStop(_eventStream);
         FSEventStreamInvalidate(_eventStream);
@@ -95,12 +98,15 @@ void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCallBackIn
         _eventStream = NULL;
 
         _isMonitoring = NO;
-    });
+    }
 }
 
 - (BOOL)isMonitoring
 {
-    return _isMonitoring;
+	@synchronized(self)
+	{
+		return _isMonitoring;
+	}
 }
 
 
@@ -110,7 +116,8 @@ void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCallBackIn
 {
     __weak ReportDownloadFolderMonitor *weakSelf = self;
 
-    dispatch_sync(_serialQueue, ^{
+	@synchronized(self)
+	{
         NSString *reportFolder = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsDownloadFolderPathKey];
 
         if (![_downloadFolder isEqualToString:reportFolder])
@@ -122,7 +129,7 @@ void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCallBackIn
                 [weakSelf startMonitoring];
             }
         }
-    });
+    }
 }
 
 @end
