@@ -114,7 +114,13 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 - (void)_downloadAllReportsOfType:(ITCReportType)reportType subType:(ITCReportSubType)reportSubType dateType:(ITCReportDateType)reportDateType fromAccount:(GenericAccount *)account
 {
 	DTITCReportDownloadOperation *op = [[DTITCReportDownloadOperation alloc] initForReportsOfType:reportType subType:reportSubType dateType:reportDateType fromAccount:account vendorID:_vendorID intoFolder:_reportFolder];
-	op.uncompressFiles = [[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldUncompressReportsKey];
+	
+	// uncompressing not supported for password-protected opt-in reports yet
+	if (reportType != ITCReportTypeOptIn)
+	{
+		op.uncompressFiles = [[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldUncompressReportsKey];
+	}
+	
 	op.delegate = self;
 	
 	[_queue addOperation:op];
@@ -208,6 +214,27 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	if ([defaults boolForKey:@"DownloadYearly"])
 	{
 		[self _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeYearly fromAccount:account];
+		
+		hasWorkToDo = YES;
+	}
+	
+	if ([defaults boolForKey:@"DownloadOptInWeekly"])
+	{
+		[self _downloadAllReportsOfType:ITCReportTypeOptIn subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeWeekly fromAccount:account];
+		
+		hasWorkToDo = YES;
+	}
+	
+	if ([defaults boolForKey:@"DownloadNewsstandDaily"])
+	{
+		[self _downloadAllReportsOfType:ITCReportTypeNewsstand subType:ITCReportSubTypeDetailed dateType:ITCReportDateTypeDaily fromAccount:account];
+		
+		hasWorkToDo = YES;
+	}
+	
+	if ([defaults boolForKey:@"DownloadNewsstandWeekly"])
+	{
+		[self _downloadAllReportsOfType:ITCReportTypeNewsstand subType:ITCReportSubTypeDetailed dateType:ITCReportDateTypeWeekly fromAccount:account];
 		
 		hasWorkToDo = YES;
 	}

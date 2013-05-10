@@ -155,7 +155,16 @@
 												  return;
 											  }
 											  
-											  NSString *baseName = [fileName stringByReplacingOccurrencesOfString:@".txt.gz" withString:@""];
+											  NSString *baseName;
+											  
+											  if (_reportType == ITCReportTypeOptIn)
+											  {
+												  baseName = [fileName stringByReplacingOccurrencesOfString:@".zip" withString:@""];
+											  }
+											  else
+											  {
+												  baseName = [fileName stringByReplacingOccurrencesOfString:@".txt.gz" withString:@""];
+											  }
 											  
 											  // update actual report date
 											  NSString *dateFormat = NSStringWithDateFormatForITCReportDateType(_reportDateType);
@@ -243,13 +252,20 @@
 													 {
 														 _error = error; // invalid vendor id
 													 }
+													 else if ([[error localizedDescription] rangeOfString:@"selection"].location != NSNotFound)
+													 {
+														 NSLog(@"ITC reports no reports available for %@ %@ %@ %@", NSStringFromITCReportType(_reportType), NSStringFromITCReportSubType(_reportSubType), NSStringFromITCReportDateType(_reportDateType), [formatter stringFromDate:reportDate]);
+														 [self cancel]; // probably wrong download parameters cancel the operation for this combination of parameters
+													 }
+													 else
+													 {
+														 NSLog(@"%@", [error localizedDescription]);
+													 }
 													 
 													 if (_error && [_delegate respondsToSelector:@selector(operation:didFailWithError:)])
 													 {
 														 [_delegate operation:self didFailWithError:_error];
 													 }
-													 
-													 NSLog(@"%@", [error localizedDescription]);
 												 }])
 		{
 			// download succeeded for this date
