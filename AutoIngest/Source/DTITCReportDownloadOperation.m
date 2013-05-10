@@ -202,6 +202,11 @@
 											  NSError *writeError = nil;
 											  if ([data writeToFile:outputPath options:NSDataWritingAtomic error:&writeError])
 											  {
+												  if ([_delegate respondsToSelector:@selector(operation:didDownloadReportWithDate:)])
+												  {
+													  [_delegate operation:self didDownloadReportWithDate:reportDate];
+												  }
+												  
 												  NSLog(@"Downloaded Report %@", fileName);
 												  downloadedFiles++;
 												  

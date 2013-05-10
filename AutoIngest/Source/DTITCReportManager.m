@@ -8,6 +8,7 @@
 
 #import "DTITCReportManager.h"
 #import "DTITCReportDownloadOperation.h"
+#import "ReportInformation.h"
 
 #import "AccountManager.h"
 #import "DTReachability.h"
@@ -41,6 +42,9 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     SCNetworkConnectionFlags _connectionFlags;
     
     BOOL _waitingForConnectionToSync;
+
+	// synching statistics
+	NSMutableDictionary *_syncStatsByType;
 }
 
 + (DTITCReportManager *)sharedManager
@@ -128,11 +132,16 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 
 - (void)_reportCompletionWithError:(NSError *)error
 {
-	NSDictionary *userInfo = nil;
+	NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
 	
 	if (error)
 	{
-		userInfo = @{@"Error": _error};
+		userInfo[@"Error"] = _error;
+	}
+	
+	if (_syncStatsByType)
+	{
+		userInfo[@"Stats"] = _syncStatsByType;
 	}
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:DTITCReportManagerSyncDidFinishNotification object:self userInfo:userInfo];
@@ -158,6 +167,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	self.error = nil;
     
     _waitingForConnectionToSync = NO;
+	_syncStatsByType = [[NSMutableDictionary alloc] init];
 	
 	NSArray *accounts = [[AccountManager sharedAccountManager] accountsOfType:@"iTunes Connect"];
 	
@@ -516,5 +526,26 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	[self stopSync];
 }
 
+- (void)operation:(DTITCReportDownloadOperation *)operation didDownloadReportWithDate:(NSDate *)date
+{
+	// increment counter based on type
+	ReportInformation *reportInfo = [[ReportInformation alloc] init];
+	reportInfo.type = operation.reportType;
+	reportInfo.subType = operation.reportSubType;
+	reportInfo.dateType = operation.reportDateType;
+	
+	NSNumber *countNum = _syncStatsByType[reportInfo];
+	
+	if (countNum)
+	{
+		countNum = @([countNum integerValue]+1);
+	}
+	else
+	{
+		countNum = @1;
+	}
+	
+	_syncStatsByType[reportInfo] = countNum;
+}
 
 @end

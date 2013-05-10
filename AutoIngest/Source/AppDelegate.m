@@ -14,6 +14,7 @@
 #import "StatusItemController.h"
 #import "ReportDownloadFolderMonitor.h"
 #import "ReportOrganizer.h"
+#import "ReportInformation.h"
 
 #if SPARKLE
 #import <Sparkle/Sparkle.h>
@@ -210,10 +211,12 @@
         
         _statusItemController.isSyncing = NO;
         _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
+		
+		NSDictionary *userInfo = [notification userInfo];
 
         if ([NSUserNotification class] && [NSUserNotificationCenter class])
         {
-            NSError *error = [notification userInfo][@"Error"];
+            NSError *error = userInfo[@"Error"];
 
             NSUserNotification *note = [[NSUserNotification alloc] init];
 
@@ -225,10 +228,40 @@
             }
             else
             {
-                [note setTitle:@"AutoIngest"];
-                NSString *infoText = [NSString stringWithFormat:@"Report download complete"];
-                [note setInformativeText:infoText];
-
+                [note setTitle:@"Report Synching Complete"];
+				
+				NSString *infoText = nil;
+				
+				NSDictionary *statsDict = userInfo[@"Stats"];
+				
+				if ([statsDict count])
+				{
+					NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
+					
+					NSUInteger index = 0;
+					for (ReportInformation *reportInfo in statsDict)
+					{
+						if (index)
+						{
+							[tmpString appendString:@", "];
+						}
+						
+						NSNumber *countNum = statsDict[reportInfo];
+						
+						[tmpString appendFormat:@"%@ %@ %@", countNum, [reportInfo dateTypeStringValue], [reportInfo typeStringValue]];
+						
+						index++;
+					}
+					
+					infoText = tmpString;
+				}
+				else
+				{
+					infoText = @"No Reports Downloaded";
+				}
+				
+				[note setInformativeText:infoText];
+				
                 [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:AIUserDefaultsLastSuccessfulSyncDateKey];
             }
 
