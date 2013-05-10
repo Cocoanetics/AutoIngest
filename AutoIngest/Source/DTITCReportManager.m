@@ -8,6 +8,7 @@
 
 #import "DTITCReportManager.h"
 #import "DTITCReportDownloadOperation.h"
+#import "ReportInformation.h"
 
 #import "AccountManager.h"
 #import "DTReachability.h"
@@ -527,9 +528,13 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 
 - (void)operation:(DTITCReportDownloadOperation *)operation didDownloadReportWithDate:(NSDate *)date
 {
-	NSString *key = [NSString stringWithFormat:@"%@ %@", NSStringFromITCReportDateType(operation.reportDateType), NSStringFromITCReportType(operation.reportType)];
+	// increment counter based on type
+	ReportInformation *reportInfo = [[ReportInformation alloc] init];
+	reportInfo.type = operation.reportType;
+	reportInfo.subType = operation.reportSubType;
+	reportInfo.dateType = operation.reportDateType;
 	
-	NSNumber *countNum = _syncStatsByType[key];
+	NSNumber *countNum = _syncStatsByType[reportInfo];
 	
 	if (countNum)
 	{
@@ -540,7 +545,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		countNum = @1;
 	}
 	
-	_syncStatsByType[key] = countNum;
+	_syncStatsByType[reportInfo] = countNum;
 }
 
 @end

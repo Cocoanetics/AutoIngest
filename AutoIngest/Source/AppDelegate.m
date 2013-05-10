@@ -14,6 +14,7 @@
 #import "StatusItemController.h"
 #import "ReportDownloadFolderMonitor.h"
 #import "ReportOrganizer.h"
+#import "ReportInformation.h"
 
 #if SPARKLE
 #import <Sparkle/Sparkle.h>
@@ -227,7 +228,7 @@
             }
             else
             {
-                [note setTitle:@"Report download complete"];
+                [note setTitle:@"Report Synching Complete"];
 				
 				NSString *infoText = nil;
 				
@@ -238,16 +239,16 @@
 					NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
 					
 					NSUInteger index = 0;
-					for (NSString *oneKey in statsDict)
+					for (ReportInformation *reportInfo in statsDict)
 					{
 						if (index)
 						{
 							[tmpString appendString:@", "];
 						}
 						
-						NSNumber *number = statsDict[oneKey];
+						NSNumber *countNum = statsDict[reportInfo];
 						
-						[tmpString appendFormat:@"%@ %@", number, oneKey];
+						[tmpString appendFormat:@"%@ %@ %@", countNum, [reportInfo dateTypeStringValue], [reportInfo typeStringValue]];
 						
 						index++;
 					}
