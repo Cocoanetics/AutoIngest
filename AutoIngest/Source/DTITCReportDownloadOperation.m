@@ -9,6 +9,8 @@
 #import "DTITCReportDownloadOperation.h"
 #import "GenericAccount.h"
 #import "DTZipArchive.h"
+#import "ReportFolderClassifier.h"
+#import "NSString+DTPaths.h"
 
 @implementation DTITCReportDownloadOperation
 {
@@ -49,7 +51,7 @@
 - (BOOL)_alreadyDownloadedReportForDate:(NSDate *)reportDate reportType:(ITCReportType)reportType reportDateType:(ITCReportDateType)reportDateType reportSubType:(ITCReportSubType)reportSubType
 {
 	NSAssert(_downloader, @"Need a downloader set");
-	
+
 	NSString *predictedZippedName = [_downloader predictedFileNameForDate:reportDate
 																		 reportType:_reportType
 																	reportDateType:_reportDateType
@@ -61,10 +63,15 @@
 																			reportDateType:_reportDateType
 																			 reportSubType:_reportSubType
 																				 compressed:NO];
-	
-	NSString *predictedZippedOutputPath = [_reportFolder stringByAppendingPathComponent:predictedZippedName];
-	NSString *predictedUnzippedOutputPath = [_reportFolder stringByAppendingPathComponent:predictedUnzippedName];
-	
+	NSString *folder = _reportFolder;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldAutoOrganizeReportsKey])
+    {
+        folder = [[[ReportFolderClassifier alloc] initWithBasePath:folder] pathForReportFileName:predictedZippedName];
+    }
+
+	NSString *predictedZippedOutputPath = [folder stringByAppendingPathComponent:predictedZippedName];
+	NSString *predictedUnzippedOutputPath = [folder stringByAppendingPathComponent:predictedUnzippedName];
+
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	
 	if ([fileManager fileExistsAtPath:predictedZippedOutputPath])
@@ -149,7 +156,16 @@
 												  return;
 											  }
 											  
-											  NSString *baseName = [fileName stringByReplacingOccurrencesOfString:@".txt.gz" withString:@""];
+											  NSString *baseName;
+											  
+											  if (_reportType == ITCReportTypeOptIn)
+											  {
+												  baseName = [fileName stringByReplacingOccurrencesOfString:@".zip" withString:@""];
+											  }
+											  else
+											  {
+												  baseName = [fileName stringByReplacingOccurrencesOfString:@".txt.gz" withString:@""];
+											  }
 											  
 											  // update actual report date
 											  NSString *dateFormat = NSStringWithDateFormatForITCReportDateType(_reportDateType);
@@ -179,45 +195,53 @@
 												  
 												  return;
 											  }
+
+											  
+											  if ([_delegate respondsToSelector:@selector(operation:didDownloadReportWithDate:)])
+											  {
+												  [_delegate operation:self didDownloadReportWithDate:reportDate];
+											  }
+											  
+											  NSLog(@"Downloaded Report %@", fileName);
+											  downloadedFiles++;
+
 											  
 											  // get current working directory
 											  NSString *outputPath = [_reportFolder stringByAppendingPathComponent:fileName];
 											  
-											  // write data to file
-											  NSError *writeError = nil;
-											  if ([data writeToFile:outputPath options:NSDataWritingAtomic error:&writeError])
+											  if (self.uncompressFiles)
 											  {
-												  NSLog(@"Downloaded Report %@", fileName);
-												  downloadedFiles++;
+												  // save the data to a temporary file
+												  NSString *tmpFilePath = [NSString pathForTemporaryFile];
 												  
-												  // optional uncompressing
-												  if (self.uncompressFiles)
+												  NSError *writeError = nil;
+												  if (![data writeToFile:tmpFilePath options:NSDataWritingAtomic error:&writeError])
 												  {
-													  NSString *uncompressedFilePath = [outputPath stringByDeletingLastPathComponent];
-													  
-													  DTZipArchive *zipArchive = [DTZipArchive archiveAtPath:outputPath];
-													  
-													  [zipArchive uncompressToPath:uncompressedFilePath completion:^(NSError *error) {
-														  if (error)
-														  {
-															  NSLog(@"Unzipping Error: %@", [error localizedDescription]);
-														  }
-														  else
-														  {
-															  NSFileManager *fileManager = [[NSFileManager alloc] init];
-															  
-															  NSError *removeError = nil;
-															  if (![fileManager removeItemAtPath:outputPath error:&removeError])
-															  {
-																  NSLog(@"Error removing file: %@", [removeError localizedDescription]);
-															  }
-														  }
-													  }];
+													  NSLog(@"%@", [writeError localizedDescription]);
+													  return;
 												  }
+												  
+												  DTZipArchive *zipArchive = [DTZipArchive archiveAtPath:tmpFilePath];
+												  
+												  [zipArchive enumerateUncompressedFilesAsDataUsingBlock:^(NSString *fileName, NSData *data, BOOL *stop) {
+													  NSError *writeError = nil;
+													  if (![data writeToFile:outputPath options:NSDataWritingAtomic error:&writeError])
+													  {
+														  NSLog(@"%@", [writeError localizedDescription]);
+													  }
+												  }];
+												  
+												  NSFileManager *fileManager = [[NSFileManager alloc] init];
+												  [fileManager removeItemAtPath:tmpFilePath error:NULL];
 											  }
 											  else
 											  {
-												  NSLog(@"%@", [writeError localizedDescription]);
+												  // write data to file
+												  NSError *writeError = nil;
+												  if (![data writeToFile:outputPath options:NSDataWritingAtomic error:&writeError])
+												  {
+													   NSLog(@"%@", [writeError localizedDescription]);
+												  }
 											  }
 										  }
 					 
@@ -237,13 +261,20 @@
 													 {
 														 _error = error; // invalid vendor id
 													 }
+													 else if ([[error localizedDescription] rangeOfString:@"selection"].location != NSNotFound)
+													 {
+														 NSLog(@"ITC reports no reports available for %@ %@ %@ %@", NSStringFromITCReportType(_reportType), NSStringFromITCReportSubType(_reportSubType), NSStringFromITCReportDateType(_reportDateType), [formatter stringFromDate:reportDate]);
+														 [self cancel]; // probably wrong download parameters cancel the operation for this combination of parameters
+													 }
+													 else
+													 {
+														 NSLog(@"%@", [error localizedDescription]);
+													 }
 													 
 													 if (_error && [_delegate respondsToSelector:@selector(operation:didFailWithError:)])
 													 {
 														 [_delegate operation:self didFailWithError:_error];
 													 }
-													 
-													 NSLog(@"%@", [error localizedDescription]);
 												 }])
 		{
 			// download succeeded for this date

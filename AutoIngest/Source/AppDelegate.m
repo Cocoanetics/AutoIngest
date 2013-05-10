@@ -12,6 +12,9 @@
 #import "DTITCReportManager.h"
 
 #import "StatusItemController.h"
+#import "ReportDownloadFolderMonitor.h"
+#import "ReportOrganizer.h"
+#import "ReportInformation.h"
 
 #if SPARKLE
 #import <Sparkle/Sparkle.h>
@@ -81,10 +84,15 @@
 
 	[nc addObserver:self selector:@selector(menuWillOpen:) name:AIMenuWillOpenNotification object:nil];
 
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldAutoSyncKey])
-	{
-		[reportManager startAutoSyncTimer];
-	}
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+    if ([defaults boolForKey:AIUserDefaultsShouldAutoOrganizeReportsKey])
+    {
+		[[ReportOrganizer sharedOrganizer] organizeAllReports];
+        [[ReportDownloadFolderMonitor sharedMonitor] startMonitoring];
+    }
+	
+    [nc addObserver:self selector:@selector(startStopDownloadFolderMonitor:) name:NSUserDefaultsDidChangeNotification object:nil];
 	
 	[self _startSparkleIfAvailable];
 }
@@ -92,6 +100,12 @@
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    ReportDownloadFolderMonitor *monitor = [ReportDownloadFolderMonitor sharedMonitor];
+    if ([monitor isMonitoring])
+    {
+         [monitor stopMonitoring];
+    }
 }
 
 #pragma mark - Sparkle
@@ -114,7 +128,7 @@
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-	if (menuItem.action == @selector(syncNow:))
+	if (menuItem.action == @selector(syncMenuItemAction:))
 	{
 		return [[DTITCReportManager sharedManager] canSync];
 	}
@@ -132,6 +146,12 @@
     }
     else
     {
+		if (![reportManager canSync])
+		{
+			NSLog(@"Report Manager reports unable to sync");
+			return;
+		}
+		
         [reportManager startSync];
         _syncMenuItem.title = NSLocalizedString(@"Stop sync", nil);
     }    
@@ -191,10 +211,12 @@
         
         _statusItemController.isSyncing = NO;
         _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
+		
+		NSDictionary *userInfo = [notification userInfo];
 
         if ([NSUserNotification class] && [NSUserNotificationCenter class])
         {
-            NSError *error = [notification userInfo][@"Error"];
+            NSError *error = userInfo[@"Error"];
 
             NSUserNotification *note = [[NSUserNotification alloc] init];
 
@@ -206,10 +228,40 @@
             }
             else
             {
-                [note setTitle:@"AutoIngest"];
-                NSString *infoText = [NSString stringWithFormat:@"Report download complete"];
-                [note setInformativeText:infoText];
-
+                [note setTitle:@"Report Synching Complete"];
+				
+				NSString *infoText = nil;
+				
+				NSDictionary *statsDict = userInfo[@"Stats"];
+				
+				if ([statsDict count])
+				{
+					NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
+					
+					NSUInteger index = 0;
+					for (ReportInformation *reportInfo in statsDict)
+					{
+						if (index)
+						{
+							[tmpString appendString:@", "];
+						}
+						
+						NSNumber *countNum = statsDict[reportInfo];
+						
+						[tmpString appendFormat:@"%@ %@ %@", countNum, [reportInfo dateTypeStringValue], [reportInfo typeStringValue]];
+						
+						index++;
+					}
+					
+					infoText = tmpString;
+				}
+				else
+				{
+					infoText = @"No Reports Downloaded";
+				}
+				
+				[note setInformativeText:infoText];
+				
                 [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:AIUserDefaultsLastSuccessfulSyncDateKey];
             }
 
@@ -217,6 +269,21 @@
             [center deliverNotification:note];
         }
     });
+}
+
+- (void)startStopDownloadFolderMonitor:(NSNotification *)notification
+{
+    BOOL shouldOrganize = [[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldAutoOrganizeReportsKey];
+    ReportDownloadFolderMonitor *monitor = [ReportDownloadFolderMonitor sharedMonitor];
+    if (shouldOrganize)
+    {
+        [[ReportOrganizer sharedOrganizer] organizeAllReports];
+        [monitor startMonitoring];
+    }
+    else if ([monitor isMonitoring])
+    {
+        [monitor stopMonitoring];
+    }
 }
 
 #pragma mark - Sparkle Delegate

@@ -6,8 +6,6 @@
 //
 //
 
-#import <Cocoa/Cocoa.h>
-
 @interface PreferencesWindowController : NSWindowController
 
 @property (nonatomic, strong) NSString *username;
@@ -20,4 +18,5 @@
 @property (nonatomic, strong) NSColor *vendorIdColor;
 @property (nonatomic, assign) BOOL sparkleEnabled;
 
+@property (weak) IBOutlet NSTextField *reportsHelpText;
 @end
