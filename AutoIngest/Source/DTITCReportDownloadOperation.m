@@ -243,41 +243,6 @@
 													   NSLog(@"%@", [writeError localizedDescription]);
 												  }
 											  }
-											  
-											  // write data to file
-											  NSError *writeError = nil;
-											  if ([data writeToFile:outputPath options:NSDataWritingAtomic error:&writeError])
-											  {
-												  
-												  // optional uncompressing
-												  if (self.uncompressFiles)
-												  {
-													  NSString *uncompressedFilePath = [outputPath stringByDeletingLastPathComponent];
-													  
-													  DTZipArchive *zipArchive = [DTZipArchive archiveAtPath:outputPath];
-													  
-													  [zipArchive uncompressToPath:uncompressedFilePath completion:^(NSError *error) {
-														  if (error)
-														  {
-															  NSLog(@"Unzipping Error: %@", [error localizedDescription]);
-														  }
-														  else
-														  {
-															  NSFileManager *fileManager = [[NSFileManager alloc] init];
-															  
-															  NSError *removeError = nil;
-															  if (![fileManager removeItemAtPath:outputPath error:&removeError])
-															  {
-																  NSLog(@"Error removing file: %@", [removeError localizedDescription]);
-															  }
-														  }
-													  }];
-												  }
-											  }
-											  else
-											  {
-												  NSLog(@"%@", [writeError localizedDescription]);
-											  }
 										  }
 					 
 												 errorHandler:^(NSError *error) {
