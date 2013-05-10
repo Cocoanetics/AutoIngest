@@ -64,6 +64,19 @@
 	
 	// enable update button if we have Sparkle
 	[self.updateButton setEnabled:self.sparkleEnabled];
+	
+	// add link to iTC Report guide to help text
+	
+	NSMutableAttributedString *attributedString = [self.reportsHelpText.attributedStringValue mutableCopy];
+	NSRange linkRange = [[attributedString string] rangeOfString:@"iTunes Connect Reporting Guide"];
+	NSURL *URL = [NSURL URLWithString:@"http://www.apple.com/itunesnews/docs/AppStoreReportingInstructions.pdf"];
+	[attributedString addAttribute:NSLinkAttributeName value:URL range:linkRange];
+    [attributedString addAttribute:NSForegroundColorAttributeName value:[NSColor blueColor] range:linkRange];
+    [attributedString addAttribute:
+	 NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSSingleUnderlineStyle] range:linkRange];
+    [self.reportsHelpText setAllowsEditingTextAttributes: YES];
+    [self.reportsHelpText setSelectable: YES];
+	self.reportsHelpText.attributedStringValue = attributedString;
 }
 
 - (void)_createAccountIfNecessary
