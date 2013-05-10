@@ -83,8 +83,13 @@
 
 	[nc addObserver:self selector:@selector(menuWillOpen:) name:AIMenuWillOpenNotification object:nil];
 
-	// no need to start defaults-based services, they will be started through defaults registration 
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
+    if ([defaults boolForKey:AIUserDefaultsShouldAutoOrganizeReportsKey])
+    {
+		[[ReportOrganizer sharedOrganizer] organizeAllReports];
+        [[ReportDownloadFolderMonitor sharedMonitor] startMonitoring];
+    }
 	
     [nc addObserver:self selector:@selector(startStopDownloadFolderMonitor:) name:NSUserDefaultsDidChangeNotification object:nil];
 	
