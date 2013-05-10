@@ -144,6 +144,8 @@
 		A7D8C7DF1723FD5D00025675 /* LastSyncDateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */; };
 		A7DD30EE173D15B7005B4CC8 /* libDTFoundation_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C79F172316BE00025675 /* libDTFoundation_Mac.a */; };
 		A7DD30EF173D15BD005B4CC8 /* libDTFoundation_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C79F172316BE00025675 /* libDTFoundation_Mac.a */; };
+		A7DD30F9173D18F4005B4CC8 /* icon.iconset in Resources */ = {isa = PBXBuildFile; fileRef = A7DD30F8173D18F4005B4CC8 /* icon.iconset */; };
+		A7DD30FA173D18F4005B4CC8 /* icon.iconset in Resources */ = {isa = PBXBuildFile; fileRef = A7DD30F8173D18F4005B4CC8 /* icon.iconset */; };
 		B3D043B6512F71D5175266EF /* ReportInformationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D04B6B23093F558AEB21A7 /* ReportInformationTests.m */; };
 		B3D04B9FCD64FB689ADC5E01 /* ReportInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D04C30F0858A14CBE3058A /* ReportInformation.m */; };
 		BA6D19073710E05AA752824B /* ReportDownloadFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6D1E9F111DBF987D2A1482 /* ReportDownloadFolderMonitor.m */; };
@@ -447,6 +449,7 @@
 		A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		A7D8C7DD1723FD5C00025675 /* LastSyncDateValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastSyncDateValueTransformer.h; sourceTree = "<group>"; };
 		A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastSyncDateValueTransformer.m; sourceTree = "<group>"; };
+		A7DD30F8173D18F4005B4CC8 /* icon.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = icon.iconset; sourceTree = "<group>"; };
 		B3D044D9567E7785CEAF75FB /* ReportInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportInformation.h; sourceTree = "<group>"; };
 		B3D04B6B23093F558AEB21A7 /* ReportInformationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportInformationTests.m; sourceTree = "<group>"; };
 		B3D04C30F0858A14CBE3058A /* ReportInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportInformation.m; sourceTree = "<group>"; };
@@ -598,6 +601,7 @@
 		A7175E44172147800031058F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A7DD310C173D194C005B4CC8 /* App Icon */,
 				A7D4A1A617286BF40042D0D1 /* Status Icon */,
 				A7175E52172148AA0031058F /* Credits.rtf */,
 				A7175E4B1721488A0031058F /* MainMenu.xib */,
@@ -753,6 +757,14 @@
 				A7D8C7881722D6BA00025675 /* DTITCReportDownloadOperation.m */,
 			);
 			name = "Report Manager";
+			sourceTree = "<group>";
+		};
+		A7DD310C173D194C005B4CC8 /* App Icon */ = {
+			isa = PBXGroup;
+			children = (
+				A7DD30F8173D18F4005B4CC8 /* icon.iconset */,
+			);
+			name = "App Icon";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1054,6 +1066,7 @@
 				3D98E6B3172FE2DC002F1C95 /* AutoIngest Animation 39 Template.pdf in Resources */,
 				3D98E6B4172FE2DC002F1C95 /* AutoIngest Animation 44 Template.pdf in Resources */,
 				3D98E6B5172FE2DC002F1C95 /* AutoIngest Animation 00 Template.pdf in Resources */,
+				A7DD30F9173D18F4005B4CC8 /* icon.iconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1105,6 +1118,7 @@
 				A76B51431733B21E00807B82 /* AutoIngest Animation 44 Template.pdf in Resources */,
 				A76B51441733B21E00807B82 /* AutoIngest Animation 00 Template.pdf in Resources */,
 				A76B514E1733BF6B00807B82 /* dsa_pub.pem in Resources */,
+				A7DD30FA173D18F4005B4CC8 /* icon.iconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
