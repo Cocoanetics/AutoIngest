@@ -155,7 +155,16 @@
 												  return;
 											  }
 											  
-											  NSString *baseName = [fileName stringByReplacingOccurrencesOfString:@".txt.gz" withString:@""];
+											  NSString *baseName;
+											  
+											  if (_reportType == ITCReportTypeOptIn)
+											  {
+												  baseName = [fileName stringByReplacingOccurrencesOfString:@".zip" withString:@""];
+											  }
+											  else
+											  {
+												  baseName = [fileName stringByReplacingOccurrencesOfString:@".txt.gz" withString:@""];
+											  }
 											  
 											  // update actual report date
 											  NSString *dateFormat = NSStringWithDateFormatForITCReportDateType(_reportDateType);
