@@ -41,6 +41,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
     SCNetworkConnectionFlags _connectionFlags;
     
     BOOL _waitingForConnectionToSync;
+	
+	NSMutableDictionary *
 }
 
 + (DTITCReportManager *)sharedManager
