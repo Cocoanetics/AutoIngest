@@ -107,21 +107,16 @@
 			{
 				continue;
 			}
-
+			
             NSURL *destFile = [[NSURL fileURLWithPath:destination] URLByAppendingPathComponent:fileName];
 			
-            if ([fileManager fileExistsAtPath:[destFile path]])
+			// move the report into the structure
+            if (![fileManager fileExistsAtPath:[destFile path]])
 			{
-				NSLog(@"Report Cannot move %@ to %@ as there already exists a report there", fileName, destination);
-			}
-			else
-            {
-				// move the report into the structure
                 [self _moveFileAtURL:path toURL:destFile];
-            }
-        }
-    }
-
+			}
+		}
+	}
 }
 
 - (void)defaultsDidUpdate:(NSNotification *)notification
@@ -133,7 +128,6 @@
         _downloadFolder = reportFolder;
     }
 }
-
 
 #pragma mark - Private Methods
 
