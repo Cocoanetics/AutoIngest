@@ -129,4 +129,53 @@ static NSCache *_cache;
     }
 }
 
+- (NSUInteger)hash
+{
+	NSString *key = [NSString stringWithFormat:@"%@-%@-%@-%ld", [self typeStringValue], [self subTypeStringValue], [self dateTypeStringValue], (long)self.vendorId];
+	return [key hash];
+}
+
+- (BOOL)isEqual:(ReportInformation *)object
+{
+	if (![object isKindOfClass:[ReportInformation class]])
+	{
+		return NO;
+	}
+	
+	if (self.vendorId != object.vendorId)
+	{
+		return NO;
+	}
+	
+	if (self.type != object.type)
+	{
+		return NO;
+	}
+	
+	if (self.subType != object.subType)
+	{
+		return NO;
+	}
+	
+	if (self.dateType != object.dateType)
+	{
+		return NO;
+	}
+	
+	return YES;
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+	ReportInformation *newObject = [[ReportInformation allocWithZone:zone] init];
+	newObject.type = self.type;
+	newObject.subType = self.subType;
+	newObject.dateType = self.dateType;
+	newObject.vendorId = self.vendorId;
+	
+	return newObject;
+}
+
 @end

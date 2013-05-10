@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-@interface ReportInformation : NSObject
+@interface ReportInformation : NSObject <NSCopying>
 
 + (BOOL)isFileNameAReport:(NSString *)fileName;
 + (ReportInformation *)reportInformationFromFileName:(NSString *)fileName;
