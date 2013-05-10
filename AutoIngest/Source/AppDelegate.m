@@ -127,7 +127,7 @@
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-	if (menuItem.action == @selector(syncNow:))
+	if (menuItem.action == @selector(syncMenuItemAction:))
 	{
 		return [[DTITCReportManager sharedManager] canSync];
 	}
@@ -145,6 +145,12 @@
     }
     else
     {
+		if (![reportManager canSync])
+		{
+			NSLog(@"Report Manager reports unable to sync");
+			return;
+		}
+		
         [reportManager startSync];
         _syncMenuItem.title = NSLocalizedString(@"Stop sync", nil);
     }    
