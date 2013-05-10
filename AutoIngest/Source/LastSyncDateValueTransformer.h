@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface LastSyncDateValueTransformer : NSValueTransformer
 
 @end

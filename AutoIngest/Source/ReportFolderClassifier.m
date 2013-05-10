@@ -1,25 +1,28 @@
 //
+//  ReportFolderClassifier.m
+//  AutoIngest
+//
 //  Created by Felipe Cypriano on 22/04/13.
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-
 #import "ReportFolderClassifier.h"
 #import "ReportInformation.h"
 
-
-@implementation ReportFolderClassifier {
-
+@implementation ReportFolderClassifier
+{
     NSString *_basePath;
 }
 
 - (id)initWithBasePath:(NSString *)basePath
 {
     self = [self init];
+	
     if (self)
     {
         self.basePath = [basePath copy];
     }
+	
     return self;
 }
 
@@ -27,6 +30,7 @@
 {
     NSString *path;
     ReportInformation *reportInfo = [ReportInformation reportInformationFromFileName:fileName];
+	
     if (reportInfo)
     {
         path = [self.basePath stringByAppendingFormat:@"%li/%@/%@/%@/",
@@ -61,6 +65,5 @@
 {
     return _basePath != nil ? _basePath : @"";
 }
-
 
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "StatusItemController.h"
-#import <QuartzCore/QuartzCore.h>
 
 NSString * const AIMenuWillOpenNotification = @"AIMenuWillOpenNotification";
 
