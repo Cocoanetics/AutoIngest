@@ -346,6 +346,21 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	{
 		hasWorkToDo = YES;
 	}
+
+	if ([defaults boolForKey:@"DownloadOptInWeekly"])
+	{
+		hasWorkToDo = YES;
+	}
+
+	if ([defaults boolForKey:@"DownloadNewsstandDaily"])
+	{
+		hasWorkToDo = YES;
+	}
+	
+	if ([defaults boolForKey:@"DownloadNewsstandWeekly"])
+	{
+		hasWorkToDo = YES;
+	}
 	
 	if (!hasWorkToDo)
 	{
