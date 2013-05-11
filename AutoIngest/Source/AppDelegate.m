@@ -142,7 +142,6 @@
     if (reportManager.isSynching)
     {
         [reportManager stopSync];
-        _syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
     }
     else
     {
@@ -153,7 +152,6 @@
 		}
 		
         [reportManager startSync];
-        _syncMenuItem.title = NSLocalizedString(@"Stop sync", nil);
     }    
 }
 
@@ -203,10 +201,15 @@
 - (void)syncDidStart:(NSNotification *)notification
 {
     _statusItemController.isSyncing = YES;
+	
+	_syncMenuItem.title = NSLocalizedString(@"Stop sync", nil);
 }
 
 - (void)syncDidFinish:(NSNotification *)notification
 {
+	_syncMenuItem.title = NSLocalizedString(@"Sync now", nil);
+
+	
     dispatch_async(dispatch_get_main_queue(), ^{
         
         _statusItemController.isSyncing = NO;
