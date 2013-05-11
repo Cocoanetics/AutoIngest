@@ -62,25 +62,36 @@ void eventStreamCallback(ConstFSEventStreamRef streamRef, void *clientCallBackIn
 {
 	@synchronized(self)
 	{
-        if (_isMonitoring)
+		if (_isMonitoring)
 		{
 			return;
 		}
-
-        CFArrayRef pathsToWatch = (__bridge CFArrayRef) @[_downloadFolder];
-        _eventStream = FSEventStreamCreate(NULL,
-                &eventStreamCallback,
-                NULL,
-                pathsToWatch,
-                kFSEventStreamEventIdSinceNow,
-                10.0,
-                kFSEventStreamCreateFlagNone);
-
-        FSEventStreamScheduleWithRunLoop(_eventStream, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
-        FSEventStreamStart(_eventStream);
-
-        _isMonitoring = YES;
-    }
+		
+		// check if folder to watch exists
+		NSFileManager *fileManager = [[NSFileManager alloc] init];
+		
+		BOOL isDirectory = NO;
+		if (![fileManager fileExistsAtPath:_downloadFolder isDirectory:&isDirectory] || !isDirectory)
+		{
+			NSLog(@"Cannot watch report folder at %@ because it doesn't exist or is not a folder", _downloadFolder);
+			return;
+		}
+		
+		
+		CFArrayRef pathsToWatch = (__bridge CFArrayRef) @[_downloadFolder];
+		_eventStream = FSEventStreamCreate(NULL,
+													  &eventStreamCallback,
+													  NULL,
+													  pathsToWatch,
+													  kFSEventStreamEventIdSinceNow,
+													  10.0,
+													  kFSEventStreamCreateFlagNone);
+		
+		FSEventStreamScheduleWithRunLoop(_eventStream, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
+		FSEventStreamStart(_eventStream);
+		
+		_isMonitoring = YES;
+	}
 }
 
 - (void)stopMonitoring
