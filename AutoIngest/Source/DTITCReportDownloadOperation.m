@@ -211,6 +211,12 @@
 											  
 											  if (self.uncompressFiles)
 											  {
+												  // remove gz extension from final name
+												  if ([outputPath hasSuffix:@".gz"])
+												  {
+													  outputPath = [outputPath substringWithRange:NSMakeRange(0, [outputPath length]-3)];
+												  }
+												  
 												  // save the data to a temporary file
 												  NSString *tmpFilePath = [NSString pathForTemporaryFile];
 												  
