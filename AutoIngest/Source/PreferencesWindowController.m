@@ -9,13 +9,14 @@
 #import "PreferencesWindowController.h"
 
 #import "AccountManager.h"
-#import "GenericAccount.h"
+
 
 @interface PreferencesWindowController ()
 
 @property (nonatomic, strong) GenericAccount *account;
 
 @end
+
 
 @implementation PreferencesWindowController
 {
@@ -37,10 +38,45 @@
         {
             // initially only one account is supported
             _account = accounts[0];
+            self.vendorId = [[NSUserDefaults standardUserDefaults] valueForKey:@"DownloadVendorID"];
+            
+            [self validateUsername];
+            [self validateVendorId];
+            
+            [self addObserver:self forKeyPath:@"username" options:NSKeyValueObservingOptionNew context:nil];
+            [self addObserver:self forKeyPath:@"vendorId" options:NSKeyValueObservingOptionNew context:nil];
         }
     }
 	
     return self;
+}
+
+- (void)awakeFromNib
+{
+	// set version
+	NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+	
+	NSString *marketingVersion = infoDictionary[@"CFBundleShortVersionString"];
+	NSString *buildVersion = infoDictionary[@"CFBundleVersion"];
+	
+	NSString *version = [NSString stringWithFormat:@"Version %@ (%@)", marketingVersion, buildVersion];
+	self.versionLabel.stringValue = version;
+	
+	// enable update button if we have Sparkle
+	[self.updateButton setEnabled:self.sparkleEnabled];
+	
+	// add link to iTC Report guide to help text
+	
+	NSMutableAttributedString *attributedString = [self.reportsHelpText.attributedStringValue mutableCopy];
+	NSRange linkRange = [[attributedString string] rangeOfString:@"iTunes Connect Reporting Guide"];
+	NSURL *URL = [NSURL URLWithString:@"http://www.apple.com/itunesnews/docs/AppStoreReportingInstructions.pdf"];
+	[attributedString addAttribute:NSLinkAttributeName value:URL range:linkRange];
+    [attributedString addAttribute:NSForegroundColorAttributeName value:[NSColor blueColor] range:linkRange];
+    [attributedString addAttribute:
+	 NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSSingleUnderlineStyle] range:linkRange];
+    [self.reportsHelpText setAllowsEditingTextAttributes: YES];
+    [self.reportsHelpText setSelectable: YES];
+	self.reportsHelpText.attributedStringValue = attributedString;
 }
 
 - (void)_createAccountIfNecessary
@@ -56,6 +92,50 @@
     }
 }
 
+
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"username" context:nil];
+    [self removeObserver:self forKeyPath:@"vendorId" context:nil];
+}
+
+
+#pragma mark - KVO
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"username"])
+    {
+        [self validateUsername];
+    }
+    else if ([keyPath isEqualToString:@"vendorId"])
+    {
+        [self validateVendorId];
+        [[NSUserDefaults standardUserDefaults] setValue:self.vendorId forKey:@"DownloadVendorID"];
+    }
+}
+
+
+#pragma mark - Validation
+
+
+- (void)validateUsername
+{
+    NSString *emailRegEx = @".+@.+\\.[A-Za-z]{2}[A-Za-z]*";
+    NSPredicate *emailPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
+    self.usernameColor = [emailPredicate evaluateWithObject:self.username] ? [NSColor textColor] : [NSColor redColor];
+}
+
+
+- (void)validateVendorId
+{
+    NSString *vendorRegEx = @"8\\d{7}";
+    NSPredicate *vendorIdPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", vendorRegEx];
+    self.vendorIdColor = [vendorIdPredicate evaluateWithObject:self.vendorId] ? [NSColor textColor] : [NSColor redColor];
+}
+
+
 #pragma mark - Actions
 
 - (IBAction)chooseDownloadFolder:(id)sender
@@ -68,7 +148,7 @@
     openPanel.prompt = @"Choose";
     
     // set default path
-    NSString *path = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadFolderPath"];
+    NSString *path = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsDownloadFolderPathKey];
     NSURL *URL = [NSURL fileURLWithPath:path];
     if (URL)
     {
@@ -81,7 +161,7 @@
 		if (result == NSFileHandlingPanelOKButton)
 		{
             NSString *path = [[openPanel URL] path];
-            [[NSUserDefaults standardUserDefaults] setObject:path forKey:@"DownloadFolderPath"];
+            [[NSUserDefaults standardUserDefaults] setObject:path forKey:AIUserDefaultsDownloadFolderPathKey];
 		}
 	}];
 }

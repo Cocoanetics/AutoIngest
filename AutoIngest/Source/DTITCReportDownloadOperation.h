@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Cocoanetics. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import "DTITC.h"
 
 @class GenericAccount;
@@ -17,6 +15,9 @@
 
 @optional
 - (void)operation:(DTITCReportDownloadOperation *)operation didFailWithError:(NSError *)error;
+
+// informs the delegate of a completed download. The other parameters are available via properties
+- (void)operation:(DTITCReportDownloadOperation *)operation didDownloadReportWithDate:(NSDate *)date;
 
 @end
 
@@ -30,5 +31,9 @@
 @property (nonatomic, assign) BOOL uncompressFiles;
 
 @property (nonatomic, weak) id <DTITCReportDownloadOperationDelegate> delegate;
+
+@property (nonatomic, readonly) ITCReportType reportType;
+@property (nonatomic, readonly) ITCReportSubType reportSubType;
+@property (nonatomic, readonly) ITCReportDateType reportDateType;
 
 @end

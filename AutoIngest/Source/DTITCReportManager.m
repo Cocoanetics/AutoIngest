@@ -8,8 +8,13 @@
 
 #import "DTITCReportManager.h"
 #import "DTITCReportDownloadOperation.h"
+#import "ReportInformation.h"
 
 #import "AccountManager.h"
+#import "DTReachability.h"
+
+#import <SystemConfiguration/SystemConfiguration.h>
+#import <arpa/inet.h>
 
 static DTITCReportManager *_sharedInstance = nil;
 
@@ -31,6 +36,15 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	NSOperationQueue *_queue;
 	
 	NSTimer *_autoSyncTimer;
+    
+    // Reachability
+    id _reachabilityObserver;
+    SCNetworkConnectionFlags _connectionFlags;
+    
+    BOOL _waitingForConnectionToSync;
+
+	// synching statistics
+	NSMutableDictionary *_syncStatsByType;
 }
 
 + (DTITCReportManager *)sharedManager
@@ -55,8 +69,39 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		// load initial defaults
 		[self defaultsDidUpdate:nil];
 		
+        
 		// observe for defaults changes, e.g. download path
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(defaultsDidUpdate:) name:NSUserDefaultsDidChangeNotification object:nil];
+        
+        // observe if the machine wakes from sleep
+        [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(machineDidWakeUp:) name:NSWorkspaceDidWakeNotification object:nil];
+        
+        // Reachability
+        __weak DTITCReportManager *weakself = self;
+        
+        _reachabilityObserver = [DTReachability addReachabilityObserverWithBlock:^(SCNetworkConnectionFlags connectionFlags) {
+            
+            // assign to strong first
+            DTITCReportManager *manager = weakself;
+            manager->_connectionFlags = connectionFlags;
+            
+            BOOL hasConnection = [manager _hasInternetConnection];
+            
+            if (hasConnection)
+            {
+                NSLog(@"Has Internet Connection");
+            }
+            else
+            {
+                NSLog(@"NO Internet Connection");
+            }
+            
+            if (manager->_waitingForConnectionToSync && hasConnection)
+            {
+                NSLog(@"Internet became available and waiting for that to sync");
+                [manager startSync];
+            }
+        }];
 	}
 	
 	return self;
@@ -65,13 +110,21 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
+    
+    [DTReachability removeReachabilityObserver:_reachabilityObserver];
 }
-
 
 - (void)_downloadAllReportsOfType:(ITCReportType)reportType subType:(ITCReportSubType)reportSubType dateType:(ITCReportDateType)reportDateType fromAccount:(GenericAccount *)account
 {
 	DTITCReportDownloadOperation *op = [[DTITCReportDownloadOperation alloc] initForReportsOfType:reportType subType:reportSubType dateType:reportDateType fromAccount:account vendorID:_vendorID intoFolder:_reportFolder];
-	op.uncompressFiles = [[NSUserDefaults standardUserDefaults] boolForKey:@"UncompressReports"];
+	
+	// uncompressing not supported for password-protected opt-in reports yet
+	if (reportType != ITCReportTypeOptIn)
+	{
+		op.uncompressFiles = [[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldUncompressReportsKey];
+	}
+	
 	op.delegate = self;
 	
 	[_queue addOperation:op];
@@ -79,14 +132,21 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 
 - (void)_reportCompletionWithError:(NSError *)error
 {
-	NSDictionary *userInfo = nil;
+	NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
 	
 	if (error)
 	{
-		userInfo = @{@"Error": _error};
+		userInfo[@"Error"] = _error;
+	}
+	
+	if (_syncStatsByType)
+	{
+		userInfo[@"Stats"] = _syncStatsByType;
 	}
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:DTITCReportManagerSyncDidFinishNotification object:self userInfo:userInfo];
+    
+    NSLog(@"==== Report Synching Completed");
 }
 
 - (void)startSync
@@ -105,6 +165,9 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	
 	// reset error status
 	self.error = nil;
+    
+    _waitingForConnectionToSync = NO;
+	_syncStatsByType = [[NSMutableDictionary alloc] init];
 	
 	NSArray *accounts = [[AccountManager sharedAccountManager] accountsOfType:@"iTunes Connect"];
 	
@@ -161,6 +224,27 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	if ([defaults boolForKey:@"DownloadYearly"])
 	{
 		[self _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeYearly fromAccount:account];
+		
+		hasWorkToDo = YES;
+	}
+	
+	if ([defaults boolForKey:@"DownloadOptInWeekly"])
+	{
+		[self _downloadAllReportsOfType:ITCReportTypeOptIn subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeWeekly fromAccount:account];
+		
+		hasWorkToDo = YES;
+	}
+	
+	if ([defaults boolForKey:@"DownloadNewsstandDaily"])
+	{
+		[self _downloadAllReportsOfType:ITCReportTypeNewsstand subType:ITCReportSubTypeDetailed dateType:ITCReportDateTypeDaily fromAccount:account];
+		
+		hasWorkToDo = YES;
+	}
+	
+	if ([defaults boolForKey:@"DownloadNewsstandWeekly"])
+	{
+		[self _downloadAllReportsOfType:ITCReportTypeNewsstand subType:ITCReportSubTypeDetailed dateType:ITCReportDateTypeWeekly fromAccount:account];
 		
 		hasWorkToDo = YES;
 	}
@@ -223,7 +307,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		return NO;
 	}
 	
-	NSString *vendorID = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadVendorID"];
+	NSString *vendorID = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsVendoIDKey];
 	
 	// vendor ID must be only digits
 	if ([[vendorID stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"0123456789"]] length])
@@ -236,7 +320,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		return NO;
 	}
 	
-	NSString *reportFolder = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadFolderPath"];
+	NSString *reportFolder = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsDownloadFolderPathKey];
 	BOOL isDirectory = NO;
 	if ([[NSFileManager defaultManager] fileExistsAtPath:reportFolder isDirectory:&isDirectory])
 	{
@@ -272,8 +356,28 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	{
 		hasWorkToDo = YES;
 	}
+
+	if ([defaults boolForKey:@"DownloadOptInWeekly"])
+	{
+		hasWorkToDo = YES;
+	}
+
+	if ([defaults boolForKey:@"DownloadNewsstandDaily"])
+	{
+		hasWorkToDo = YES;
+	}
+	
+	if ([defaults boolForKey:@"DownloadNewsstandWeekly"])
+	{
+		hasWorkToDo = YES;
+	}
 	
 	if (!hasWorkToDo)
+	{
+		return NO;
+	}
+	
+	if (![self _hasInternetConnection])
 	{
 		return NO;
 	}
@@ -281,14 +385,27 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	return YES;
 }
 
+- (BOOL)_hasInternetConnection
+{
+    BOOL isReachable = ((_connectionFlags & kSCNetworkFlagsReachable) != 0);
+    BOOL needsConnection = ((_connectionFlags & kSCNetworkFlagsConnectionRequired) != 0);
+    return (isReachable && !needsConnection);
+}
+
 #pragma mark - Auto Sync
 - (void)startAutoSyncTimer
 {
-	[_autoSyncTimer invalidate];
-	
-	_autoSyncTimer = [NSTimer scheduledTimerWithTimeInterval:24*60*60 target:self selector:@selector(_autoSyncTimer:) userInfo:nil repeats:YES];
-	
-	NSLog(@"AutoSync Timer enabled");
+    [_autoSyncTimer invalidate];
+    
+    // check every hour if the auto-sync criteria is met
+    _autoSyncTimer = [NSTimer scheduledTimerWithTimeInterval:60*60 target:self selector:@selector(_startAutoSyncIfNecessary) userInfo:nil repeats:YES];
+    
+    NSLog(@"AutoSync Timer enabled");
+
+    // do that on next run loop for notifications to have a chance to be received
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self _startAutoSyncIfNecessary];
+    });
 }
 
 - (void)stopAutoSyncTimer
@@ -299,9 +416,52 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	NSLog(@"AutoSync Timer disabled");
 }
 
-- (void)_autoSyncTimer:(NSTimer *)timer
+// starts synching if there was never a sync or the last successful sync is longer than 24 hours ago
+- (void)_startAutoSyncIfNecessary
 {
-	[self startSync];
+    if (_isSynching)
+    {
+        return;
+    }
+    
+    NSDate *lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadLastSuccessfulSync"];
+
+    if (lastSyncDate)
+    {
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDate *now =[NSDate date];
+        NSDateComponents *lastSyncComps = [gregorian components:NSDayCalendarUnit fromDate:lastSyncDate];
+        NSDateComponents *nowComps = [gregorian components:NSDayCalendarUnit fromDate:now];
+        NSDateComponents *diffComps = [gregorian components:NSDayCalendarUnit fromDate:lastSyncDate toDate:now options:0];
+        
+        if (lastSyncComps.day != nowComps.day)
+        {
+            // different date, only sync if its at least the same hour in day or later
+            if (diffComps.day <= 1 && nowComps.hour < lastSyncComps.hour)
+            {
+                // less than a day
+                return;
+            }
+            
+            // either last sync is longer then 1 day or its a later hour in the day than last sync on day before
+        }
+        else
+        {
+            // same date, never sync
+            return;
+        }
+    }
+    
+    if ([self _hasInternetConnection])
+    {
+        NSLog(@"Last Sync longer than 24 hours ago, starting sync now");
+        [self startSync];
+    }
+    else
+    {
+        NSLog(@"Last Sync longer than 24 hours ago, but no internet connection, deferring sync");
+        _waitingForConnectionToSync = YES;
+    }
 }
 
 #pragma mark - Notifications
@@ -311,8 +471,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	
 	BOOL needsToStopSync = NO;
 	
-	NSString *reportFolder = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadFolderPath"];
-	NSString *vendorID = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadVendorID"];
+	NSString *reportFolder = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsDownloadFolderPathKey];
+	NSString *vendorID = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsVendoIDKey];
    
 	if (![_reportFolder isEqualToString:reportFolder])
 	{
@@ -336,7 +496,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		[self stopSync];
 	}
 	
-	BOOL needsAutoSync = [[NSUserDefaults standardUserDefaults] boolForKey:@"DownloadAutoSync"];
+	BOOL needsAutoSync = [[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldAutoSyncKey];
 	BOOL hasActiveTimer = (_autoSyncTimer!=nil);
 	
 	if (needsAutoSync != hasActiveTimer)
@@ -352,6 +512,11 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	}
 }
 
+- (void)machineDidWakeUp:(NSNotification *)notification
+{
+    [self _startAutoSyncIfNecessary];
+}
+
 #pragma mark - DTITCReportDownloadOperation Delegate
 
 - (void)operation:(DTITCReportDownloadOperation *)operation didFailWithError:(NSError *)error
@@ -361,5 +526,26 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	[self stopSync];
 }
 
+- (void)operation:(DTITCReportDownloadOperation *)operation didDownloadReportWithDate:(NSDate *)date
+{
+	// increment counter based on type
+	ReportInformation *reportInfo = [[ReportInformation alloc] init];
+	reportInfo.type = operation.reportType;
+	reportInfo.subType = operation.reportSubType;
+	reportInfo.dateType = operation.reportDateType;
+	
+	NSNumber *countNum = _syncStatsByType[reportInfo];
+	
+	if (countNum)
+	{
+		countNum = @([countNum integerValue]+1);
+	}
+	else
+	{
+		countNum = @1;
+	}
+	
+	_syncStatsByType[reportInfo] = countNum;
+}
 
 @end

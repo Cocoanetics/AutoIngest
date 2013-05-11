@@ -16,12 +16,12 @@ To Do
 - ~~animate this icon while downloading is occuring~~
 - ~~change the "Sync Now" menu option to "Stop Sync" during download~~
 - provide an app icon for the app
-- Add downloading on a timer
+- ~~Add downloading on a timer~~
 - Add counting of how many items where downloaded per type during a sync session
 - report these via the didFinishNotification and output them in the user notification
 - add UI to configure multiple accounts + Vendor IDs
 - add support for Opt-In and Newsstand reports (I have no reports there so I cannot test them)
-- add option to organize report folder: Vendor_ID/ReportType/ReportSubType/ReportDateType
+- ~~add option to organize report folder: Vendor_ID/ReportType/ReportSubType/ReportDateType~~
 - add Sparkle and automatic updating with Developer ID
 
 If you have an idea that is not in this list, then please ask before getting to work on it.

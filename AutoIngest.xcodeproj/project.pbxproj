@@ -7,11 +7,56 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1DA477A91723F36D0048EACA /* MenuItem.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA477A81723F36D0048EACA /* MenuItem.png */; };
 		1DA477B81723FB4C0048EACA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA477B71723FB4C0048EACA /* QuartzCore.framework */; };
-		1DA477BB1723FDFB0048EACA /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA477BA1723FDFB0048EACA /* StatusItemView.m */; };
-		1DA477BD1723FF820048EACA /* MenuItemAlt.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DA477BC1723FF820048EACA /* MenuItemAlt.png */; };
+		1DA477BB1723FDFB0048EACA /* StatusItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA477BA1723FDFB0048EACA /* StatusItemController.m */; };
 		1DA477E2172481240048EACA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DA477E4172481240048EACA /* InfoPlist.strings */; };
+		3D98E692172FE2DC002F1C95 /* AutoIngest Animation 77 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E66E172FE2DC002F1C95 /* AutoIngest Animation 77 Template.pdf */; };
+		3D98E693172FE2DC002F1C95 /* AutoIngest Animation 78 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E66F172FE2DC002F1C95 /* AutoIngest Animation 78 Template.pdf */; };
+		3D98E694172FE2DC002F1C95 /* AutoIngest Animation 79 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E670172FE2DC002F1C95 /* AutoIngest Animation 79 Template.pdf */; };
+		3D98E695172FE2DC002F1C95 /* AutoIngest Animation 80 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E671172FE2DC002F1C95 /* AutoIngest Animation 80 Template.pdf */; };
+		3D98E696172FE2DC002F1C95 /* AutoIngest Animation 81 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E672172FE2DC002F1C95 /* AutoIngest Animation 81 Template.pdf */; };
+		3D98E697172FE2DC002F1C95 /* AutoIngest Animation 82 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E673172FE2DC002F1C95 /* AutoIngest Animation 82 Template.pdf */; };
+		3D98E698172FE2DC002F1C95 /* AutoIngest Animation 83 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E674172FE2DC002F1C95 /* AutoIngest Animation 83 Template.pdf */; };
+		3D98E699172FE2DC002F1C95 /* AutoIngest Animation 84 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E675172FE2DC002F1C95 /* AutoIngest Animation 84 Template.pdf */; };
+		3D98E69A172FE2DC002F1C95 /* AutoIngest Animation 85 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E676172FE2DC002F1C95 /* AutoIngest Animation 85 Template.pdf */; };
+		3D98E69B172FE2DC002F1C95 /* AutoIngest Animation 86 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E677172FE2DC002F1C95 /* AutoIngest Animation 86 Template.pdf */; };
+		3D98E69C172FE2DC002F1C95 /* AutoIngest Animation 68 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E678172FE2DC002F1C95 /* AutoIngest Animation 68 Template.pdf */; };
+		3D98E69D172FE2DC002F1C95 /* AutoIngest Animation 69 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E679172FE2DC002F1C95 /* AutoIngest Animation 69 Template.pdf */; };
+		3D98E69E172FE2DC002F1C95 /* AutoIngest Animation 70 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67A172FE2DC002F1C95 /* AutoIngest Animation 70 Template.pdf */; };
+		3D98E69F172FE2DC002F1C95 /* AutoIngest Animation 71 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67B172FE2DC002F1C95 /* AutoIngest Animation 71 Template.pdf */; };
+		3D98E6A0172FE2DC002F1C95 /* AutoIngest Animation 72 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67C172FE2DC002F1C95 /* AutoIngest Animation 72 Template.pdf */; };
+		3D98E6A1172FE2DC002F1C95 /* AutoIngest Animation 73 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67D172FE2DC002F1C95 /* AutoIngest Animation 73 Template.pdf */; };
+		3D98E6A2172FE2DC002F1C95 /* AutoIngest Animation 74 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67E172FE2DC002F1C95 /* AutoIngest Animation 74 Template.pdf */; };
+		3D98E6A3172FE2DC002F1C95 /* AutoIngest Animation 75 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67F172FE2DC002F1C95 /* AutoIngest Animation 75 Template.pdf */; };
+		3D98E6A4172FE2DC002F1C95 /* AutoIngest Animation 76 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E680172FE2DC002F1C95 /* AutoIngest Animation 76 Template.pdf */; };
+		3D98E6A5172FE2DC002F1C95 /* AutoIngest Animation 49 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E681172FE2DC002F1C95 /* AutoIngest Animation 49 Template.pdf */; };
+		3D98E6A6172FE2DC002F1C95 /* AutoIngest Animation 54 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E682172FE2DC002F1C95 /* AutoIngest Animation 54 Template.pdf */; };
+		3D98E6A7172FE2DC002F1C95 /* AutoIngest Animation 59 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E683172FE2DC002F1C95 /* AutoIngest Animation 59 Template.pdf */; };
+		3D98E6A8172FE2DC002F1C95 /* AutoIngest Animation 64 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E684172FE2DC002F1C95 /* AutoIngest Animation 64 Template.pdf */; };
+		3D98E6A9172FE2DC002F1C95 /* AutoIngest Animation 65 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E685172FE2DC002F1C95 /* AutoIngest Animation 65 Template.pdf */; };
+		3D98E6AA172FE2DC002F1C95 /* AutoIngest Animation 66 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E686172FE2DC002F1C95 /* AutoIngest Animation 66 Template.pdf */; };
+		3D98E6AB172FE2DC002F1C95 /* AutoIngest Animation 67 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E687172FE2DC002F1C95 /* AutoIngest Animation 67 Template.pdf */; };
+		3D98E6AC172FE2DC002F1C95 /* AutoIngest Animation 04 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E688172FE2DC002F1C95 /* AutoIngest Animation 04 Template.pdf */; };
+		3D98E6AD172FE2DC002F1C95 /* AutoIngest Animation 09 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E689172FE2DC002F1C95 /* AutoIngest Animation 09 Template.pdf */; };
+		3D98E6AE172FE2DC002F1C95 /* AutoIngest Animation 14 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68A172FE2DC002F1C95 /* AutoIngest Animation 14 Template.pdf */; };
+		3D98E6AF172FE2DC002F1C95 /* AutoIngest Animation 19 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68B172FE2DC002F1C95 /* AutoIngest Animation 19 Template.pdf */; };
+		3D98E6B0172FE2DC002F1C95 /* AutoIngest Animation 24 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68C172FE2DC002F1C95 /* AutoIngest Animation 24 Template.pdf */; };
+		3D98E6B1172FE2DC002F1C95 /* AutoIngest Animation 29 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68D172FE2DC002F1C95 /* AutoIngest Animation 29 Template.pdf */; };
+		3D98E6B2172FE2DC002F1C95 /* AutoIngest Animation 34 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68E172FE2DC002F1C95 /* AutoIngest Animation 34 Template.pdf */; };
+		3D98E6B3172FE2DC002F1C95 /* AutoIngest Animation 39 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68F172FE2DC002F1C95 /* AutoIngest Animation 39 Template.pdf */; };
+		3D98E6B4172FE2DC002F1C95 /* AutoIngest Animation 44 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E690172FE2DC002F1C95 /* AutoIngest Animation 44 Template.pdf */; };
+		3D98E6B5172FE2DC002F1C95 /* AutoIngest Animation 00 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E691172FE2DC002F1C95 /* AutoIngest Animation 00 Template.pdf */; };
+		3DC53114172A65D4005D9183 /* AIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC53113172A65D4005D9183 /* AIApplication.m */; };
+		554167F91725929700762241 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554167F81725929700762241 /* SenTestingKit.framework */; };
+		554167FA1725929700762241 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7175E27172146EE0031058F /* Cocoa.framework */; };
+		5541680E1725941100762241 /* ReportFolderClassifierTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5541680D1725941100762241 /* ReportFolderClassifierTests.m */; };
+		5541682417259DA600762241 /* ReportFolderClassifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 5541682317259DA600762241 /* ReportFolderClassifier.m */; };
+		5541682C1725C0B300762241 /* libITCReportDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F23172161E20092F4F8 /* libITCReportDownloader.a */; };
+		557DDFFD17345D8700A4FF77 /* ReportOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6D158FC54C3128B8973127 /* ReportOrganizer.m */; };
+		557DE00917345D9700A4FF77 /* ReportOrganizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6D158FC54C3128B8973127 /* ReportOrganizer.m */; };
+		557DE00A17345D9900A4FF77 /* ReportDownloadFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6D1E9F111DBF987D2A1482 /* ReportDownloadFolderMonitor.m */; };
+		557DE00B17345D9C00A4FF77 /* ReportInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D04C30F0858A14CBE3058A /* ReportInformation.m */; };
+		557DE00C17345DA000A4FF77 /* ReportFolderClassifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 5541682317259DA600762241 /* ReportFolderClassifier.m */; };
 		A7175E28172146EE0031058F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7175E27172146EE0031058F /* Cocoa.framework */; };
 		A7175E47172148390031058F /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7175E46172148390031058F /* PreferencesWindowController.xib */; };
 		A7175E4A172148450031058F /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E49172148450031058F /* PreferencesWindowController.m */; };
@@ -21,6 +66,8 @@
 		A7175E53172148AA0031058F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A7175E52172148AA0031058F /* Credits.rtf */; };
 		A71E9869172409D800176AC8 /* DTITCReportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */; };
 		A71E9875172409DA00176AC8 /* DTITCReportDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8C7881722D6BA00025675 /* DTITCReportDownloadOperation.m */; };
+		A7212219173C0544003C6F0A /* libDTReachability_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A721220F173C051F003C6F0A /* libDTReachability_Mac.a */; };
+		A721221A173C054C003C6F0A /* libDTReachability_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A721220F173C051F003C6F0A /* libDTReachability_Mac.a */; };
 		A7415F28172161F30092F4F8 /* libITCReportDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F23172161E20092F4F8 /* libITCReportDownloader.a */; };
 		A7415F2C1721626A0092F4F8 /* Readme.markdown in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2A1721626A0092F4F8 /* Readme.markdown */; };
 		A7415F2D1721626A0092F4F8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2B1721626A0092F4F8 /* LICENSE */; };
@@ -28,12 +75,111 @@
 		A7415F37172170EA0092F4F8 /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F34172170EA0092F4F8 /* AccountManager.m */; };
 		A7415F38172170EA0092F4F8 /* GenericAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F36172170EA0092F4F8 /* GenericAccount.m */; };
 		A7415F3A172173650092F4F8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F39172173650092F4F8 /* Security.framework */; };
+		A7675E4A172E661900C548CB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7675E49172E661900C548CB /* SystemConfiguration.framework */; };
+		A76B51051733B21E00807B82 /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E49172148450031058F /* PreferencesWindowController.m */; };
+		A76B51061733B21E00807B82 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E4E172148930031058F /* AppDelegate.m */; };
+		A76B51071733B21E00807B82 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7175E501721489A0031058F /* main.m */; };
+		A76B51081733B21E00807B82 /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F34172170EA0092F4F8 /* AccountManager.m */; };
+		A76B51091733B21E00807B82 /* GenericAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F36172170EA0092F4F8 /* GenericAccount.m */; };
+		A76B510A1733B21E00807B82 /* LastSyncDateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */; };
+		A76B510B1733B21E00807B82 /* StatusItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA477BA1723FDFB0048EACA /* StatusItemController.m */; };
+		A76B510C1733B21E00807B82 /* DTITCReportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */; };
+		A76B510D1733B21E00807B82 /* DTITCReportDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8C7881722D6BA00025675 /* DTITCReportDownloadOperation.m */; };
+		A76B510E1733B21E00807B82 /* AIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC53113172A65D4005D9183 /* AIApplication.m */; };
+		A76B51111733B21E00807B82 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A76B50F01733B1FB00807B82 /* Sparkle.framework */; };
+		A76B51121733B21E00807B82 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7675E49172E661900C548CB /* SystemConfiguration.framework */; };
+		A76B51131733B21E00807B82 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA477B71723FB4C0048EACA /* QuartzCore.framework */; };
+		A76B51141733B21E00807B82 /* libDTZipArchive_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7C5172317AD00025675 /* libDTZipArchive_Mac.a */; };
+		A76B51151733B21E00807B82 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */; };
+		A76B51161733B21E00807B82 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F39172173650092F4F8 /* Security.framework */; };
+		A76B51171733B21E00807B82 /* libITCReportDownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7415F23172161E20092F4F8 /* libITCReportDownloader.a */; };
+		A76B51181733B21E00807B82 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7175E27172146EE0031058F /* Cocoa.framework */; };
+		A76B511A1733B21E00807B82 /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7175E46172148390031058F /* PreferencesWindowController.xib */; };
+		A76B511B1733B21E00807B82 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7175E4B1721488A0031058F /* MainMenu.xib */; };
+		A76B511C1733B21E00807B82 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A7175E52172148AA0031058F /* Credits.rtf */; };
+		A76B511D1733B21E00807B82 /* Readme.markdown in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2A1721626A0092F4F8 /* Readme.markdown */; };
+		A76B511E1733B21E00807B82 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2B1721626A0092F4F8 /* LICENSE */; };
+		A76B511F1733B21E00807B82 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7415F2F17216AE90092F4F8 /* Defaults.plist */; };
+		A76B51201733B21E00807B82 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DA477E4172481240048EACA /* InfoPlist.strings */; };
+		A76B51211733B21E00807B82 /* AutoIngest Animation 77 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E66E172FE2DC002F1C95 /* AutoIngest Animation 77 Template.pdf */; };
+		A76B51221733B21E00807B82 /* AutoIngest Animation 78 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E66F172FE2DC002F1C95 /* AutoIngest Animation 78 Template.pdf */; };
+		A76B51231733B21E00807B82 /* AutoIngest Animation 79 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E670172FE2DC002F1C95 /* AutoIngest Animation 79 Template.pdf */; };
+		A76B51241733B21E00807B82 /* AutoIngest Animation 80 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E671172FE2DC002F1C95 /* AutoIngest Animation 80 Template.pdf */; };
+		A76B51251733B21E00807B82 /* AutoIngest Animation 81 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E672172FE2DC002F1C95 /* AutoIngest Animation 81 Template.pdf */; };
+		A76B51261733B21E00807B82 /* AutoIngest Animation 82 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E673172FE2DC002F1C95 /* AutoIngest Animation 82 Template.pdf */; };
+		A76B51271733B21E00807B82 /* AutoIngest Animation 83 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E674172FE2DC002F1C95 /* AutoIngest Animation 83 Template.pdf */; };
+		A76B51281733B21E00807B82 /* AutoIngest Animation 84 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E675172FE2DC002F1C95 /* AutoIngest Animation 84 Template.pdf */; };
+		A76B51291733B21E00807B82 /* AutoIngest Animation 85 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E676172FE2DC002F1C95 /* AutoIngest Animation 85 Template.pdf */; };
+		A76B512A1733B21E00807B82 /* AutoIngest Animation 86 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E677172FE2DC002F1C95 /* AutoIngest Animation 86 Template.pdf */; };
+		A76B512B1733B21E00807B82 /* AutoIngest Animation 68 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E678172FE2DC002F1C95 /* AutoIngest Animation 68 Template.pdf */; };
+		A76B512C1733B21E00807B82 /* AutoIngest Animation 69 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E679172FE2DC002F1C95 /* AutoIngest Animation 69 Template.pdf */; };
+		A76B512D1733B21E00807B82 /* AutoIngest Animation 70 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67A172FE2DC002F1C95 /* AutoIngest Animation 70 Template.pdf */; };
+		A76B512E1733B21E00807B82 /* AutoIngest Animation 71 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67B172FE2DC002F1C95 /* AutoIngest Animation 71 Template.pdf */; };
+		A76B512F1733B21E00807B82 /* AutoIngest Animation 72 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67C172FE2DC002F1C95 /* AutoIngest Animation 72 Template.pdf */; };
+		A76B51301733B21E00807B82 /* AutoIngest Animation 73 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67D172FE2DC002F1C95 /* AutoIngest Animation 73 Template.pdf */; };
+		A76B51311733B21E00807B82 /* AutoIngest Animation 74 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67E172FE2DC002F1C95 /* AutoIngest Animation 74 Template.pdf */; };
+		A76B51321733B21E00807B82 /* AutoIngest Animation 75 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E67F172FE2DC002F1C95 /* AutoIngest Animation 75 Template.pdf */; };
+		A76B51331733B21E00807B82 /* AutoIngest Animation 76 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E680172FE2DC002F1C95 /* AutoIngest Animation 76 Template.pdf */; };
+		A76B51341733B21E00807B82 /* AutoIngest Animation 49 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E681172FE2DC002F1C95 /* AutoIngest Animation 49 Template.pdf */; };
+		A76B51351733B21E00807B82 /* AutoIngest Animation 54 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E682172FE2DC002F1C95 /* AutoIngest Animation 54 Template.pdf */; };
+		A76B51361733B21E00807B82 /* AutoIngest Animation 59 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E683172FE2DC002F1C95 /* AutoIngest Animation 59 Template.pdf */; };
+		A76B51371733B21E00807B82 /* AutoIngest Animation 64 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E684172FE2DC002F1C95 /* AutoIngest Animation 64 Template.pdf */; };
+		A76B51381733B21E00807B82 /* AutoIngest Animation 65 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E685172FE2DC002F1C95 /* AutoIngest Animation 65 Template.pdf */; };
+		A76B51391733B21E00807B82 /* AutoIngest Animation 66 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E686172FE2DC002F1C95 /* AutoIngest Animation 66 Template.pdf */; };
+		A76B513A1733B21E00807B82 /* AutoIngest Animation 67 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E687172FE2DC002F1C95 /* AutoIngest Animation 67 Template.pdf */; };
+		A76B513B1733B21E00807B82 /* AutoIngest Animation 04 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E688172FE2DC002F1C95 /* AutoIngest Animation 04 Template.pdf */; };
+		A76B513C1733B21E00807B82 /* AutoIngest Animation 09 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E689172FE2DC002F1C95 /* AutoIngest Animation 09 Template.pdf */; };
+		A76B513D1733B21E00807B82 /* AutoIngest Animation 14 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68A172FE2DC002F1C95 /* AutoIngest Animation 14 Template.pdf */; };
+		A76B513E1733B21E00807B82 /* AutoIngest Animation 19 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68B172FE2DC002F1C95 /* AutoIngest Animation 19 Template.pdf */; };
+		A76B513F1733B21E00807B82 /* AutoIngest Animation 24 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68C172FE2DC002F1C95 /* AutoIngest Animation 24 Template.pdf */; };
+		A76B51401733B21E00807B82 /* AutoIngest Animation 29 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68D172FE2DC002F1C95 /* AutoIngest Animation 29 Template.pdf */; };
+		A76B51411733B21E00807B82 /* AutoIngest Animation 34 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68E172FE2DC002F1C95 /* AutoIngest Animation 34 Template.pdf */; };
+		A76B51421733B21E00807B82 /* AutoIngest Animation 39 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E68F172FE2DC002F1C95 /* AutoIngest Animation 39 Template.pdf */; };
+		A76B51431733B21E00807B82 /* AutoIngest Animation 44 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E690172FE2DC002F1C95 /* AutoIngest Animation 44 Template.pdf */; };
+		A76B51441733B21E00807B82 /* AutoIngest Animation 00 Template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3D98E691172FE2DC002F1C95 /* AutoIngest Animation 00 Template.pdf */; };
+		A76B514B1733B66200807B82 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A76B50F01733B1FB00807B82 /* Sparkle.framework */; };
+		A76B514E1733BF6B00807B82 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = A76B514D1733BF6B00807B82 /* dsa_pub.pem */; };
 		A7D8C7AE172316D900025675 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */; };
 		A7D8C7CE1723199300025675 /* libDTZipArchive_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C7C5172317AD00025675 /* libDTZipArchive_Mac.a */; };
 		A7D8C7DF1723FD5D00025675 /* LastSyncDateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */; };
+		A7DD30EE173D15B7005B4CC8 /* libDTFoundation_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C79F172316BE00025675 /* libDTFoundation_Mac.a */; };
+		A7DD30EF173D15BD005B4CC8 /* libDTFoundation_Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D8C79F172316BE00025675 /* libDTFoundation_Mac.a */; };
+		A7DD30F9173D18F4005B4CC8 /* icon.iconset in Resources */ = {isa = PBXBuildFile; fileRef = A7DD30F8173D18F4005B4CC8 /* icon.iconset */; };
+		A7DD30FA173D18F4005B4CC8 /* icon.iconset in Resources */ = {isa = PBXBuildFile; fileRef = A7DD30F8173D18F4005B4CC8 /* icon.iconset */; };
+		B3D043B6512F71D5175266EF /* ReportInformationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D04B6B23093F558AEB21A7 /* ReportInformationTests.m */; };
+		B3D04B9FCD64FB689ADC5E01 /* ReportInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D04C30F0858A14CBE3058A /* ReportInformation.m */; };
+		BA6D19073710E05AA752824B /* ReportDownloadFolderMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6D1E9F111DBF987D2A1482 /* ReportDownloadFolderMonitor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A721220C173C051F003C6F0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A72121DA173BFFB1003C6F0A;
+			remoteInfo = "DTReachability (iOS)";
+		};
+		A721220E173C051F003C6F0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A72121EA173BFFED003C6F0A;
+			remoteInfo = "DTReachability (Mac)";
+		};
+		A7212215173C052E003C6F0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A72121E9173BFFED003C6F0A;
+			remoteInfo = "DTReachability (Mac)";
+		};
+		A7212217173C0534003C6F0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A72121E9173BFFED003C6F0A;
+			remoteInfo = "DTReachability (Mac)";
+		};
 		A7415F22172161E20092F4F8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A7415F0E172161DD0092F4F8 /* TheMissingAPI.xcodeproj */;
@@ -49,6 +195,62 @@
 			remoteInfo = Autoingest;
 		};
 		A7415F26172161EF0092F4F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7415F0E172161DD0092F4F8 /* TheMissingAPI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A7414AF614DFB5CB00E436DD;
+			remoteInfo = "Static Library";
+		};
+		A76B50EF1733B1FB00807B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = Sparkle;
+		};
+		A76B50F11733B1FB00807B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 61B5F90209C4CEE200B25A18;
+			remoteInfo = "Sparkle Test App";
+		};
+		A76B50F31733B1FB00807B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 612279D90DB5470200AB99EA;
+			remoteInfo = "Sparkle Unit Tests";
+		};
+		A76B50F51733B1FB00807B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D06E8D00FD68C7C005AE3F6;
+			remoteInfo = BinaryDelta;
+		};
+		A76B50F71733B1FB00807B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55C14BB7136EEF1500649790;
+			remoteInfo = finish_installation;
+		};
+		A76B50FF1733B21E00807B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = Sparkle;
+		};
+		A76B51011733B21E00807B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A7D8C7AF1723174600025675;
+			remoteInfo = "DTZipArchive (Mac)";
+		};
+		A76B51031733B21E00807B82 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A7415F0E172161DD0092F4F8 /* TheMissingAPI.xcodeproj */;
 			proxyType = 1;
@@ -132,15 +334,85 @@
 			remoteGlobalIDString = A7D8C7AF1723174600025675;
 			remoteInfo = "DTZipArchive (Mac)";
 		};
+		A7DD30DC173D15B0005B4CC8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A710A4FF1607556000437D36;
+			remoteInfo = "Static Library (Mac)";
+		};
+		A7DD30F0173D15C3005B4CC8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A710A4FF1607556000437D36;
+			remoteInfo = "Static Library (Mac)";
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A76B514A1733B65500807B82 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A76B514B1733B66200807B82 /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		1DA477A81723F36D0048EACA /* MenuItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuItem.png; sourceTree = "<group>"; };
 		1DA477B71723FB4C0048EACA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		1DA477B91723FDFA0048EACA /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
-		1DA477BA1723FDFB0048EACA /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemView.m; sourceTree = "<group>"; };
-		1DA477BC1723FF820048EACA /* MenuItemAlt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuItemAlt.png; sourceTree = "<group>"; };
-		1DA477E3172481240048EACA /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1DA477B91723FDFA0048EACA /* StatusItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemController.h; sourceTree = "<group>"; };
+		1DA477BA1723FDFB0048EACA /* StatusItemController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemController.m; sourceTree = "<group>"; };
+		1DA477E3172481240048EACA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3D98E66E172FE2DC002F1C95 /* AutoIngest Animation 77 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 77 Template.pdf"; sourceTree = "<group>"; };
+		3D98E66F172FE2DC002F1C95 /* AutoIngest Animation 78 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 78 Template.pdf"; sourceTree = "<group>"; };
+		3D98E670172FE2DC002F1C95 /* AutoIngest Animation 79 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 79 Template.pdf"; sourceTree = "<group>"; };
+		3D98E671172FE2DC002F1C95 /* AutoIngest Animation 80 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 80 Template.pdf"; sourceTree = "<group>"; };
+		3D98E672172FE2DC002F1C95 /* AutoIngest Animation 81 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 81 Template.pdf"; sourceTree = "<group>"; };
+		3D98E673172FE2DC002F1C95 /* AutoIngest Animation 82 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 82 Template.pdf"; sourceTree = "<group>"; };
+		3D98E674172FE2DC002F1C95 /* AutoIngest Animation 83 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 83 Template.pdf"; sourceTree = "<group>"; };
+		3D98E675172FE2DC002F1C95 /* AutoIngest Animation 84 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 84 Template.pdf"; sourceTree = "<group>"; };
+		3D98E676172FE2DC002F1C95 /* AutoIngest Animation 85 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 85 Template.pdf"; sourceTree = "<group>"; };
+		3D98E677172FE2DC002F1C95 /* AutoIngest Animation 86 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 86 Template.pdf"; sourceTree = "<group>"; };
+		3D98E678172FE2DC002F1C95 /* AutoIngest Animation 68 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 68 Template.pdf"; sourceTree = "<group>"; };
+		3D98E679172FE2DC002F1C95 /* AutoIngest Animation 69 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 69 Template.pdf"; sourceTree = "<group>"; };
+		3D98E67A172FE2DC002F1C95 /* AutoIngest Animation 70 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 70 Template.pdf"; sourceTree = "<group>"; };
+		3D98E67B172FE2DC002F1C95 /* AutoIngest Animation 71 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 71 Template.pdf"; sourceTree = "<group>"; };
+		3D98E67C172FE2DC002F1C95 /* AutoIngest Animation 72 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 72 Template.pdf"; sourceTree = "<group>"; };
+		3D98E67D172FE2DC002F1C95 /* AutoIngest Animation 73 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 73 Template.pdf"; sourceTree = "<group>"; };
+		3D98E67E172FE2DC002F1C95 /* AutoIngest Animation 74 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 74 Template.pdf"; sourceTree = "<group>"; };
+		3D98E67F172FE2DC002F1C95 /* AutoIngest Animation 75 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 75 Template.pdf"; sourceTree = "<group>"; };
+		3D98E680172FE2DC002F1C95 /* AutoIngest Animation 76 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 76 Template.pdf"; sourceTree = "<group>"; };
+		3D98E681172FE2DC002F1C95 /* AutoIngest Animation 49 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 49 Template.pdf"; sourceTree = "<group>"; };
+		3D98E682172FE2DC002F1C95 /* AutoIngest Animation 54 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 54 Template.pdf"; sourceTree = "<group>"; };
+		3D98E683172FE2DC002F1C95 /* AutoIngest Animation 59 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 59 Template.pdf"; sourceTree = "<group>"; };
+		3D98E684172FE2DC002F1C95 /* AutoIngest Animation 64 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 64 Template.pdf"; sourceTree = "<group>"; };
+		3D98E685172FE2DC002F1C95 /* AutoIngest Animation 65 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 65 Template.pdf"; sourceTree = "<group>"; };
+		3D98E686172FE2DC002F1C95 /* AutoIngest Animation 66 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 66 Template.pdf"; sourceTree = "<group>"; };
+		3D98E687172FE2DC002F1C95 /* AutoIngest Animation 67 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 67 Template.pdf"; sourceTree = "<group>"; };
+		3D98E688172FE2DC002F1C95 /* AutoIngest Animation 04 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 04 Template.pdf"; sourceTree = "<group>"; };
+		3D98E689172FE2DC002F1C95 /* AutoIngest Animation 09 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 09 Template.pdf"; sourceTree = "<group>"; };
+		3D98E68A172FE2DC002F1C95 /* AutoIngest Animation 14 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 14 Template.pdf"; sourceTree = "<group>"; };
+		3D98E68B172FE2DC002F1C95 /* AutoIngest Animation 19 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 19 Template.pdf"; sourceTree = "<group>"; };
+		3D98E68C172FE2DC002F1C95 /* AutoIngest Animation 24 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 24 Template.pdf"; sourceTree = "<group>"; };
+		3D98E68D172FE2DC002F1C95 /* AutoIngest Animation 29 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 29 Template.pdf"; sourceTree = "<group>"; };
+		3D98E68E172FE2DC002F1C95 /* AutoIngest Animation 34 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 34 Template.pdf"; sourceTree = "<group>"; };
+		3D98E68F172FE2DC002F1C95 /* AutoIngest Animation 39 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 39 Template.pdf"; sourceTree = "<group>"; };
+		3D98E690172FE2DC002F1C95 /* AutoIngest Animation 44 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 44 Template.pdf"; sourceTree = "<group>"; };
+		3D98E691172FE2DC002F1C95 /* AutoIngest Animation 00 Template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "AutoIngest Animation 00 Template.pdf"; sourceTree = "<group>"; };
+		3DC53112172A65D4005D9183 /* AIApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIApplication.h; sourceTree = "<group>"; };
+		3DC53113172A65D4005D9183 /* AIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIApplication.m; sourceTree = "<group>"; };
+		554167F71725929700762241 /* AutoIngestTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutoIngestTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		554167F81725929700762241 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		554168091725932900762241 /* AutoIngestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AutoIngestTests-Info.plist"; sourceTree = "<group>"; };
+		5541680A1725932900762241 /* AutoIngestTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AutoIngestTests-Prefix.pch"; sourceTree = "<group>"; };
+		5541680D1725941100762241 /* ReportFolderClassifierTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportFolderClassifierTests.m; sourceTree = "<group>"; };
+		5541682217259DA600762241 /* ReportFolderClassifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportFolderClassifier.h; sourceTree = "<group>"; };
+		5541682317259DA600762241 /* ReportFolderClassifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportFolderClassifier.m; sourceTree = "<group>"; };
 		A7175E24172146EE0031058F /* AutoIngest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoIngest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7175E27172146EE0031058F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A7175E2A172146EE0031058F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -167,19 +439,45 @@
 		A7415F39172173650092F4F8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A7415F4217218D2F0092F4F8 /* DTITCReportManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTITCReportManager.h; path = AutoIngest/Source/DTITCReportManager.h; sourceTree = SOURCE_ROOT; };
 		A7415F4317218D2F0092F4F8 /* DTITCReportManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTITCReportManager.m; path = AutoIngest/Source/DTITCReportManager.m; sourceTree = SOURCE_ROOT; };
+		A7675E49172E661900C548CB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Sparkle.xcodeproj; path = Sparkle/Sparkle.xcodeproj; sourceTree = "<group>"; };
+		A76B51481733B21E00807B82 /* AutoIngest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoIngest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A76B514D1733BF6B00807B82 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		A7D8C7871722D6BA00025675 /* DTITCReportDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTITCReportDownloadOperation.h; path = AutoIngest/Source/DTITCReportDownloadOperation.h; sourceTree = SOURCE_ROOT; };
 		A7D8C7881722D6BA00025675 /* DTITCReportDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTITCReportDownloadOperation.m; path = AutoIngest/Source/DTITCReportDownloadOperation.m; sourceTree = SOURCE_ROOT; };
 		A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DTFoundation.xcodeproj; path = DTFoundation/DTFoundation.xcodeproj; sourceTree = "<group>"; };
 		A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		A7D8C7DD1723FD5C00025675 /* LastSyncDateValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastSyncDateValueTransformer.h; sourceTree = "<group>"; };
 		A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastSyncDateValueTransformer.m; sourceTree = "<group>"; };
+		A7DD30F8173D18F4005B4CC8 /* icon.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = icon.iconset; sourceTree = "<group>"; };
+		B3D044D9567E7785CEAF75FB /* ReportInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportInformation.h; sourceTree = "<group>"; };
+		B3D04B6B23093F558AEB21A7 /* ReportInformationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportInformationTests.m; sourceTree = "<group>"; };
+		B3D04C30F0858A14CBE3058A /* ReportInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportInformation.m; sourceTree = "<group>"; };
+		BA6D109EB0F42E2F11C2F3BE /* ReportOrganizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportOrganizer.h; sourceTree = "<group>"; };
+		BA6D12941BE7ED081B31E153 /* ReportDownloadFolderMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportDownloadFolderMonitor.h; sourceTree = "<group>"; };
+		BA6D12B07D998A4E3684E2AC /* AIUserDefaultsKeysConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIUserDefaultsKeysConstants.h; sourceTree = "<group>"; };
+		BA6D158FC54C3128B8973127 /* ReportOrganizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportOrganizer.m; sourceTree = "<group>"; };
+		BA6D1E9F111DBF987D2A1482 /* ReportDownloadFolderMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportDownloadFolderMonitor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		554167F31725929700762241 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5541682C1725C0B300762241 /* libITCReportDownloader.a in Frameworks */,
+				554167F91725929700762241 /* SenTestingKit.framework in Frameworks */,
+				554167FA1725929700762241 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A7175E21172146EE0031058F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7DD30EE173D15B7005B4CC8 /* libDTFoundation_Mac.a in Frameworks */,
+				A721221A173C054C003C6F0A /* libDTReachability_Mac.a in Frameworks */,
+				A7675E4A172E661900C548CB /* SystemConfiguration.framework in Frameworks */,
 				1DA477B81723FB4C0048EACA /* QuartzCore.framework in Frameworks */,
 				A7D8C7CE1723199300025675 /* libDTZipArchive_Mac.a in Frameworks */,
 				A7D8C7AE172316D900025675 /* libz.1.2.5.dylib in Frameworks */,
@@ -189,15 +487,67 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A76B51101733B21E00807B82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7DD30EF173D15BD005B4CC8 /* libDTFoundation_Mac.a in Frameworks */,
+				A7212219173C0544003C6F0A /* libDTReachability_Mac.a in Frameworks */,
+				A76B51111733B21E00807B82 /* Sparkle.framework in Frameworks */,
+				A76B51121733B21E00807B82 /* SystemConfiguration.framework in Frameworks */,
+				A76B51131733B21E00807B82 /* QuartzCore.framework in Frameworks */,
+				A76B51141733B21E00807B82 /* libDTZipArchive_Mac.a in Frameworks */,
+				A76B51151733B21E00807B82 /* libz.1.2.5.dylib in Frameworks */,
+				A76B51161733B21E00807B82 /* Security.framework in Frameworks */,
+				A76B51171733B21E00807B82 /* libITCReportDownloader.a in Frameworks */,
+				A76B51181733B21E00807B82 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		554168081725932900762241 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				554168091725932900762241 /* AutoIngestTests-Info.plist */,
+				5541680A1725932900762241 /* AutoIngestTests-Prefix.pch */,
+				5541680B1725932900762241 /* Source */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		5541680B1725932900762241 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				5541680D1725941100762241 /* ReportFolderClassifierTests.m */,
+				B3D04B6B23093F558AEB21A7 /* ReportInformationTests.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		5541682617259DB700762241 /* Report Organizer */ = {
+			isa = PBXGroup;
+			children = (
+				5541682217259DA600762241 /* ReportFolderClassifier.h */,
+				5541682317259DA600762241 /* ReportFolderClassifier.m */,
+				B3D044D9567E7785CEAF75FB /* ReportInformation.h */,
+				B3D04C30F0858A14CBE3058A /* ReportInformation.m */,
+				BA6D12941BE7ED081B31E153 /* ReportDownloadFolderMonitor.h */,
+				BA6D1E9F111DBF987D2A1482 /* ReportDownloadFolderMonitor.m */,
+				BA6D109EB0F42E2F11C2F3BE /* ReportOrganizer.h */,
+				BA6D158FC54C3128B8973127 /* ReportOrganizer.m */,
+			);
+			name = "Report Organizer";
+			sourceTree = "<group>";
+		};
 		A7175E1B172146EE0031058F = {
 			isa = PBXGroup;
 			children = (
 				A7415F291721625E0092F4F8 /* Documentation */,
 				A7415EFB172161DD0092F4F8 /* Externals */,
 				A7175E2D172146EE0031058F /* AutoIngest */,
+				554168081725932900762241 /* Tests */,
 				A7175E26172146EE0031058F /* Frameworks */,
 				A7175E25172146EE0031058F /* Products */,
 			);
@@ -207,6 +557,8 @@
 			isa = PBXGroup;
 			children = (
 				A7175E24172146EE0031058F /* AutoIngest.app */,
+				554167F71725929700762241 /* AutoIngestTests.octest */,
+				A76B51481733B21E00807B82 /* AutoIngest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,9 +566,11 @@
 		A7175E26172146EE0031058F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A7675E49172E661900C548CB /* SystemConfiguration.framework */,
 				A7D8C7AD172316D900025675 /* libz.1.2.5.dylib */,
 				A7175E27172146EE0031058F /* Cocoa.framework */,
 				A7415F39172173650092F4F8 /* Security.framework */,
+				554167F81725929700762241 /* SenTestingKit.framework */,
 				A7175E29172146EE0031058F /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -247,13 +601,14 @@
 		A7175E44172147800031058F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A7DD310C173D194C005B4CC8 /* App Icon */,
+				A7D4A1A617286BF40042D0D1 /* Status Icon */,
 				A7175E52172148AA0031058F /* Credits.rtf */,
 				A7175E4B1721488A0031058F /* MainMenu.xib */,
 				A7175E46172148390031058F /* PreferencesWindowController.xib */,
-				1DA477A81723F36D0048EACA /* MenuItem.png */,
-				1DA477BC1723FF820048EACA /* MenuItemAlt.png */,
 				A7415F2F17216AE90092F4F8 /* Defaults.plist */,
 				1DA477E4172481240048EACA /* InfoPlist.strings */,
+				A76B514D1733BF6B00807B82 /* dsa_pub.pem */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -261,17 +616,21 @@
 		A7175E45172147800031058F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				5541682617259DB700762241 /* Report Organizer */,
 				A7D8C7D11723F79500025675 /* Report Manager */,
 				A7415F32172170CB0092F4F8 /* Cleanup for DTFoundation */,
 				A7175E501721489A0031058F /* main.m */,
+				3DC53112172A65D4005D9183 /* AIApplication.h */,
+				3DC53113172A65D4005D9183 /* AIApplication.m */,
 				A7175E4D172148930031058F /* AppDelegate.h */,
 				A7175E4E172148930031058F /* AppDelegate.m */,
 				A7175E48172148450031058F /* PreferencesWindowController.h */,
 				A7175E49172148450031058F /* PreferencesWindowController.m */,
 				A7D8C7DD1723FD5C00025675 /* LastSyncDateValueTransformer.h */,
 				A7D8C7DE1723FD5C00025675 /* LastSyncDateValueTransformer.m */,
-				1DA477B91723FDFA0048EACA /* StatusItemView.h */,
-				1DA477BA1723FDFB0048EACA /* StatusItemView.m */,
+				1DA477B91723FDFA0048EACA /* StatusItemController.h */,
+				1DA477BA1723FDFB0048EACA /* StatusItemController.m */,
+				BA6D12B07D998A4E3684E2AC /* AIUserDefaultsKeysConstants.h */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -279,6 +638,7 @@
 		A7415EFB172161DD0092F4F8 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */,
 				A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */,
 				A7415F0E172161DD0092F4F8 /* TheMissingAPI.xcodeproj */,
 			);
@@ -314,6 +674,61 @@
 			name = "Cleanup for DTFoundation";
 			sourceTree = "<group>";
 		};
+		A76B50DE1733B1FA00807B82 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A76B50F01733B1FB00807B82 /* Sparkle.framework */,
+				A76B50F21733B1FB00807B82 /* Sparkle Test App.app */,
+				A76B50F41733B1FB00807B82 /* Sparkle Unit Tests.octest */,
+				A76B50F61733B1FB00807B82 /* BinaryDelta */,
+				A76B50F81733B1FB00807B82 /* finish_installation.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A7D4A1A617286BF40042D0D1 /* Status Icon */ = {
+			isa = PBXGroup;
+			children = (
+				3D98E66E172FE2DC002F1C95 /* AutoIngest Animation 77 Template.pdf */,
+				3D98E66F172FE2DC002F1C95 /* AutoIngest Animation 78 Template.pdf */,
+				3D98E670172FE2DC002F1C95 /* AutoIngest Animation 79 Template.pdf */,
+				3D98E671172FE2DC002F1C95 /* AutoIngest Animation 80 Template.pdf */,
+				3D98E672172FE2DC002F1C95 /* AutoIngest Animation 81 Template.pdf */,
+				3D98E673172FE2DC002F1C95 /* AutoIngest Animation 82 Template.pdf */,
+				3D98E674172FE2DC002F1C95 /* AutoIngest Animation 83 Template.pdf */,
+				3D98E675172FE2DC002F1C95 /* AutoIngest Animation 84 Template.pdf */,
+				3D98E676172FE2DC002F1C95 /* AutoIngest Animation 85 Template.pdf */,
+				3D98E677172FE2DC002F1C95 /* AutoIngest Animation 86 Template.pdf */,
+				3D98E678172FE2DC002F1C95 /* AutoIngest Animation 68 Template.pdf */,
+				3D98E679172FE2DC002F1C95 /* AutoIngest Animation 69 Template.pdf */,
+				3D98E67A172FE2DC002F1C95 /* AutoIngest Animation 70 Template.pdf */,
+				3D98E67B172FE2DC002F1C95 /* AutoIngest Animation 71 Template.pdf */,
+				3D98E67C172FE2DC002F1C95 /* AutoIngest Animation 72 Template.pdf */,
+				3D98E67D172FE2DC002F1C95 /* AutoIngest Animation 73 Template.pdf */,
+				3D98E67E172FE2DC002F1C95 /* AutoIngest Animation 74 Template.pdf */,
+				3D98E67F172FE2DC002F1C95 /* AutoIngest Animation 75 Template.pdf */,
+				3D98E680172FE2DC002F1C95 /* AutoIngest Animation 76 Template.pdf */,
+				3D98E681172FE2DC002F1C95 /* AutoIngest Animation 49 Template.pdf */,
+				3D98E682172FE2DC002F1C95 /* AutoIngest Animation 54 Template.pdf */,
+				3D98E683172FE2DC002F1C95 /* AutoIngest Animation 59 Template.pdf */,
+				3D98E684172FE2DC002F1C95 /* AutoIngest Animation 64 Template.pdf */,
+				3D98E685172FE2DC002F1C95 /* AutoIngest Animation 65 Template.pdf */,
+				3D98E686172FE2DC002F1C95 /* AutoIngest Animation 66 Template.pdf */,
+				3D98E687172FE2DC002F1C95 /* AutoIngest Animation 67 Template.pdf */,
+				3D98E688172FE2DC002F1C95 /* AutoIngest Animation 04 Template.pdf */,
+				3D98E689172FE2DC002F1C95 /* AutoIngest Animation 09 Template.pdf */,
+				3D98E68A172FE2DC002F1C95 /* AutoIngest Animation 14 Template.pdf */,
+				3D98E68B172FE2DC002F1C95 /* AutoIngest Animation 19 Template.pdf */,
+				3D98E68C172FE2DC002F1C95 /* AutoIngest Animation 24 Template.pdf */,
+				3D98E68D172FE2DC002F1C95 /* AutoIngest Animation 29 Template.pdf */,
+				3D98E68E172FE2DC002F1C95 /* AutoIngest Animation 34 Template.pdf */,
+				3D98E68F172FE2DC002F1C95 /* AutoIngest Animation 39 Template.pdf */,
+				3D98E690172FE2DC002F1C95 /* AutoIngest Animation 44 Template.pdf */,
+				3D98E691172FE2DC002F1C95 /* AutoIngest Animation 00 Template.pdf */,
+			);
+			path = "Status Icon";
+			sourceTree = "<group>";
+		};
 		A7D8C78C172316BE00025675 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +742,8 @@
 				A7D8C7C5172317AD00025675 /* libDTZipArchive_Mac.a */,
 				A7D8C7A7172316BE00025675 /* libDTUTI.a */,
 				A7D8C7A9172316BE00025675 /* libDTUTI.a */,
+				A721220D173C051F003C6F0A /* libDTReachability_iOS.a */,
+				A721220F173C051F003C6F0A /* libDTReachability_Mac.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -342,9 +759,35 @@
 			name = "Report Manager";
 			sourceTree = "<group>";
 		};
+		A7DD310C173D194C005B4CC8 /* App Icon */ = {
+			isa = PBXGroup;
+			children = (
+				A7DD30F8173D18F4005B4CC8 /* icon.iconset */,
+			);
+			name = "App Icon";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		554167F61725929700762241 /* AutoIngestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 554168071725929700762241 /* Build configuration list for PBXNativeTarget "AutoIngestTests" */;
+			buildPhases = (
+				554167F21725929700762241 /* Sources */,
+				554167F31725929700762241 /* Frameworks */,
+				554167F41725929700762241 /* Resources */,
+				554167F51725929700762241 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AutoIngestTests;
+			productName = AutoIngestTests;
+			productReference = 554167F71725929700762241 /* AutoIngestTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		A7175E23172146EE0031058F /* AutoIngest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A7175E41172146EF0031058F /* Build configuration list for PBXNativeTarget "AutoIngest" */;
@@ -356,12 +799,37 @@
 			buildRules = (
 			);
 			dependencies = (
+				A7DD30DD173D15B0005B4CC8 /* PBXTargetDependency */,
+				A7212216173C052E003C6F0A /* PBXTargetDependency */,
 				A7D8C7CD1723198F00025675 /* PBXTargetDependency */,
 				A7415F27172161EF0092F4F8 /* PBXTargetDependency */,
 			);
 			name = AutoIngest;
 			productName = AutoIngest;
 			productReference = A7175E24172146EE0031058F /* AutoIngest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A76B50FD1733B21E00807B82 /* AutoIngest (Sparkle) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A76B51451733B21E00807B82 /* Build configuration list for PBXNativeTarget "AutoIngest (Sparkle)" */;
+			buildPhases = (
+				A76B51041733B21E00807B82 /* Sources */,
+				A76B51101733B21E00807B82 /* Frameworks */,
+				A76B51191733B21E00807B82 /* Resources */,
+				A76B514A1733B65500807B82 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A7DD30F1173D15C3005B4CC8 /* PBXTargetDependency */,
+				A7212218173C0534003C6F0A /* PBXTargetDependency */,
+				A76B50FE1733B21E00807B82 /* PBXTargetDependency */,
+				A76B51001733B21E00807B82 /* PBXTargetDependency */,
+				A76B51021733B21E00807B82 /* PBXTargetDependency */,
+			);
+			name = "AutoIngest (Sparkle)";
+			productName = AutoIngest;
+			productReference = A76B51481733B21E00807B82 /* AutoIngest.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -379,6 +847,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				English,
 			);
 			mainGroup = A7175E1B172146EE0031058F;
 			productRefGroup = A7175E25172146EE0031058F /* Products */;
@@ -389,6 +858,10 @@
 					ProjectRef = A7D8C78B172316BE00025675 /* DTFoundation.xcodeproj */;
 				},
 				{
+					ProductGroup = A76B50DE1733B1FA00807B82 /* Products */;
+					ProjectRef = A76B50DD1733B1FA00807B82 /* Sparkle.xcodeproj */;
+				},
+				{
 					ProductGroup = A7415F1E172161E20092F4F8 /* Products */;
 					ProjectRef = A7415F0E172161DD0092F4F8 /* TheMissingAPI.xcodeproj */;
 				},
@@ -396,11 +869,27 @@
 			projectRoot = "";
 			targets = (
 				A7175E23172146EE0031058F /* AutoIngest */,
+				554167F61725929700762241 /* AutoIngestTests */,
+				A76B50FD1733B21E00807B82 /* AutoIngest (Sparkle) */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		A721220D173C051F003C6F0A /* libDTReachability_iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTReachability_iOS.a;
+			remoteRef = A721220C173C051F003C6F0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A721220F173C051F003C6F0A /* libDTReachability_Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTReachability_Mac.a;
+			remoteRef = A721220E173C051F003C6F0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		A7415F23172161E20092F4F8 /* libITCReportDownloader.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -413,6 +902,41 @@
 			fileType = "compiled.mach-o.executable";
 			path = Autoingest;
 			remoteRef = A7415F24172161E20092F4F8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A76B50F01733B1FB00807B82 /* Sparkle.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Sparkle.framework;
+			remoteRef = A76B50EF1733B1FB00807B82 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A76B50F21733B1FB00807B82 /* Sparkle Test App.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Sparkle Test App.app";
+			remoteRef = A76B50F11733B1FB00807B82 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A76B50F41733B1FB00807B82 /* Sparkle Unit Tests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Sparkle Unit Tests.octest";
+			remoteRef = A76B50F31733B1FB00807B82 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A76B50F61733B1FB00807B82 /* BinaryDelta */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = BinaryDelta;
+			remoteRef = A76B50F51733B1FB00807B82 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A76B50F81733B1FB00807B82 /* finish_installation.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = finish_installation.app;
+			remoteRef = A76B50F71733B1FB00807B82 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		A7D8C799172316BE00025675 /* DTFoundation.framework */ = {
@@ -488,6 +1012,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		554167F41725929700762241 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A7175E22172146EE0031058F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -498,15 +1029,127 @@
 				A7415F2C1721626A0092F4F8 /* Readme.markdown in Resources */,
 				A7415F2D1721626A0092F4F8 /* LICENSE in Resources */,
 				A7415F3017216AE90092F4F8 /* Defaults.plist in Resources */,
-				1DA477A91723F36D0048EACA /* MenuItem.png in Resources */,
-				1DA477BD1723FF820048EACA /* MenuItemAlt.png in Resources */,
 				1DA477E2172481240048EACA /* InfoPlist.strings in Resources */,
+				3D98E692172FE2DC002F1C95 /* AutoIngest Animation 77 Template.pdf in Resources */,
+				3D98E693172FE2DC002F1C95 /* AutoIngest Animation 78 Template.pdf in Resources */,
+				3D98E694172FE2DC002F1C95 /* AutoIngest Animation 79 Template.pdf in Resources */,
+				3D98E695172FE2DC002F1C95 /* AutoIngest Animation 80 Template.pdf in Resources */,
+				3D98E696172FE2DC002F1C95 /* AutoIngest Animation 81 Template.pdf in Resources */,
+				3D98E697172FE2DC002F1C95 /* AutoIngest Animation 82 Template.pdf in Resources */,
+				3D98E698172FE2DC002F1C95 /* AutoIngest Animation 83 Template.pdf in Resources */,
+				3D98E699172FE2DC002F1C95 /* AutoIngest Animation 84 Template.pdf in Resources */,
+				3D98E69A172FE2DC002F1C95 /* AutoIngest Animation 85 Template.pdf in Resources */,
+				3D98E69B172FE2DC002F1C95 /* AutoIngest Animation 86 Template.pdf in Resources */,
+				3D98E69C172FE2DC002F1C95 /* AutoIngest Animation 68 Template.pdf in Resources */,
+				3D98E69D172FE2DC002F1C95 /* AutoIngest Animation 69 Template.pdf in Resources */,
+				3D98E69E172FE2DC002F1C95 /* AutoIngest Animation 70 Template.pdf in Resources */,
+				3D98E69F172FE2DC002F1C95 /* AutoIngest Animation 71 Template.pdf in Resources */,
+				3D98E6A0172FE2DC002F1C95 /* AutoIngest Animation 72 Template.pdf in Resources */,
+				3D98E6A1172FE2DC002F1C95 /* AutoIngest Animation 73 Template.pdf in Resources */,
+				3D98E6A2172FE2DC002F1C95 /* AutoIngest Animation 74 Template.pdf in Resources */,
+				3D98E6A3172FE2DC002F1C95 /* AutoIngest Animation 75 Template.pdf in Resources */,
+				3D98E6A4172FE2DC002F1C95 /* AutoIngest Animation 76 Template.pdf in Resources */,
+				3D98E6A5172FE2DC002F1C95 /* AutoIngest Animation 49 Template.pdf in Resources */,
+				3D98E6A6172FE2DC002F1C95 /* AutoIngest Animation 54 Template.pdf in Resources */,
+				3D98E6A7172FE2DC002F1C95 /* AutoIngest Animation 59 Template.pdf in Resources */,
+				3D98E6A8172FE2DC002F1C95 /* AutoIngest Animation 64 Template.pdf in Resources */,
+				3D98E6A9172FE2DC002F1C95 /* AutoIngest Animation 65 Template.pdf in Resources */,
+				3D98E6AA172FE2DC002F1C95 /* AutoIngest Animation 66 Template.pdf in Resources */,
+				3D98E6AB172FE2DC002F1C95 /* AutoIngest Animation 67 Template.pdf in Resources */,
+				3D98E6AC172FE2DC002F1C95 /* AutoIngest Animation 04 Template.pdf in Resources */,
+				3D98E6AD172FE2DC002F1C95 /* AutoIngest Animation 09 Template.pdf in Resources */,
+				3D98E6AE172FE2DC002F1C95 /* AutoIngest Animation 14 Template.pdf in Resources */,
+				3D98E6AF172FE2DC002F1C95 /* AutoIngest Animation 19 Template.pdf in Resources */,
+				3D98E6B0172FE2DC002F1C95 /* AutoIngest Animation 24 Template.pdf in Resources */,
+				3D98E6B1172FE2DC002F1C95 /* AutoIngest Animation 29 Template.pdf in Resources */,
+				3D98E6B2172FE2DC002F1C95 /* AutoIngest Animation 34 Template.pdf in Resources */,
+				3D98E6B3172FE2DC002F1C95 /* AutoIngest Animation 39 Template.pdf in Resources */,
+				3D98E6B4172FE2DC002F1C95 /* AutoIngest Animation 44 Template.pdf in Resources */,
+				3D98E6B5172FE2DC002F1C95 /* AutoIngest Animation 00 Template.pdf in Resources */,
+				A7DD30F9173D18F4005B4CC8 /* icon.iconset in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A76B51191733B21E00807B82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A76B511A1733B21E00807B82 /* PreferencesWindowController.xib in Resources */,
+				A76B511B1733B21E00807B82 /* MainMenu.xib in Resources */,
+				A76B511C1733B21E00807B82 /* Credits.rtf in Resources */,
+				A76B511D1733B21E00807B82 /* Readme.markdown in Resources */,
+				A76B511E1733B21E00807B82 /* LICENSE in Resources */,
+				A76B511F1733B21E00807B82 /* Defaults.plist in Resources */,
+				A76B51201733B21E00807B82 /* InfoPlist.strings in Resources */,
+				A76B51211733B21E00807B82 /* AutoIngest Animation 77 Template.pdf in Resources */,
+				A76B51221733B21E00807B82 /* AutoIngest Animation 78 Template.pdf in Resources */,
+				A76B51231733B21E00807B82 /* AutoIngest Animation 79 Template.pdf in Resources */,
+				A76B51241733B21E00807B82 /* AutoIngest Animation 80 Template.pdf in Resources */,
+				A76B51251733B21E00807B82 /* AutoIngest Animation 81 Template.pdf in Resources */,
+				A76B51261733B21E00807B82 /* AutoIngest Animation 82 Template.pdf in Resources */,
+				A76B51271733B21E00807B82 /* AutoIngest Animation 83 Template.pdf in Resources */,
+				A76B51281733B21E00807B82 /* AutoIngest Animation 84 Template.pdf in Resources */,
+				A76B51291733B21E00807B82 /* AutoIngest Animation 85 Template.pdf in Resources */,
+				A76B512A1733B21E00807B82 /* AutoIngest Animation 86 Template.pdf in Resources */,
+				A76B512B1733B21E00807B82 /* AutoIngest Animation 68 Template.pdf in Resources */,
+				A76B512C1733B21E00807B82 /* AutoIngest Animation 69 Template.pdf in Resources */,
+				A76B512D1733B21E00807B82 /* AutoIngest Animation 70 Template.pdf in Resources */,
+				A76B512E1733B21E00807B82 /* AutoIngest Animation 71 Template.pdf in Resources */,
+				A76B512F1733B21E00807B82 /* AutoIngest Animation 72 Template.pdf in Resources */,
+				A76B51301733B21E00807B82 /* AutoIngest Animation 73 Template.pdf in Resources */,
+				A76B51311733B21E00807B82 /* AutoIngest Animation 74 Template.pdf in Resources */,
+				A76B51321733B21E00807B82 /* AutoIngest Animation 75 Template.pdf in Resources */,
+				A76B51331733B21E00807B82 /* AutoIngest Animation 76 Template.pdf in Resources */,
+				A76B51341733B21E00807B82 /* AutoIngest Animation 49 Template.pdf in Resources */,
+				A76B51351733B21E00807B82 /* AutoIngest Animation 54 Template.pdf in Resources */,
+				A76B51361733B21E00807B82 /* AutoIngest Animation 59 Template.pdf in Resources */,
+				A76B51371733B21E00807B82 /* AutoIngest Animation 64 Template.pdf in Resources */,
+				A76B51381733B21E00807B82 /* AutoIngest Animation 65 Template.pdf in Resources */,
+				A76B51391733B21E00807B82 /* AutoIngest Animation 66 Template.pdf in Resources */,
+				A76B513A1733B21E00807B82 /* AutoIngest Animation 67 Template.pdf in Resources */,
+				A76B513B1733B21E00807B82 /* AutoIngest Animation 04 Template.pdf in Resources */,
+				A76B513C1733B21E00807B82 /* AutoIngest Animation 09 Template.pdf in Resources */,
+				A76B513D1733B21E00807B82 /* AutoIngest Animation 14 Template.pdf in Resources */,
+				A76B513E1733B21E00807B82 /* AutoIngest Animation 19 Template.pdf in Resources */,
+				A76B513F1733B21E00807B82 /* AutoIngest Animation 24 Template.pdf in Resources */,
+				A76B51401733B21E00807B82 /* AutoIngest Animation 29 Template.pdf in Resources */,
+				A76B51411733B21E00807B82 /* AutoIngest Animation 34 Template.pdf in Resources */,
+				A76B51421733B21E00807B82 /* AutoIngest Animation 39 Template.pdf in Resources */,
+				A76B51431733B21E00807B82 /* AutoIngest Animation 44 Template.pdf in Resources */,
+				A76B51441733B21E00807B82 /* AutoIngest Animation 00 Template.pdf in Resources */,
+				A76B514E1733BF6B00807B82 /* dsa_pub.pem in Resources */,
+				A7DD30FA173D18F4005B4CC8 /* icon.iconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		554167F51725929700762241 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		554167F21725929700762241 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5541680E1725941100762241 /* ReportFolderClassifierTests.m in Sources */,
+				B3D043B6512F71D5175266EF /* ReportInformationTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A7175E20172146EE0031058F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -517,24 +1160,85 @@
 				A7415F37172170EA0092F4F8 /* AccountManager.m in Sources */,
 				A7415F38172170EA0092F4F8 /* GenericAccount.m in Sources */,
 				A7D8C7DF1723FD5D00025675 /* LastSyncDateValueTransformer.m in Sources */,
-				1DA477BB1723FDFB0048EACA /* StatusItemView.m in Sources */,
+				1DA477BB1723FDFB0048EACA /* StatusItemController.m in Sources */,
 				A71E9869172409D800176AC8 /* DTITCReportManager.m in Sources */,
 				A71E9875172409DA00176AC8 /* DTITCReportDownloadOperation.m in Sources */,
+				5541682417259DA600762241 /* ReportFolderClassifier.m in Sources */,
+				B3D04B9FCD64FB689ADC5E01 /* ReportInformation.m in Sources */,
+				3DC53114172A65D4005D9183 /* AIApplication.m in Sources */,
+				BA6D19073710E05AA752824B /* ReportDownloadFolderMonitor.m in Sources */,
+				557DDFFD17345D8700A4FF77 /* ReportOrganizer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A76B51041733B21E00807B82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A76B51051733B21E00807B82 /* PreferencesWindowController.m in Sources */,
+				A76B51061733B21E00807B82 /* AppDelegate.m in Sources */,
+				A76B51071733B21E00807B82 /* main.m in Sources */,
+				A76B51081733B21E00807B82 /* AccountManager.m in Sources */,
+				A76B51091733B21E00807B82 /* GenericAccount.m in Sources */,
+				A76B510A1733B21E00807B82 /* LastSyncDateValueTransformer.m in Sources */,
+				A76B510B1733B21E00807B82 /* StatusItemController.m in Sources */,
+				A76B510C1733B21E00807B82 /* DTITCReportManager.m in Sources */,
+				A76B510D1733B21E00807B82 /* DTITCReportDownloadOperation.m in Sources */,
+				A76B510E1733B21E00807B82 /* AIApplication.m in Sources */,
+				557DE00917345D9700A4FF77 /* ReportOrganizer.m in Sources */,
+				557DE00A17345D9900A4FF77 /* ReportDownloadFolderMonitor.m in Sources */,
+				557DE00B17345D9C00A4FF77 /* ReportInformation.m in Sources */,
+				557DE00C17345DA000A4FF77 /* ReportFolderClassifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A7212216173C052E003C6F0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DTReachability (Mac)";
+			targetProxy = A7212215173C052E003C6F0A /* PBXContainerItemProxy */;
+		};
+		A7212218173C0534003C6F0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DTReachability (Mac)";
+			targetProxy = A7212217173C0534003C6F0A /* PBXContainerItemProxy */;
+		};
 		A7415F27172161EF0092F4F8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Static Library";
 			targetProxy = A7415F26172161EF0092F4F8 /* PBXContainerItemProxy */;
 		};
+		A76B50FE1733B21E00807B82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Sparkle;
+			targetProxy = A76B50FF1733B21E00807B82 /* PBXContainerItemProxy */;
+		};
+		A76B51001733B21E00807B82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "DTZipArchive (Mac)";
+			targetProxy = A76B51011733B21E00807B82 /* PBXContainerItemProxy */;
+		};
+		A76B51021733B21E00807B82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Static Library";
+			targetProxy = A76B51031733B21E00807B82 /* PBXContainerItemProxy */;
+		};
 		A7D8C7CD1723198F00025675 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "DTZipArchive (Mac)";
 			targetProxy = A7D8C7CC1723198F00025675 /* PBXContainerItemProxy */;
+		};
+		A7DD30DD173D15B0005B4CC8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Static Library (Mac)";
+			targetProxy = A7DD30DC173D15B0005B4CC8 /* PBXContainerItemProxy */;
+		};
+		A7DD30F1173D15C3005B4CC8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Static Library (Mac)";
+			targetProxy = A7DD30F0173D15C3005B4CC8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -550,6 +1254,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		554168051725929700762241 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/$(PROJECT_NAME).app/Contents/MacOS/$(PROJECT_NAME)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tests/AutoIngestTests-Prefix.pch";
+				INFOPLIST_FILE = "Tests/AutoIngestTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader\"/**";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		554168061725929700762241 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/$(PROJECT_NAME).app/Contents/MacOS/$(PROJECT_NAME)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tests/AutoIngestTests-Prefix.pch";
+				INFOPLIST_FILE = "Tests/AutoIngestTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader\"/**";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		A7175E3F172146EF0031058F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -577,7 +1313,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -604,7 +1340,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -616,6 +1352,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AutoIngest/AutoIngest-Prefix.pch";
 				INFOPLIST_FILE = "AutoIngest/AutoIngest-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader/Core\"/** \"${PROJECT_DIR}/Externals/DTFoundation/Core\"/**";
 				WRAPPER_EXTENSION = app;
@@ -629,7 +1366,45 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AutoIngest/AutoIngest-Prefix.pch";
 				INFOPLIST_FILE = "AutoIngest/AutoIngest-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader/Core\"/** \"${PROJECT_DIR}/Externals/DTFoundation/Core\"/**";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		A76B51461733B21E00807B82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application: Drobnik KG";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AutoIngest/AutoIngest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SPARKLE=1",
+				);
+				INFOPLIST_FILE = "AutoIngest/AutoIngest-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = AutoIngest;
+				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader/Core\"/** \"${PROJECT_DIR}/Externals/DTFoundation/Core\"/**";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A76B51471733B21E00807B82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application: Drobnik KG";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AutoIngest/AutoIngest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "SPARKLE=1";
+				INFOPLIST_FILE = "AutoIngest/AutoIngest-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = AutoIngest;
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Externals/DTITCReportDownloader/Core\"/** \"${PROJECT_DIR}/Externals/DTFoundation/Core\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -638,6 +1413,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		554168071725929700762241 /* Build configuration list for PBXNativeTarget "AutoIngestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				554168051725929700762241 /* Debug */,
+				554168061725929700762241 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A7175E1F172146EE0031058F /* Build configuration list for PBXProject "AutoIngest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -652,6 +1436,15 @@
 			buildConfigurations = (
 				A7175E42172146EF0031058F /* Debug */,
 				A7175E43172146EF0031058F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A76B51451733B21E00807B82 /* Build configuration list for PBXNativeTarget "AutoIngest (Sparkle)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A76B51461733B21E00807B82 /* Debug */,
+				A76B51471733B21E00807B82 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

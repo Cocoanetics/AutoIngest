@@ -6,8 +6,14 @@
 	<string>~/Downloads</string>
 	<key>DownloadDaily</key>
 	<true/>
+	<key>DownloadNewsstandDaily</key>
+	<false/>
 	<key>DownloadWeekly</key>
 	<true/>
+	<key>DownloadOptInWeekly</key>
+	<false/>
+	<key>DownloadNewsstandWeekly</key>
+	<false/>
 	<key>DownloadMonthly</key>
 	<true/>
 	<key>DownloadYearly</key>
@@ -17,6 +23,8 @@
 	<key>DownloadAutoSync</key>
 	<false/>
 	<key>UncompressReports</key>
+	<false/>
+	<key>ShouldAutoOrganizeReports</key>
 	<false/>
 </dict>
 </plist>

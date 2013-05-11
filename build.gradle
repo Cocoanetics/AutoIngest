@@ -1,0 +1,66 @@
+import org.pegdown.PegDownProcessor
+
+buildscript {
+    repositories {
+				maven {
+					url('http://openbakery.org/repository/')
+				}
+				mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.openbakery', name: 'xcodePlugin', version: '0.8.0-beta5'
+    }
+}
+apply plugin: 'xcode'
+
+
+xcodebuild {
+	sdk = 'macosx'
+	target = 'AutoIngest (Sparkle)'
+        configuration = 'Release'
+}
+
+
+
+task('sparkle-notes') {
+	def notes = "$System.env.CHANGELOG"
+	if (notes) {
+		
+		def matcher = notes =~ /^\s*"(.*)"$/
+
+		if (notes ==~ /^<\w+>.*<\/\w+>$/) {
+			notes = notes;
+		} else {
+			// convert markdown
+			PegDownProcessor pegDownProcessor = new PegDownProcessor();
+			notes = pegDownProcessor.markdownToHtml(notes)
+		}
+		String html = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><title>Release Notes</title></head><body>" + notes + "</body></html>";
+		new File("releasenotes.html").write(html, "UTF-8");
+
+	} else {
+		println "No notes found"
+	}
+}
+
+task sparkleZip(dependsOn:'xcodebuild') {
+	def directory = project.xcodebuild.symRoot.absolutePath + '/' + project.xcodebuild.configuration + '/AutoIngest.app/Contents'
+	
+	def outputDirectory = ".";
+	if (project.hasProperty('sparkle.output')) {
+		outputDirectory = project['sparkle.output'];
+	}
+	
+	doLast {
+		def ant = new groovy.util.AntBuilder()
+		ant.zip(destfile: outputDirectory + "/AutoIngest.zip") {
+			zipfileset ( prefix:"AutoIngest.app/Contents/", dir: directory, excludes : "MacOS/*", includes : "*/**");
+			zipfileset ( prefix:"AutoIngest.app/Contents/MacOS", dir: directory + "/MacOS", includes : "*", filemode : 755);
+			zipfileset ( prefix:"AutoIngest.app/Contents/Frameworks/Sparkle.framework/Resources/finish_installation.app/Contents/MacOS", dir: directory + "/Frameworks/Sparkle.framework/Resources/finish_installation.app/Contents/MacOS/", includes : "*", filemode : 755);
+		}
+		
+		ant.move(file: "releasenotes.html",  todir: outputDirectory, quiet: true)
+	  
+	}
+}
+
