@@ -12,6 +12,7 @@
 
 #import "AccountManager.h"
 #import "DTReachability.h"
+#import "NSString+AutoIngest.h"
 
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <arpa/inet.h>
@@ -31,7 +32,6 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 @implementation DTITCReportManager
 {	
 	NSString *_reportFolder;
-	NSString *_vendorID;
 	
 	NSOperationQueue *_queue;
 	
@@ -45,6 +45,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 
 	// synching statistics
 	NSMutableDictionary *_syncStatsByType;
+	NSArray *_vendorIdentifiersForWhichSyncWasStarted;
 }
 
 + (DTITCReportManager *)sharedManager
@@ -117,17 +118,20 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 
 - (void)_downloadAllReportsOfType:(ITCReportType)reportType subType:(ITCReportSubType)reportSubType dateType:(ITCReportDateType)reportDateType fromAccount:(GenericAccount *)account
 {
-	DTITCReportDownloadOperation *op = [[DTITCReportDownloadOperation alloc] initForReportsOfType:reportType subType:reportSubType dateType:reportDateType fromAccount:account vendorID:_vendorID intoFolder:_reportFolder];
-	
-	// uncompressing not supported for password-protected opt-in reports yet
-	if (reportType != ITCReportTypeOptIn)
+	for (NSString *vendorID in [self _validVendorIdentifiers])
 	{
-		op.uncompressFiles = [[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldUncompressReportsKey];
+		DTITCReportDownloadOperation *op = [[DTITCReportDownloadOperation alloc] initForReportsOfType:reportType subType:reportSubType dateType:reportDateType fromAccount:account vendorID:vendorID intoFolder:_reportFolder];
+		
+		// uncompressing not supported for password-protected opt-in reports yet
+		if (reportType != ITCReportTypeOptIn)
+		{
+			op.uncompressFiles = [[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldUncompressReportsKey];
+		}
+		
+		op.delegate = self;
+		
+		[_queue addOperation:op];
 	}
-	
-	op.delegate = self;
-	
-	[_queue addOperation:op];
 }
 
 - (void)_reportCompletionWithError:(NSError *)error
@@ -147,6 +151,48 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	[[NSNotificationCenter defaultCenter] postNotificationName:DTITCReportManagerSyncDidFinishNotification object:self userInfo:userInfo];
     
     NSLog(@"==== Report Synching Completed");
+}
+
+- (NSArray *)_validVendorIdentifiers
+{
+	id value = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsVendoIDKey];
+	
+	if (!value)
+	{
+		return nil;
+	}
+	
+	NSArray *array = nil;
+	
+	if ([value isKindOfClass:[NSArray class]])
+	{
+		array = value;
+	}
+	else if ([value isKindOfClass:[NSString class]])
+	{
+		array = @[value];
+	}
+	
+	if (![array count])
+	{
+		return nil;
+	}
+	
+	// make unique in set
+	NSMutableSet *validTokens = [NSMutableSet set];
+	
+	for (NSString *oneToken in array)
+	{
+		if ([oneToken isValidVendorIdentifier])
+		{
+			[validTokens addObject:oneToken];
+		}
+	}
+	
+	NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:nil
+																			 ascending:YES
+																			  selector:@selector(compare:)];
+	return [validTokens sortedArrayUsingDescriptors:@[sort]];
 }
 
 - (void)startSync
@@ -186,9 +232,11 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		return;
 	}
 	
-	if (![_vendorID integerValue] || (![_vendorID hasPrefix:@"8"] || [_vendorID length]!=8))
+	NSArray *validVendorIdentifiers = [self _validVendorIdentifiers];
+	
+	if (![validVendorIdentifiers count])
 	{
-		NSLog(@"Invalid Vendor ID, must be numeric and begin with an 8 and be 8 digits");
+		NSLog(@"Invalid Vendor IDs, must be numeric and begin with an 8 and be 8 digits");
 		return;
 	}
 	
@@ -262,7 +310,9 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		return;
 	}
 	
-	NSLog(@"Starting Sync");
+	NSLog(@"Starting Sync for vendors %@", [validVendorIdentifiers componentsJoinedByString:@","]);
+	
+	_vendorIdentifiersForWhichSyncWasStarted = validVendorIdentifiers;
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:DTITCReportManagerSyncDidStartNotification object:weakself];
 	
@@ -307,21 +357,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		return NO;
 	}
 	
-	NSString *vendorID = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsVendoIDKey];
-	
-	// if it's an array, get only one from it.
-	if ([vendorID isKindOfClass:[NSArray class]])
-	{
-		vendorID = [(NSArray *)vendorID lastObject];
-	}
-	
-	// vendor ID must be only digits
-	if ([[vendorID stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"0123456789"]] length])
-	{
-		return NO;
-	}
-	
-	if (![vendorID integerValue] || (![vendorID hasPrefix:@"8"] || [vendorID length]!=8))
+	if (![self _validVendorIdentifiers])
 	{
 		return NO;
 	}
@@ -493,10 +529,12 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		needsToStopSync = YES;
 	}
 	
-	if (![_vendorID isEqualToString:vendorID])
+	NSArray *validVendorIdentifiers = [self _validVendorIdentifiers];
+	
+	if (![_vendorIdentifiersForWhichSyncWasStarted isEqualToArray:validVendorIdentifiers])
 	{
-		NSLog(@"Vendor ID changed to %@", vendorID);
-		_vendorID = vendorID;
+		NSLog(@"Vendor ID changed to %@", [validVendorIdentifiers componentsJoinedByString:@","]);
+		_vendorIdentifiersForWhichSyncWasStarted = nil;
 		
 		needsToStopSync = YES;
 	}
