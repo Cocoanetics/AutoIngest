@@ -309,6 +309,12 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	
 	NSString *vendorID = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsVendoIDKey];
 	
+	// if it's an array, get only one from it.
+	if ([vendorID isKindOfClass:[NSArray class]])
+	{
+		vendorID = [(NSArray *)vendorID lastObject];
+	}
+	
 	// vendor ID must be only digits
 	if ([[vendorID stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"0123456789"]] length])
 	{
@@ -474,6 +480,11 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	NSString *reportFolder = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsDownloadFolderPathKey];
 	NSString *vendorID = [[NSUserDefaults standardUserDefaults] objectForKey:AIUserDefaultsVendoIDKey];
    
+	if ([vendorID isKindOfClass:[NSArray class]])
+	{
+		vendorID = [(NSArray *)vendorID lastObject];
+	}
+	
 	if (![_reportFolder isEqualToString:reportFolder])
 	{
 		NSLog(@"Report Download Folder changed to %@", reportFolder);
