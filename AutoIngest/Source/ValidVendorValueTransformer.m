@@ -30,8 +30,10 @@
 		array = @[value];
 	}
 	
-	NSAssert(array, @"Invalid class for transformer");
-	
+	if (!value)
+	{
+		return nil;
+	}
 	
 	// make unique in set
 	NSMutableSet *validTokens = [NSMutableSet set];
