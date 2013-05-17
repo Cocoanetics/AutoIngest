@@ -10,13 +10,14 @@
 
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, copy) NSString *password;
-@property (nonatomic, copy) NSString *vendorId;
+
 @property (weak) IBOutlet NSTextField *versionLabel;
 @property (weak) IBOutlet NSButton *updateButton;
-
 @property (nonatomic, strong) NSColor *usernameColor;
-@property (nonatomic, strong) NSColor *vendorIdColor;
+@property (weak) IBOutlet NSTokenField *vendorTokenField;
+
 @property (nonatomic, assign) BOOL sparkleEnabled;
 
 @property (weak) IBOutlet NSTextField *reportsHelpText;
+
 @end

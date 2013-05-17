@@ -9,9 +9,10 @@
 #import "PreferencesWindowController.h"
 
 #import "AccountManager.h"
+#import "NSString+AutoIngest.h"
 
 
-@interface PreferencesWindowController ()
+@interface PreferencesWindowController () <NSTokenFieldDelegate>
 
 @property (nonatomic, strong) GenericAccount *account;
 
@@ -38,13 +39,10 @@
         {
             // initially only one account is supported
             _account = accounts[0];
-            self.vendorId = [[NSUserDefaults standardUserDefaults] valueForKey:@"DownloadVendorID"];
-            
+           
             [self validateUsername];
-            [self validateVendorId];
-            
+           
             [self addObserver:self forKeyPath:@"username" options:NSKeyValueObservingOptionNew context:nil];
-            [self addObserver:self forKeyPath:@"vendorId" options:NSKeyValueObservingOptionNew context:nil];
         }
     }
 	
@@ -77,6 +75,17 @@
     [self.reportsHelpText setAllowsEditingTextAttributes: YES];
     [self.reportsHelpText setSelectable: YES];
 	self.reportsHelpText.attributedStringValue = attributedString;
+	
+	// vendor token field
+	
+	// any non-number is a seperator
+	NSMutableCharacterSet *characterSet = [NSMutableCharacterSet alphanumericCharacterSet];
+	[characterSet formUnionWithCharacterSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	[characterSet formUnionWithCharacterSet:[NSCharacterSet punctuationCharacterSet]];
+	
+	[characterSet removeCharactersInString:@"1234567890"];
+	
+	self.vendorTokenField.tokenizingCharacterSet = characterSet;
 }
 
 - (void)_createAccountIfNecessary
@@ -109,16 +118,9 @@
     {
         [self validateUsername];
     }
-    else if ([keyPath isEqualToString:@"vendorId"])
-    {
-        [self validateVendorId];
-        [[NSUserDefaults standardUserDefaults] setValue:self.vendorId forKey:@"DownloadVendorID"];
-    }
 }
 
-
 #pragma mark - Validation
-
 
 - (void)validateUsername
 {
@@ -127,14 +129,34 @@
     self.usernameColor = [emailPredicate evaluateWithObject:self.username] ? [NSColor textColor] : [NSColor redColor];
 }
 
+#pragma mark - Vendor Token Field
 
-- (void)validateVendorId
+- (NSArray *)tokenField:(NSTokenField *)tokenField shouldAddObjects:(NSArray *)tokens atIndex:(NSUInteger)index
 {
-    NSString *vendorRegEx = @"8\\d{7}";
-    NSPredicate *vendorIdPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", vendorRegEx];
-    self.vendorIdColor = [vendorIdPredicate evaluateWithObject:self.vendorId] ? [NSColor textColor] : [NSColor redColor];
+	NSMutableArray *validTokens = [NSMutableArray array];
+	
+	for (NSString *oneToken in tokens)
+	{
+		if ([oneToken isValidVendorIdentifier])
+		{
+			[validTokens addObject:oneToken];
+		}
+	}
+	
+	return validTokens;
 }
 
+
+- (NSTokenStyle)tokenField:(NSTokenField *)tokenField styleForRepresentedObject:(id)representedObject
+{
+	// make valid vendor ids "blue pill", everything else plain text
+	if ([representedObject isValidVendorIdentifier])
+	{
+		return NSRoundedTokenStyle;
+	}
+	
+	return NSPlainTextTokenStyle;
+}
 
 #pragma mark - Actions
 
