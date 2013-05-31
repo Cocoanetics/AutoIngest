@@ -30,19 +30,19 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 @end
 
 @implementation DTITCReportManager
-{	
+{
 	NSString *_reportFolder;
 	
 	NSOperationQueue *_queue;
 	
 	NSTimer *_autoSyncTimer;
-    
-    // Reachability
-    id _reachabilityObserver;
-    SCNetworkConnectionFlags _connectionFlags;
-    
-    BOOL _waitingForConnectionToSync;
-
+	
+	// Reachability
+	id _reachabilityObserver;
+	BOOL _hasInternetConnection;
+   
+	BOOL _waitingForConnectionToSync;
+	
 	// synching statistics
 	NSMutableDictionary *_syncStatsByType;
 	NSArray *_vendorIdentifiersForWhichSyncWasStarted;
@@ -70,39 +70,41 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		// load initial defaults
 		[self defaultsDidUpdate:nil];
 		
-        
+		
 		// observe for defaults changes, e.g. download path
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(defaultsDidUpdate:) name:NSUserDefaultsDidChangeNotification object:nil];
-        
-        // observe if the machine wakes from sleep
-        [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(machineDidWakeUp:) name:NSWorkspaceDidWakeNotification object:nil];
-        
-        // Reachability
-        __weak DTITCReportManager *weakself = self;
-        
-        _reachabilityObserver = [DTReachability addReachabilityObserverWithBlock:^(SCNetworkConnectionFlags connectionFlags) {
-            
-            // assign to strong first
-            DTITCReportManager *manager = weakself;
-            manager->_connectionFlags = connectionFlags;
-            
-            BOOL hasConnection = [manager _hasInternetConnection];
-            
-            if (hasConnection)
-            {
-                NSLog(@"Has Internet Connection");
-            }
-            else
-            {
-                NSLog(@"NO Internet Connection");
-            }
-            
-            if (manager->_waitingForConnectionToSync && hasConnection)
-            {
-                NSLog(@"Internet became available and waiting for that to sync");
-                [manager startSync];
-            }
-        }];
+		
+		// observe if the machine wakes from sleep
+		[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(machineDidWakeUp:) name:NSWorkspaceDidWakeNotification object:nil];
+		
+		// Reachability
+		__weak DTITCReportManager *weakself = self;
+		
+		_reachabilityObserver = [DTReachability addReachabilityObserverWithBlock:^(SCNetworkConnectionFlags connectionFlags) {
+			
+			// assign to strong first
+			DTITCReportManager *manager = weakself;
+			
+			BOOL hasConnection = DTReachabilityIsReachableFromFlags(connectionFlags);
+			manager->_hasInternetConnection = hasConnection;
+			
+			if (hasConnection)
+			{
+				NSLog(@"Has Internet Connection");
+			}
+			else
+			{
+				NSLog(@"NO Internet Connection");
+			}
+			
+			if (manager->_waitingForConnectionToSync && hasConnection)
+			{
+				NSLog(@"Internet became available and waiting for that to sync");
+				
+				// wait a few seconds for DNS resolving to be really available
+				[manager performSelector:@selector(startSync) withObject:nil afterDelay:5];
+			}
+		}];
 	}
 	
 	return self;
@@ -111,9 +113,9 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
-    
-    [DTReachability removeReachabilityObserver:_reachabilityObserver];
+	[[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
+	
+	[DTReachability removeReachabilityObserver:_reachabilityObserver];
 }
 
 - (void)_downloadAllReportsOfType:(ITCReportType)reportType subType:(ITCReportSubType)reportSubType dateType:(ITCReportDateType)reportDateType fromAccount:(GenericAccount *)account
@@ -149,8 +151,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	}
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:DTITCReportManagerSyncDidFinishNotification object:self userInfo:userInfo];
-    
-    NSLog(@"==== Report Synching Completed");
+	
+	NSLog(@"==== Report Synching Completed");
 }
 
 - (NSArray *)_validVendorIdentifiers
@@ -211,8 +213,8 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	
 	// reset error status
 	self.error = nil;
-    
-    _waitingForConnectionToSync = NO;
+	
+	_waitingForConnectionToSync = NO;
 	_syncStatsByType = [[NSMutableDictionary alloc] init];
 	
 	NSArray *accounts = [[AccountManager sharedAccountManager] accountsOfType:@"iTunes Connect"];
@@ -343,7 +345,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	
 	// now the completion block should follow
 	[_queue setSuspended:NO];
-
+	
 	
 	_isSynching = NO;
 }
@@ -398,12 +400,12 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	{
 		hasWorkToDo = YES;
 	}
-
+	
 	if ([defaults boolForKey:@"DownloadOptInWeekly"])
 	{
 		hasWorkToDo = YES;
 	}
-
+	
 	if ([defaults boolForKey:@"DownloadNewsstandDaily"])
 	{
 		hasWorkToDo = YES;
@@ -419,35 +421,28 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		return NO;
 	}
 	
-	if (![self _hasInternetConnection])
+	if (_hasInternetConnection)
 	{
-		return NO;
+		return YES;
 	}
 	
-	return YES;
-}
-
-- (BOOL)_hasInternetConnection
-{
-    BOOL isReachable = ((_connectionFlags & kSCNetworkFlagsReachable) != 0);
-    BOOL needsConnection = ((_connectionFlags & kSCNetworkFlagsConnectionRequired) != 0);
-    return (isReachable && !needsConnection);
+	return NO;
 }
 
 #pragma mark - Auto Sync
 - (void)startAutoSyncTimer
 {
-    [_autoSyncTimer invalidate];
-    
-    // check every hour if the auto-sync criteria is met
-    _autoSyncTimer = [NSTimer scheduledTimerWithTimeInterval:60*60 target:self selector:@selector(_startAutoSyncIfNecessary) userInfo:nil repeats:YES];
-    
-    NSLog(@"AutoSync Timer enabled");
-
-    // do that on next run loop for notifications to have a chance to be received
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self _startAutoSyncIfNecessary];
-    });
+	[_autoSyncTimer invalidate];
+	
+	// check every hour if the auto-sync criteria is met
+	_autoSyncTimer = [NSTimer scheduledTimerWithTimeInterval:60*60 target:self selector:@selector(_startAutoSyncIfNecessary) userInfo:nil repeats:YES];
+	
+	NSLog(@"AutoSync Timer enabled");
+	
+	// do that on next run loop for notifications to have a chance to be received
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[self _startAutoSyncIfNecessary];
+	});
 }
 
 - (void)stopAutoSyncTimer
@@ -461,49 +456,49 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 // starts synching if there was never a sync or the last successful sync is longer than 24 hours ago
 - (void)_startAutoSyncIfNecessary
 {
-    if (_isSynching)
-    {
-        return;
-    }
-    
-    NSDate *lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadLastSuccessfulSync"];
-
-    if (lastSyncDate)
-    {
-        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDate *now =[NSDate date];
-        NSDateComponents *lastSyncComps = [gregorian components:NSDayCalendarUnit fromDate:lastSyncDate];
-        NSDateComponents *nowComps = [gregorian components:NSDayCalendarUnit fromDate:now];
-        NSDateComponents *diffComps = [gregorian components:NSDayCalendarUnit fromDate:lastSyncDate toDate:now options:0];
-        
-        if (lastSyncComps.day != nowComps.day)
-        {
-            // different date, only sync if its at least the same hour in day or later
-            if (diffComps.day <= 1 && nowComps.hour < lastSyncComps.hour)
-            {
-                // less than a day
-                return;
-            }
-            
-            // either last sync is longer then 1 day or its a later hour in the day than last sync on day before
-        }
-        else
-        {
-            // same date, never sync
-            return;
-        }
-    }
-    
-    if ([self _hasInternetConnection])
-    {
-        NSLog(@"Last Sync longer than 24 hours ago, starting sync now");
-        [self startSync];
-    }
-    else
-    {
-        NSLog(@"Last Sync longer than 24 hours ago, but no internet connection, deferring sync");
-        _waitingForConnectionToSync = YES;
-    }
+	if (_isSynching)
+	{
+		return;
+	}
+	
+	NSDate *lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"DownloadLastSuccessfulSync"];
+	
+	if (lastSyncDate)
+	{
+		NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+		NSDate *now =[NSDate date];
+		NSDateComponents *lastSyncComps = [gregorian components:NSDayCalendarUnit fromDate:lastSyncDate];
+		NSDateComponents *nowComps = [gregorian components:NSDayCalendarUnit fromDate:now];
+		NSDateComponents *diffComps = [gregorian components:NSDayCalendarUnit fromDate:lastSyncDate toDate:now options:0];
+		
+		if (lastSyncComps.day != nowComps.day)
+		{
+			// different date, only sync if its at least the same hour in day or later
+			if (diffComps.day <= 1 && nowComps.hour < lastSyncComps.hour)
+			{
+				// less than a day
+				return;
+			}
+			
+			// either last sync is longer then 1 day or its a later hour in the day than last sync on day before
+		}
+		else
+		{
+			// same date, never sync
+			return;
+		}
+	}
+	
+	if (!_hasInternetConnection)
+	{
+		NSLog(@"Last Sync longer than 24 hours ago, starting sync now");
+		[self startSync];
+	}
+	else
+	{
+		NSLog(@"Last Sync longer than 24 hours ago, but no internet connection, deferring sync");
+		_waitingForConnectionToSync = YES;
+	}
 }
 
 #pragma mark - Notifications
@@ -563,7 +558,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 
 - (void)machineDidWakeUp:(NSNotification *)notification
 {
-    [self _startAutoSyncIfNecessary];
+	[self _startAutoSyncIfNecessary];
 }
 
 #pragma mark - DTITCReportDownloadOperation Delegate
