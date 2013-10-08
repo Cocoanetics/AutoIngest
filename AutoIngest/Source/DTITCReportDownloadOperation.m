@@ -158,7 +158,7 @@
 											  
 											  NSString *baseName;
 											  
-											  if (_reportType == ITCReportTypeOptIn)
+											  if (_reportSubType == ITCReportSubTypeOptIn)
 											  {
 												  baseName = [fileName stringByReplacingOccurrencesOfString:@".zip" withString:@""];
 											  }

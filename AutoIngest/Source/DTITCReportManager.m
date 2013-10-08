@@ -125,7 +125,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 		DTITCReportDownloadOperation *op = [[DTITCReportDownloadOperation alloc] initForReportsOfType:reportType subType:reportSubType dateType:reportDateType fromAccount:account vendorID:vendorID intoFolder:_reportFolder];
 		
 		// uncompressing not supported for password-protected opt-in reports yet
-		if (reportType != ITCReportTypeOptIn)
+		if (reportSubType != ITCReportSubTypeOptIn)
 		{
 			op.uncompressFiles = [[NSUserDefaults standardUserDefaults] boolForKey:AIUserDefaultsShouldUncompressReportsKey];
 		}
@@ -280,7 +280,7 @@ NSString * const DTITCReportManagerSyncDidFinishNotification = @"DTITCReportMana
 	
 	if ([defaults boolForKey:@"DownloadOptInWeekly"])
 	{
-		[self _downloadAllReportsOfType:ITCReportTypeOptIn subType:ITCReportSubTypeSummary dateType:ITCReportDateTypeWeekly fromAccount:account];
+		[self _downloadAllReportsOfType:ITCReportTypeSales subType:ITCReportSubTypeOptIn dateType:ITCReportDateTypeWeekly fromAccount:account];
 		
 		hasWorkToDo = YES;
 	}

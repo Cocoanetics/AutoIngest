@@ -105,7 +105,8 @@ static NSCache *_cache;
     }
     else if ([character isEqualToString:@"O_S"])
     {
-        _type = ITCReportTypeOptIn;
+        _type = ITCReportTypeSales;
+		_subType = ITCReportSubTypeOptIn;
     }
 }
 
